@@ -1,0 +1,21 @@
+[03-Sep-2013 16:39:39] PHP Warning:  Invalid argument supplied for foreach() in /home/mtprvzki/public_html/administrator/components/com_rsform/helpers/rsform.php(512) : eval()'d code on line 20
+[03-Sep-2013 16:39:51] PHP Warning:  Invalid argument supplied for foreach() in /home/mtprvzki/public_html/administrator/components/com_rsform/helpers/rsform.php(512) : eval()'d code on line 20
+[03-Sep-2013 16:39:51] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/mtprvzki/public_html/administrator/components/com_rsform/helpers/rsform.php(512) : eval()'d code on line 20
+[03-Sep-2013 16:39:51] PHP Warning:  Invalid argument supplied for foreach() in /home/mtprvzki/public_html/administrator/components/com_rsform/helpers/rsform.php(512) : eval()'d code on line 23
+[03-Sep-2013 16:41:21] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/mtprvzki/public_html/administrator/components/com_rsform/helpers/rsform.php(512) : eval()'d code on line 20
+[03-Sep-2013 16:41:21] PHP Warning:  Invalid argument supplied for foreach() in /home/mtprvzki/public_html/administrator/components/com_rsform/helpers/rsform.php(512) : eval()'d code on line 23
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JLoader::import() should not be called statically in /home/mtprvzki/public_html/libraries/joomla/import.php on line 29
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JLoader::register() should not be called statically in /home/mtprvzki/public_html/libraries/loader.php on line 71
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JLoader::import() should not be called statically in /home/mtprvzki/public_html/libraries/joomla/import.php on line 32
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JLoader::register() should not be called statically in /home/mtprvzki/public_html/libraries/loader.php on line 71
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JLoader::load() should not be called statically in /home/mtprvzki/public_html/libraries/loader.php on line 161
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JLoader::register() should not be called statically in /home/mtprvzki/public_html/libraries/loader.php on line 138
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JRequest::clean() should not be called statically in /home/mtprvzki/public_html/libraries/joomla/import.php on line 33
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JRequest::_cleanArray() should not be called statically in /home/mtprvzki/public_html/libraries/joomla/environment/request.php on line 463
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JRequest::_cleanArray() should not be called statically in /home/mtprvzki/public_html/libraries/joomla/environment/request.php on line 464
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JRequest::_cleanArray() should not be called statically in /home/mtprvzki/public_html/libraries/joomla/environment/request.php on line 465
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JRequest::_cleanArray() should not be called statically in /home/mtprvzki/public_html/libraries/joomla/environment/request.php on line 466
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JRequest::_cleanArray() should not be called statically in /home/mtprvzki/public_html/libraries/joomla/environment/request.php on line 467
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JRequest::_cleanArray() should not be called statically in /home/mtprvzki/public_html/libraries/joomla/environment/request.php on line 468
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JLoader::import() should not be called statically in /home/mtprvzki/public_html/libraries/joomla/import.php on line 35
+[08-Apr-2017 17:58:20 UTC] PHP Strict Standards:  Non-static method JLoader::register() should not be 

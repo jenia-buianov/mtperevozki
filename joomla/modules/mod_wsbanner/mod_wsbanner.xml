@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+ <name>Banners</name>
+ <!-- Далее идут необязательные элементы-->
+ <creationDate>27.08.2011</creationDate>
+ <author>Михаил</author>
+ <authorEmail>mikbox74@gmail.com</authorEmail>
+ <authorUrl>http://www.free-lance.ru/users/Sind-Bad</authorUrl>
+ <copyright>(С) 2011, Михаил Ураков</copyright>
+ <license>Commercial</license>
+ <!--  Номер версии сохраняется как строковое значение в таблице компонентов -->
+ <version>0.1</version>
+ <!-- Описание необязательно, и по-умолчанию равно имени компонента -->
+ <description>Эксклюзивно для womensenses.ru</description> 
+ <!-- Копирование файлов во фронтенд -->
+<files>
+  <filename module="mod_wsbanner">mod_wsbanner.php</filename>
+</files>
+<params>
+<field name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="A suffix to be applied to the css class of the module (mod_login), this allows individual module styling" />
+<field name="speed" type="text" default="4000" label="Скорость смены" description="в миллисекундах" />
+
+<param name="image1" type="imagelist" default="" label="Выберите баннер 1" directory="images/banners" />
+<param name="link1" type="text" default="" label="Ссылка для баннера 1" />
+<param name="title1" type="text" default="" label="Подпись для баннера 1" />
+
+<param name="image2" type="imagelist" default="" label="Выберите баннер 2" directory="images/banners" />
+<param name="link2" type="text" default="" label="Ссылка для баннера 2" />
+<param name="title2" type="text" default="" label="Подпись для баннера 2" />
+
+<param name="image3" type="imagelist" default="" label="Выберите баннер 3" directory="images/banners" />
+<param name="link3" type="text" default="" label="Ссылка для баннера 3" />
+<param name="title3" type="text" default="" label="Подпись для баннера 3" />
+
+<param name="image4" type="imagelist" default="" label="Выберите баннер 4" directory="images/banners" />
+<param name="link4" type="text" default="" label="Ссылка для баннера 4" />
+<param name="title4" type="text" default="" label="Подпись для баннера 4" />
+
+<param name="image5" type="imagelist" default="" label="Выберите баннер 5" directory="images/banners" />
+<param name="link5" type="text" default="" label="Ссылка для баннера 5" />
+<param name="title5" type="text" default="" label="Подпись для баннера 5" />
+
+<param name="image6" type="imagelist" default="" label="Выберите баннер 6" directory="images/banners" />
+<param name="link6" type="text" default="" label="Ссылка для баннера 6" />
+<param name="title6" type="text" default="" label="Подпись для баннера 6" />
+
+<param name="image7" type="imagelist" default="" label="Выберите баннер 7" directory="images/banners" />
+<param name="link7" type="text" default="" label="Ссылка для баннера 7" />
+<param name="title7" type="text" default="" label="Подпись для баннера 7" />
+
+<param name="image8" type="imagelist" default="" label="Выберите баннер 8" directory="images/banners" />
+<param name="link8" type="text" default="" label="Ссылка для баннера 8" />
+<param name="title8" type="text" default="" label="Подпись для баннера 8" />
+
+<param name="image9" type="imagelist" default="" label="Выберите баннер 9" directory="images/banners" />
+<param name="link9" type="text" default="" label="Ссылка для баннера 9" />
+<param name="title9" type="text" default="" label="Подпись для баннера 9" />
+
+<param name="image10" type="imagelist" default="" label="Выберите баннер 10" directory="images/banners" />
+<param name="link10" type="text" default="" label="Ссылка для баннера 10" />
+<param name="title10" type="text" default="" label="Подпись для баннера 10" />
+
+</params>
+</install>

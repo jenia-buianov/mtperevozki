@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="content">
+	<name>Форма заявки в материале</name>
+	<author>Михаил Ураков</author>
+	<creationDate>07/03/2012</creationDate>
+	<copyright></copyright>
+	<license></license>
+	<authorEmail>mikbox74@gmail.com</authorEmail>
+	<authorUrl>http://www.free-lance.ru/users/Sind-Bad</authorUrl>
+	<version></version>
+	<description></description>
+	<files>
+		<filename plugin="mtpform">mtpform.php</filename>
+	</files>
+	<params />
+</install>

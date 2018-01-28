@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 1.5//DTD template 1.0//EN" "http://www.joomla.org/xml/dtd/1.5/template-install.dtd">
+<install version="1.5" type="template">
+	<name>carrier</name>
+	<creationDate>05/03/2012</creationDate>
+	<author>Михаил Sind-Bad</author>
+	<authorEmail>mikbox74@gmail.com</authorEmail>
+	<authorUrl>http://www.free-lance.ru/users/Sind-Bad</authorUrl>
+	<copyright>Михаил Sind-Bad</copyright>
+	<license></license>
+	<version></version>
+	<description></description>
+	<files>
+		<filename>css/index.html</filename>
+		<filename>css/style.css</filename>
+		<filename>html/com_content/article/default.php</filename>
+		<filename>html/com_content/article/index.html</filename>
+		<filename>html/com_content/frontpage/default.php</filename>
+		<filename>html/com_content/frontpage/default_item.php</filename>
+		<filename>html/com_content/frontpage/index.html</filename>
+		<filename>html/com_content/index.html</filename>
+		<filename>html/index.html</filename>
+		<filename>images/EN.jpg</filename>
+		<filename>images/RU.jpg</filename>
+		<filename>images/b18.png</filename>
+		<filename>images/b20.png</filename>
+		<filename>images/banner.jpg</filename>
+		<filename>images/body.png</filename>
+		<filename>images/column.png</filename>
+		<filename>images/counter.jpg</filename>
+		<filename>images/div.png</filename>
+		<filename>images/header.png</filename>
+		<filename>images/image1.jpg</filename>
+		<filename>images/image2.jpg</filename>
+		<filename>images/image3.jpg</filename>
+		<filename>images/image4.jpg</filename>
+		<filename>images/index.html</filename>
+		<filename>images/sendButton.png</filename>
+		<filename>index.html</filename>
+		<filename>index.php</filename>
+		<filename>js/Chicago_400.font.js</filename>
+		<filename>js/cufon-yui.js</filename>
+		<filename>js/index.html</filename>
+		<filename>js/mootools.js</filename>
+		<filename>js/script.js</filename>
+		<filename>templateDetails.xml</filename>
+		<filename>template_thumbnail.png</filename>
+	</files>
+	<positions>
+		<position>slogan</position>
+		<position>phone</position>
+		<position>slider</position>
+		<position>langs</position>
+		<position>mainmenu</position>
+		<position>top</position>
+		<position>left</position>
+		<position>right</position>
+		<position>copyright</position>
+		<position>counters</position>
+		<position>phone</position>
+		<position>modalwin</position>
+		<position>goto</position>
+		<position>after_content</position>
+	</positions>
+</install>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="system">
+	<name>Системный - Очистка ссылок</name>
+	<author>Михаил Ураков</author>
+	<creationDate>28.03.2012</creationDate>
+	<copyright></copyright>
+	<license></license>
+	<authorEmail>mikbox74@gmail.com</authorEmail>
+	<authorUrl>http://www.free-lance.ru/users/Sind-Bad</authorUrl>
+	<version>1.0</version>
+	<description></description>
+	<files>
+		<filename plugin="clean_uri">clean_uri.php</filename>
+	</files>
+</install>

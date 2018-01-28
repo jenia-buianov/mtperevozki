@@ -1,0 +1,302 @@
+<?php
+
+global $mosConfig_lang;
+$suffix = "_post";
+
+if (isset($_POST['order']) and is_array($_POST['order']) and !empty($_POST['order']))
+{
+	$dbo = mysql_connect('localhost', 'mweb59_1', 'yTYHa8aM', true);
+	$db_select = mysql_select_db('mweb59_1', $dbo);
+	mysql_query("SET NAMES 'cp1251'");
+	$order = $_POST['order'];
+	
+	$save_query = "";
+	
+	foreach ($order as $key => $value)
+	{
+		if (stristr($key, "phone") and is_array($value)) 
+		{
+			$phone = "+".str_replace(array("+","-"),'',$value['country'])."-".str_replace(array("+","-"),'',$value['city'])."-".str_replace(array("+","-"),'',$value['phone']);
+			unset($order[$key]);
+			$order[$key] = $value = $phone;
+		}
+		if (empty($value) or $value == "+--" or $value == "+" or $value == "+-" ) continue;
+		$save_query .= "`".$key."`='".$value."',";
+	}
+	
+	if (!empty($save_query))
+	{
+		$order_date = date("d-m-Y");
+		$source = "riatec";
+		//assign contacts
+		$id_contact = 0;
+		$query_contacts = mysql_query("SELECT id FROM movers_contact");
+		if ($num_rows = mysql_num_rows($query_contacts) and mysql_data_seek($query_contacts, mt_rand(0, $num_rows-1))) {
+			$id_contact = mysql_fetch_array($query_contacts);
+			$by_admin = $id_contact['id'];
+		}
+		
+		$save_query.= "`order_date`='".$order_date."',`by_admin`='".$by_admin."', `source`='".$source."'";
+		
+		$query = "INSERT INTO movers_cargo".$suffix." SET ".$save_query;
+		if (mysql_query($query))
+		{
+			header("Location:".$_SERVER['SERVER_NAME']."/index.php?option=com_content&task=view&id=195");
+			exit;
+		}
+		else
+		{
+			echo "<script>alert('Ошибка сохранения');</script>";
+		}
+		
+	}
+}
+
+include_once("utils.php");
+
+?>
+<script type="text/javascript" src="/cargo/checkform.js"></script>
+<style>
+	
+	#order-form table td {
+		font-weight: lighter;
+		padding: 5px 0;
+	}
+	
+	#order-form select {
+		width: 233px;
+	}
+	
+	#order-form input {
+		width: 228px;
+	}
+	
+	#order-form .submit {
+		width: 85px !important;
+
+	}
+</style>
+
+
+        <form onsubmit="return checkForm(this, check_post, 'Пожалуйста заполните обязательные поля');" action="" name="order_post" method="post" id="order-form">
+		<table border="0" width="450">
+			<tr>
+				<td>
+					<b><?php if($mosConfig_lang == 'russian') { echo "Страна отправки"; }
+						elseif ($mosConfig_lang == 'romanian') { echo "Tara de incarcare"; }
+						elseif ($mosConfig_lang == 'english') { echo "Country of loading"; }
+					?>  *</b>
+				</td>
+				<td>
+					<select name="order[export]" id="export_country" onchange="_updateSelect('export_city', this.value, 'export_city');" >
+						<?php if($mosConfig_lang == 'russian') { echo '<option value="">- укажите страну -</option>';}
+							  elseif($mosConfig_lang == 'romanian') { echo '<option value="">- alegeti tara  -</option>';}
+							  elseif($mosConfig_lang == 'english') { echo '<option value="">- choose the country -</option>';}
+							  echo $countries;
+						?>
+					</select>
+                </td>
+			</tr>
+			
+			<tr>
+				<td>         
+					<b><?php if($mosConfig_lang == 'russian') {
+						echo 'Город отправки';}
+						elseif($mosConfig_lang == 'romanian') { echo'Oras de incarcare';}
+						elseif($mosConfig_lang == 'english') { echo'City of Loading';}
+					?></b>
+				</td>
+				<td>
+					<select type="select" name="order[export_city]" size="1" id="export_city"  style="width: 175px">
+						<option value="0">
+							<?php if($mosConfig_lang == 'russian') {
+							echo '---не имеет значения---';}
+							elseif($mosConfig_lang == 'romanian') { echo'---oricare---';}
+							elseif($mosConfig_lang == 'english') { echo'---all cities---';}
+							?>
+						</option>
+					</select>
+                </td>
+			</tr>
+			
+			<tr>
+				<td>    	
+				<b><?php if($mosConfig_lang == 'russian') {
+					echo 'Страна доставки';}
+					elseif($mosConfig_lang == 'romanian') { echo'Tara de descarcare';}
+					elseif($mosConfig_lang == 'english') { echo'Country of unloading';}
+				 ?> *</b>
+				</td>
+				<td>
+					<select name="order[import]" id="import_country" onchange="_updateSelect('import_city', this.value, 'import_city');">
+						<?php if($mosConfig_lang == 'russian') { echo '<option value="">- укажите страну -</option>';}
+							  elseif($mosConfig_lang == 'romanian') { echo '<option value="">- alegeti tara  -</option>';}
+							  elseif($mosConfig_lang == 'english') { echo '<option value="">- choose the country -</option>';}
+							  echo $countries;
+						?>
+					</select>
+                </td>
+			</tr>
+            
+			<tr>
+				<td> 
+					<b><?php
+						if($mosConfig_lang == 'russian') { echo'Город доставки';}
+						elseif($mosConfig_lang == 'romanian') { echo'Oras de descarcare';}
+						elseif($mosConfig_lang == 'english') { echo'City of unloading';}
+					?></b>
+				</td>
+                <td>
+					<select type="select" name="order[import_city]" size="1" id="import_city" style="width: 175px">
+						<option value="0">
+							<?php if($mosConfig_lang == 'russian') {
+							echo '---не имеет значения---';}
+							elseif($mosConfig_lang == 'romanian') { echo'---oricare---';}
+							elseif($mosConfig_lang == 'english') { echo'---all cities---';}
+							?>
+						</option>
+					</select>
+				</td>
+            </tr>
+			
+			
+            <tr>   	
+				<td>
+					<b><?php if($mosConfig_lang == 'russian') { echo "Наименование груза"; }
+					elseif ($mosConfig_lang == 'romanian') { echo "Denumirea incarcaturii"; }
+					elseif ($mosConfig_lang == 'english') { echo "Description of cargo"; }
+					?> *</b>
+				</td>
+				<td>
+					<select name="order[name]">
+					 <?php
+						if($mosConfig_lang == 'russian') { echo "<option value=''>- укажите тип груза -</option>"; }
+						elseif($mosConfig_lang == 'english') { echo "<option value=''>- chose the cargo type -</option>"; }
+						elseif ($mosConfig_lang == 'romanian') { echo "<option value=''>- indicati tipul de incarcatura -</option>"; }
+						echo $cargo_types;
+					?>
+					</select> 
+                </td>
+            </tr>
+            
+			<tr>
+               	<td>
+					 <b><?php if($mosConfig_lang == 'russian') { echo "Объём груза, вес груза"; }
+							elseif ($mosConfig_lang == 'romanian') { echo "Volumul si greutatea incarcaturii"; }
+							elseif ($mosConfig_lang == 'english') { echo "Cargo size and weight"; }
+					?> *</b>
+				</td>
+                <td>
+					<select name="order[volume]">
+						 <?php if($mosConfig_lang == 'russian') { echo '<option value="">- укажите массу/объём -</option>';}
+								elseif ($mosConfig_lang == 'romanian') { echo '<option value="">- indicati Volumul/greutatea -</option>';}
+								elseif ($mosConfig_lang == 'english') { echo '<option value="">- choose size/weight -</option>';}
+								echo $cargo_volumes;
+						?>
+                     </select>
+				</td>
+            </tr>
+			
+			<tr>
+               	<td>
+					 <b><?php if($mosConfig_lang == 'russian') { echo "Тип транспорта"; }
+							elseif ($mosConfig_lang == 'romanian') { echo "Tipul transportului"; }
+							elseif ($mosConfig_lang == 'english') { echo "Transport type"; }
+					?> *</b>
+				</td>
+                <td>
+					<select name="order[type]">
+						 <?php if($mosConfig_lang == 'russian') { echo '<option value="">- укажите тип транспорта -</option>';}
+								elseif ($mosConfig_lang == 'romanian') { echo '<option value="">- indicati Volumul/greutatea -</option>';}
+								elseif ($mosConfig_lang == 'english') { echo '<option value="">- choose size/weight -</option>';}
+								echo $transport_types;
+						?>
+                     </select>
+				</td>
+            </tr>
+
+			<tr>
+				<td>
+				<b><?php if($mosConfig_lang == 'russian') { echo "Контактное лицо"; }
+					elseif ($mosConfig_lang == 'romanian') { echo "Persoana de contact"; }
+					elseif ($mosConfig_lang == 'english') { echo "Contact person"; }
+				?> * </b>
+				</td>
+				<td>
+					<input type="text" name="order[face]">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+                    <b><?php if($mosConfig_lang == 'russian') { echo "Контактный телефон"; }
+						elseif ($mosConfig_lang == 'romanian') { echo "Telefon de contact"; }
+						elseif ($mosConfig_lang == 'english') { echo "Telephone"; }
+					?>  * </b>
+				</td>
+				<td>
+					+ <input type="text" style="width: 35px;" maxlength="3" size="1" name="order[phone][country]"> -
+					<input type="text" style="width: 45px;" maxlength="4" size="2" name="order[phone][city]">
+					- <input type="text" style="width: 100px;" maxlength="15" size="15" name="order[phone][phone]">
+				</td>
+            </tr>
+			
+			<tr>
+				<td>
+					<b>E-mail</b>
+				</td>
+				<td>
+					<input type="text" name="order[email]">
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					* - <?php if($mosConfig_lang == 'russian') { echo "обязательные поля"; }
+									elseif ($mosConfig_lang == 'romanian') { echo "campuri obligatorii"; }
+									elseif ($mosConfig_lang == 'english') { echo "required fields"; }
+									?>
+				</td>
+				<td align="left" style="position: relative;">
+						<input type="submit" name="submit" value="<?php if($mosConfig_lang == 'russian') { echo "Отправить"; }
+								elseif ($mosConfig_lang == 'romanian') { echo "Expediaza"; }
+								elseif ($mosConfig_lang == 'english') { echo "Send"; }
+								?>" id="submit" />
+				</td>
+			</tr>
+		</table>
+    </form>
+	
+<script type="text/javascript">		
+	var check_post = {
+		'order[export]' : '<?php if($mosConfig_lang == 'russian') { echo "Страна отправки"; }
+						elseif ($mosConfig_lang == 'romanian') { echo "Tara de incarcare"; }
+						elseif ($mosConfig_lang == 'english') { echo "Country of loading"; }
+					?>',
+		'order[import]' : '<?php if($mosConfig_lang == 'russian') {
+					echo 'Страна доставки';}
+					elseif($mosConfig_lang == 'romanian') { echo'Tara de descarcare';}
+					elseif($mosConfig_lang == 'english') { echo'Country of unloading';}
+				 ?>',
+		'order[name]' : '<?php if($mosConfig_lang == 'russian') { echo "Наименование груза"; }
+					elseif ($mosConfig_lang == 'romanian') { echo "Denumirea incarcaturii"; }
+					elseif ($mosConfig_lang == 'english') { echo "Description of cargo"; }
+					?>',
+		'order[volume]' : '<?php if($mosConfig_lang == 'russian') { echo "Объём груза, вес груза"; }
+							elseif ($mosConfig_lang == 'romanian') { echo "Volumul si greutatea incarcaturii"; }
+							elseif ($mosConfig_lang == 'english') { echo "Cargo size and weight"; }
+					?>',
+		'order[type]' : '<?php if($mosConfig_lang == 'russian') { echo "Тип транспорта"; }
+							elseif ($mosConfig_lang == 'romanian') { echo "Tipul transportului"; }
+							elseif ($mosConfig_lang == 'english') { echo "Transport type"; }
+					?>',
+		'order[face]' : '<?php if($mosConfig_lang == 'russian') { echo "Контактное лицо"; }
+					elseif ($mosConfig_lang == 'romanian') { echo "Persoana de contact"; }
+					elseif ($mosConfig_lang == 'english') { echo "Contact person"; }
+				?>',
+		'order[phone]' : '<?php if($mosConfig_lang == 'russian') { echo "Контактный телефон"; }
+						elseif ($mosConfig_lang == 'romanian') { echo "Telefon de contact"; }
+						elseif ($mosConfig_lang == 'english') { echo "Telephone"; }
+					?>'
+		};
+ </script>

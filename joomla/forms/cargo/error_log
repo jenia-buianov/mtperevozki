@@ -1,0 +1,258 @@
+[04-Jul-2013 22:00:52] PHP Warning:  include_once(.:/usr/lib/php:/usr/local/lib/php:/lib/PFBC/Form.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/mtprvzki/public_html/forms/lib/unified/loader.php on line 21
+[04-Jul-2013 22:00:52] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening '.:/usr/lib/php:/usr/local/lib/php:/lib/PFBC/Form.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/mtprvzki/public_html/forms/lib/unified/loader.php on line 21
+[04-Jul-2013 22:02:16] PHP Warning:  include_once(.:/usr/lib/php:/usr/local/lib/php:/lib/PFBC/Form.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/mtprvzki/public_html/forms/lib/unified/loader.php on line 22
+[04-Jul-2013 22:02:16] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening '.:/usr/lib/php:/usr/local/lib/php:/lib/PFBC/Form.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/mtprvzki/public_html/forms/lib/unified/loader.php on line 22
+[04-Jul-2013 22:02:57] PHP Warning:  include_once(/home/mtprvzki/public_html/forms/lib/unified:/lib/PFBC/Form.php) [<a href='function.include-once'>function.include-once</a>]: failed to open stream: No such file or directory in /home/mtprvzki/public_html/forms/lib/unified/loader.php on line 21
+[04-Jul-2013 22:02:57] PHP Warning:  include_once() [<a href='function.include'>function.include</a>]: Failed opening '/home/mtprvzki/public_html/forms/lib/unified:/lib/PFBC/Form.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/mtprvzki/public_html/forms/lib/unified/loader.php on line 21
+[04-Jul-2013 22:04:40] PHP Fatal error:  Class 'Unified' not found in /home/mtprvzki/public_html/forms/cargo/form_order_ru.php on line 4
+[04-Jul-2013 22:05:48] PHP Fatal error:  Class 'Unified' not found in /home/mtprvzki/public_html/forms/cargo/form_order_ru.php on line 4
+[04-Jul-2013 22:06:34] PHP Fatal error:  Class 'Unified' not found in /home/mtprvzki/public_html/forms/cargo/form_order_ru.php on line 4
+[04-Jul-2013 22:06:36] PHP Fatal error:  Class 'Unified' not found in /home/mtprvzki/public_html/forms/cargo/form_order_ru.php on line 4
+[04-Jul-2013 22:06:50] PHP Fatal error:  Class 'Unified' not found in /home/mtprvzki/public_html/forms/cargo/form_order_ru.php on line 4
+[04-Jul-2013 22:11:27] PHP Parse error:  syntax error, unexpected T_CLASS, expecting '{' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 2
+[04-Jul-2013 22:12:46] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 45
+[04-Jul-2013 22:13:17] PHP Parse error:  syntax error, unexpected T_STRING in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 47
+[04-Jul-2013 22:14:02] PHP Parse error:  syntax error, unexpected '{' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 47
+[04-Jul-2013 22:14:21] PHP Parse error:  syntax error, unexpected T_STRING in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 118
+[04-Jul-2013 22:14:44] PHP Warning:  include(/home/mtprvzki/public_html/db_connect/db_read.php) [<a href='function.include'>function.include</a>]: failed to open stream: No such file or directory in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 237
+[04-Jul-2013 22:14:44] PHP Warning:  include() [<a href='function.include'>function.include</a>]: Failed opening '/home/mtprvzki/public_html/db_connect/db_read.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 237
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'mtprvzki'@'localhost' (using password: NO) in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 241
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 241
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 243
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'mtprvzki'@'localhost' (using password: NO) in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 267
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 267
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 270
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'mtprvzki'@'localhost' (using password: NO) in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 293
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 293
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 295
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: Access denied for user 'mtprvzki'@'localhost' (using password: NO) in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 318
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_query() [<a href='function.mysql-query'>function.mysql-query</a>]: A link to the server could not be established in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 318
+[04-Jul-2013 22:14:44] PHP Warning:  mysql_num_rows(): supplied argument is not a valid MySQL result resource in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 320
+[04-Jul-2013 22:14:44] PHP Fatal error:  Call to private Unified::__construct() from invalid context in /home/mtprvzki/public_html/forms/cargo/form_order_ru.php on line 4
+[04-Jul-2013 22:15:13] PHP Fatal error:  Call to private Unified::__construct() from invalid context in /home/mtprvzki/public_html/forms/cargo/form_order_ru.php on line 4
+[04-Jul-2013 22:15:50] PHP Fatal error:  Access to undeclared static property: Unified::$_defaults in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 26
+[04-Jul-2013 22:16:53] PHP Fatal error:  Using $this when not in object context in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 26
+[04-Jul-2013 22:17:36] PHP Warning:  md5() expects parameter 1 to be string, array given in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 29
+[04-Jul-2013 22:17:36] PHP Warning:  md5() expects parameter 1 to be string, array given in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 30
+[04-Jul-2013 22:17:36] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(189): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:22:17] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(189): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:27:21] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(189): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:28:09] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:28:10] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:28:26] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:28:27] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:28:27] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:30:36] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:31:11] PHP Warning:  md5() expects parameter 1 to be string, array given in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 32
+[04-Jul-2013 22:31:59] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:32:24] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:32:48] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:32:49] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:33:01] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:33:23] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:33:38] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(190): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:41:10] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(189): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:43:08] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(189): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:44:35] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(189): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 22:44:36] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 1 no such table: transport_type' in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php:345
+Stack trace:
+#0 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(345): PDO->prepare('SELECT `id` FRO...')
+#1 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(1501): ORM::_execute('SELECT `id` FRO...', Array, 'default')
+#2 /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php(563): ORM->_run()
+#3 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(189): ORM->find_array()
+#4 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(43): Unified->splitTable('')
+#5 /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php(30): Unified->__construct(Array)
+#6 /home/mtprvzki/public_html/forms/cargo/form_order_ru.php(4): Unified::GetInstance()
+#7 {main}
+  thrown in /home/mtprvzki/public_html/forms/lib/unified/lib/class.ORM.lib.php on line 345
+[04-Jul-2013 23:34:40] PHP Fatal error:  Call to undefined method ORM::find_row() in /home/mtprvzki/public_html/forms/lib/unified/lib/class.Unified.lib.php on line 189

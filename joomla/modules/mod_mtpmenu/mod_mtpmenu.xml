@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>Alternative Menu</name>
+	<author>Михаил Ураков</author>
+	<creationDate>2012</creationDate>
+	<copyright> </copyright>
+	<license> </license>
+	<authorEmail>mikbox74@gmail.com</authorEmail>
+	<authorUrl> </authorUrl>
+	<version> </version>
+	<description></description>
+	<files>
+		<filename module="mod_mtpmenu">mod_mtpmenu.php</filename>
+		<filename module="mod_mtpmenu">index.html</filename>
+	</files>
+	<params>
+		<param name="menu" type="menu" default="mainmenu" label="Выберите меню" description="Select a menu" />
+	</params>
+</install>

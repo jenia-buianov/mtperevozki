@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install SYSTEM "http://dev.joomla.org/xml/1.5/component-install.dtd">
+<install type="component" version="1.5.0">
+	<name>mtpform</name>
+	<creationDate>31.08.2011</creationDate>
+	<author>Михаил Ураков</author>
+	<authorEmail>mikbox74@gmail.com</authorEmail>
+	<authorUrl>http://www.free-lance.ru/users/Sind-Bad</authorUrl>
+	<copyright>(С) 2012 Михаил Ураков</copyright>
+	<license>Commercial</license>
+	<version>1.0</version>
+	<description></description> 
+	<files folder="site">
+		<filename>mtpform.php</filename>
+		<filename>index.html</filename>
+		<filename>form.mtpform.php</filename>
+	</files>  
+	<administration>
+		<menu link="option=com_mtpform">Форма заявки</menu>
+		<files folder="admin">
+			<filename>admin.mtpform.php</filename>
+			<filename>template.mtpform.php</filename>
+			<filename>index.html</filename>
+		</files>
+	</administration>
+	<languages folder="language">
+		<language tag="en-GB">en-GB/en-GB.com_mtpform.ini</language>
+		<language tag="ru-RU">ru-RU/ru-RU.com_mtpform.ini</language>
+	</languages>	
+</install>
