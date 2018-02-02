@@ -26,10 +26,6 @@ jQuery(document).ready(function() {
 		$('nav').toggleClass('fadeInUp navbar-no-bg');
 	});
 
-    /*
-        Background slideshow
-    */
-    $('.top-content').backstretch("assets/img/backgrounds/1.jpg");
     new WOW().init();
     
     /*

@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{asset('css/animate.css')}}">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/media-queries.css')}}">
+    <link rel="stylesheet" href="{{asset('aos/aos.css')}}" />
 
 </head>
 <body>
@@ -29,28 +30,45 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html">Faby - Bootstrap Landing Page</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse" id="top-navbar-1" aria-expanded="false" style="height: 0px;">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#top-content">БЛОГ</a></li>
-                    <li><a class="scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#top-content">ПЕРЕВОЗЧИКАМ</a></li>
-                    <li><a class="scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#top-content">ПЕРЕВОЗКИ</a></li>
-                    <li><a class="scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#features">УСЛУГИ</a></li>
-                    <li><a class="scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#how-it-works">БИРЖА</a></li>
+                    <?php
 
+                    foreach(App\Menu::where('parent',0)->orderBy('order')->get() as $k=>$v){
+                        $link = explode('#',$v->link);
+                        $count = App\Menu::where('parent',$v->id)->count();
+                        echo '<li><a ';
+                        if (count($link)) echo 'class="scroll-link"';
+                        if ($count) echo 'class="dropdown-toggle" id="navbarDrop'.$v->id.'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"';
+                        echo ' href="'.url($v->link).'" title="'.trans($v->titleKey).'">'.trans($v->titleKey).'</a>';
+
+                        if ($count) echo '<div class="dropdown-menu" aria-labelledby="navbarDrop'.$v->id.'" style="overflow: auto;padding: 10px;">';
+
+                        foreach (App\Menu::where('parent',$v->id)->orderBy('order')->get() as $item=>$value){
+                            echo '<a class="dropdown-item" title="'.trans($value->titleKey).'" href="'.url($value->link).'" style="font-weight:bold">'.trans($value->titleKey).'</a>';
+                            foreach (App\Menu::where('parent',$value->id)->orderBy('order')->get() as $it=>$val){
+                                echo '<a class="dropdown-item" title="'.trans($val->titleKey).'" href="'.url($val->link).'">'.trans($val->titleKey).'</a>';
+                            }
+                        }
+
+                        if ($count) echo '</div>';
+                        echo'</li>';
+                    }
+
+                    ?>
 
                     <li><a class="btn btn-link-2" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="        line-height: 20px;
     height: auto;
     border-radius: 15px;
-    background: rgba(255,255,255,0.8);">АВТОРИЗАЦИЯ</a></li>
-                    <li><a class="btn btn-link-3 scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="border-radius: 15px;
+    background: rgba(255,255,255,0.8);">{{translate('autorize')}}</a></li>
+                    <li class="hidden-md hidden-sm  hidden-xs"><a class="btn btn-link-3 scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="border-radius: 15px;
     margin: 5px 0 0 15px;
-    padding: 15px;">НАЙТИ ГРУЗ</a></li>
-                    <li><a class="btn btn-link-3 scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="border-radius: 15px;
+    padding: 15px;">{{translate('find_cargo')}}</a></li>
+                    <li class="hidden-md hidden-sm hidden-md hidden-xs"><a class="btn btn-link-3 scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="border-radius: 15px;
     margin: 5px 0 0 15px;
-    padding: 15px;">НАЙТИ ТРАНСПОРТ</a></li>
+    padding: 15px;">{{translate('find_cars')}}</a></li>
                 </ul>
             </div>
         </div>
@@ -62,15 +80,14 @@
     <script src="{{asset('js/wow.min.js')}}"></script>
     <script src="{{asset('js/retina-1.1.0.min.js')}}"></script>
     <script src="{{asset('js/waypoints.min.js')}}"></script>
+    <script src="{{asset('aos/aos.js')}}"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
 
 <div class="backround_">
     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
          width="1165.000000pt" height="575.000000pt" viewBox="0 0 1165.000000 575.000000"
          preserveAspectRatio="xMidYMid meet">
-        <metadata>
-            Created by potrace 1.15, written by Peter Selinger 2001-2017
-        </metadata>
+
         <g transform="translate(0.000000,575.000000) scale(0.100000,-0.100000)"
            fill="#000000" stroke="none">
             <path d="M4228 5743 c-21 -5 -24 -20 -5 -26 17 -6 -23 1 -52 10 -19 5 -23 3
@@ -608,6 +625,16 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
         </g>
     </svg>
 </div>
+
+<script>
+    $(document).ready(function () {
+        AOS.init({duration: 1200,easing: 'ease-out-back',disable: "mobile"});
+        if (window.screen.width>=1024) {
+            $('.dropdown-menu').css('height',window.screen.height*0.7+'px');
+            $('.dropdown-menu').css('width',window.screen.width*0.3+'px');
+        }
+    });
+</script>
 
 </body>
 </html>
