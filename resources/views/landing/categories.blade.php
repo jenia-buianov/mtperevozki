@@ -15,12 +15,12 @@
                 $offset = $k*50;
                 ?>
                 <div class="col-sm-4 features-box" data-aos="{{$effect}}" data-aos-delay="{{$offset}}">
-                    <div class="features-box-icon">
+                    <a class="features-box-icon" style="display: block;color:#666;font-weight: 600;cursor: pointer">
                         <img src="{{url('images/categories/'.$v->image)}}">
-                        <div class="holder">
-                            <a href="{{url('/'.$v->link)}}" class="btn btn-link-1" style="color:white">Заказать</a>
+                        <div class="holder animated fadeInUpBig" style="font-size:2rem;">
+                            Заказать
                         </div>
-                    </div>
+                    </a>
                     <h3><a href="{{url($v->link)}}">{{trans($v->titleKey)}}</a></h3>
                 </div>
                 @if($k%3==2) </div> @endif

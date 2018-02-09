@@ -17,4 +17,9 @@ class RemoteTransportType extends Model
     {
         return $this->hasMany('App\RemoteAutoTransport');
     }
+
+    public function cargo()
+    {
+        return $this->hasMany('App\RemoteAutoCargo');
+    }
 }

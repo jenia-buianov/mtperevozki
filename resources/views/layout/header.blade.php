@@ -58,17 +58,16 @@
                     }
 
                     ?>
-
-                    <li><a class="btn btn-link-2" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="        line-height: 20px;
-    height: auto;
-    border-radius: 15px;
-    background: rgba(255,255,255,0.8);">{{translate('autorize')}}</a></li>
                     <li class="hidden-md hidden-sm"><a class="btn btn-link-3 scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="border-radius: 15px;
     margin: 5px 0 0 15px;
     padding: 15px;">{{translate('find_cargo')}}</a></li>
                     <li class="hidden-md hidden-sm"><a class="btn btn-link-3 scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="border-radius: 15px;
     margin: 5px 0 0 15px;
     padding: 15px;">{{translate('find_cars')}}</a></li>
+                    <li><a class="btn btn-link-2" href="#" style="        line-height: 20px;
+    height: auto;
+    border-radius: 15px;
+    background: white;color: #666666;">{{translate('autorize')}}</a></li>
                 </ul>
             </div>
         </div>
