@@ -100,7 +100,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="{{url('birja/cargo/')}}" style="margin-top: 1.2rem;font-size:1.5rem;font-weight: 600;float: right">{{translate('all_cargo')}}</a>
+                    <a href="{{url('birja/transport/')}}" style="margin-top: 1.2rem;font-size:1.5rem;font-weight: 600;float: right">{{translate('all_transport')}}</a>
                 </div>
             </div>
     </div>
