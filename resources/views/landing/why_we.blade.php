@@ -10,23 +10,23 @@
             <div class="col-sm-7 more-features-box" data-aos="fade-left">
                 <div class="more-features-box-text">
                     <div class="more-features-box-text-icon"><i class="fa fa-clock-o"></i></div>
-                    <h3>Экономия времени</h3>
+                    <h3>{{translate('time_')}}</h3>
                     <div class="more-features-box-text-description">
-                        Не надо звонить и вести долгие переговоры
+                        {{translate('time_text')}}
                     </div>
                 </div>
                 <div class="more-features-box-text">
                     <div class="more-features-box-text-icon"><i class="fa fa-registered"></i></div>
-                    <h3>Надежные перевозчики</h3>
+                    <h3>{{translate('security_transport')}}</h3>
                     <div class="more-features-box-text-description">
-                        Мы проверяем документы и выбираем лучших для сотрудничества
+                        {{translate('security_transport')}}
                     </div>
                 </div>
                 <div class="more-features-box-text">
                     <div class="more-features-box-text-icon"><i class="fa fa-check-circle"></i></div>
-                    <h3>Страхование грузов</h3>
+                    <h3>{{translate('asig_cargo')}}</h3>
                     <div class="more-features-box-text-description">
-                        Застрахуйте грузоперевозку с помощью одного из партнёров «Везёт Всем»
+                        {{translate('asig_cargo_text')}}
                     </div>
                 </div>
             </div>

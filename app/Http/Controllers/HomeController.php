@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Landing;
+use App\Menu;
 use App\RemoteAutoCargo;
 use App\RemoteAutoTransport;
 use App\RemoteCargoType;
@@ -33,50 +34,26 @@ class HomeController extends Controller
             'statistics'=>[
                 'cargo'=>[
                     'auto'=>['http://img.webme.com/pic/t/truck-driver-worldwide/peterbilt_truck.png',RemoteAutoCargo::whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->where('hidden',0)->count()],
-                    'plain'=>[RemoteAutoCargo::where('type',43)->where('hidden',0)->count()],
-                    'passengers'=>[RemotePassengersCargo::where('hidden',0)->count()],
-                    'sea'=>[RemoteAutoCargo::where('type',15)->where('hidden',0)->count()],
-                    'rails'=>[RemoteAutoCargo::where('type',44)->where('hidden',0)->count()],
-                    'post'=>[RemotePostCargo::where('hidden',0)->count()]
+                    'sea'=>['http://static.wixstatic.com/media/0d5a3f_21acfdd4ed1449dca59395deadc807a6~mv2_d_2500_1542_s_2.png_srz_974_597_85_22_0.50_1.20_0.00_png_srz',RemoteAutoCargo::where('type',15)->where('hidden',0)->count()],
+                    'rails'=>['http://noextra.ru/wp-content/uploads/2017/10/%D0%9F%D0%BE%D0%B5%D0%B7%D0%B4_2-1000x350.png',RemoteAutoCargo::where('type',44)->where('hidden',0)->count()],
+                    'plain'=>['https://img-fotki.yandex.ru/get/176508/493212545.3/0_1bbd11_4a9d975a_L',RemoteAutoCargo::where('type',43)->where('hidden',0)->count()],
+                    'post'=>['http://www.hazalambalaj.com/Images/Sayfa/Kurumsal/Basit/5311caeb8cb76.png',RemotePostCargo::where('hidden',0)->count()],
+                    'passengers'=>['http://st30.stblizko.ru/images/product/188/451/132_original.png',RemotePassengersCargo::where('hidden',0)->count()],
 
                 ],
                 'transport'=>[
                     'auto'=>['http://img.webme.com/pic/t/truck-driver-worldwide/peterbilt_truck.png',RemoteAutoTransport::whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->where('hidden',0)->count()],
-                    'plain'=>[RemoteAutoTransport::where('type',43)->where('hidden',0)->count()],
-                    'passengers'=>[RemotePassengersTransport::where('hidden',0)->count()],
-                    'sea'=>[RemoteAutoTransport::where('type',15)->where('hidden',0)->count()],
-                    'rails'=>[RemoteAutoTransport::where('type',44)->where('hidden',0)->count()],
-                    'post'=>[RemotePostTransport::where('hidden',0)->count()]
+                    'sea'=>['http://static.wixstatic.com/media/0d5a3f_21acfdd4ed1449dca59395deadc807a6~mv2_d_2500_1542_s_2.png_srz_974_597_85_22_0.50_1.20_0.00_png_srz',RemoteAutoTransport::where('type',15)->where('hidden',0)->count()],
+                    'rails'=>['http://noextra.ru/wp-content/uploads/2017/10/%D0%9F%D0%BE%D0%B5%D0%B7%D0%B4_2-1000x350.png',RemoteAutoTransport::where('type',44)->where('hidden',0)->count()],
+                    'plain'=>['https://img-fotki.yandex.ru/get/176508/493212545.3/0_1bbd11_4a9d975a_L',RemoteAutoTransport::where('type',43)->where('hidden',0)->count()],
+                    'post'=>['http://www.hazalambalaj.com/Images/Sayfa/Kurumsal/Basit/5311caeb8cb76.png',RemotePostTransport::where('hidden',0)->count()],
+                    'passengers'=>['http://st30.stblizko.ru/images/product/188/451/132_original.png',RemotePassengersTransport::where('hidden',0)->count()],
+
                 ]
             ],
-//            'statistics'=>[
-//                'auto'=>[
-//                    'cargo'=>RemoteAutoCargo::whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->where('hidden',0)->count(),
-//                    'transport'=>RemoteAutoTransport::whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->where('hidden',0)->count()
-//                ],
-//                'plain'=>[
-//                    'cargo'=>RemoteAutoCargo::where('type',43)->where('hidden',0)->count(),
-//                    'transport'=>RemoteAutoTransport::where('type',43)->where('hidden',0)->count()
-//                ],
-//                'passengers'=>[
-//                    'cargo'=>RemotePassengersCargo::where('hidden',0)->count(),
-//                    'transport'=>RemotePassengersTransport::where('hidden',0)->count()
-//                ],
-//                'sea'=>[
-//                    'cargo'=>RemoteAutoCargo::where('type',15)->where('hidden',0)->count(),
-//                    'transport'=>RemoteAutoTransport::where('type',15)->where('hidden',0)->count()
-//                ],
-//                'rails'=>[
-//                    'cargo'=>RemoteAutoCargo::where('type',44)->where('hidden',0)->count(),
-//                    'transport'=>RemoteAutoTransport::where('type',44)->where('hidden',0)->count()
-//                ],
-//                'post'=>[
-//                    'cargo'=>RemotePostCargo::where('hidden',0)->count(),
-//                    'transport'=>RemotePostTransport::where('hidden',0)->count()
-//                ]
-//            ],
             'landing'=>Landing::where('active',1)->orderBy('order','asc')->get(),
-            'countries'=>RemoteCountry::select($name,'id_country','alpha3')->where('country_hidden',0)->orderBy($name)->get()
+            'countries'=>RemoteCountry::select($name,'id_country','alpha3')->where('country_hidden',0)->orderBy($name)->get(),
+            'lang'=>app()->getLocale()
         ];
 
 

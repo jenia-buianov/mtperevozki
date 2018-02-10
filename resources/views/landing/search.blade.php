@@ -1,4 +1,4 @@
-<div class="how-it-works-container section-container section-container-image-bg" style="padding-bottom: 0px;">
+<div class="how-it-works-container section-container section-container-image-bg cargo-container" id="cargo" style="padding-bottom: 0px;">
     <div class="black-holder-3">
         <div class="container">
             <div class="row">
@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="row" style="margin-top: 1.5rem; margin-bottom: 0.8rem">
-                <form class="form-inline col-xs-12" method="GET" action="{{url('/birja/search')}}">
+                <form class="form-inline col-xs-12" method="GET" action="{{url($lang.'/birja/search')}}">
                     <div class="col-md-3 col-sm-12">
                         <label class="col-sm-12" for="inlineFormInput">
                             <div class="row">
@@ -60,16 +60,16 @@
                 </form>
             </div>
             <div class="row" style="margin-top: 5rem">
-                <div class="col-md-4 col-sm-12">
-                    <button class="btn btn-gray">Добавить транспорт</button>
-                    <div style="margin-bottom: 3rem" class="hidden-md hidden-lg"></div>
+                <div class="col-sm-4 col-xs-12">
+                    <button class="btn btn-gray">{{translate('add_transport')}}</button>
+                    <div style="margin-bottom: 3rem" class="visible-xs"></div>
                 </div>
-                <div class="col-md-4 col-sm-12">
-                    <button class="btn btn-gray">Добавить груз</button>
-                    <div style="margin-bottom: 3rem" class="hidden-md hidden-lg"></div>
+                <div class="col-sm-4 col-xs-12">
+                    <button class="btn btn-gray">{{translate('add_cargo')}}</button>
+                    <div style="margin-bottom: 3rem" class="visible-xs"></div>
                 </div>
-                <div class="col-md-4 col-sm-12">
-                    <button class="btn btn-gray">Перейти к бирже</button>
+                <div class="col-sm-4 col-xs-12">
+                    <button class="btn btn-gray">{{translate('go_to_birja')}}</button>
                 </div>
 
             </div>

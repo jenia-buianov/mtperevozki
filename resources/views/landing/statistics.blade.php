@@ -11,7 +11,7 @@
                 <div class="col-sm-12 more-features-box" data-aos="fade-up">
                     <div class="row">
                     @foreach($statistics['cargo'] as $v=>$i)
-                            <div class="col-sm-2 col-xs-12">'
+                            <div class="col-sm-2 col-xs-12">
                                 <div class="img_class">
                                 @if(count($i)>1)
                                     <img src="{{$i[0]}}">

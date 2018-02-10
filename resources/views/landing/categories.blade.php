@@ -14,11 +14,11 @@
                 if ($k%3==2) $effect = 'fade-right';
                 $offset = $k*50;
                 ?>
-                <div class="col-sm-4 features-box" data-aos="{{$effect}}" data-aos-delay="{{$offset}}">
-                    <a href="{{url('category/'.$v->titleKey)}}" class="features-box-icon" style="display: block;color:#666;font-weight: 600;cursor: pointer">
+                <div class="col-sm-4 features-box">
+                    <a href="{{url($lang.'/category/'.$v->titleKey)}}" class="features-box-icon" style="display: block;color:#666;font-weight: 600;cursor: pointer">
                         <img src="{{url('images/categories/'.$v->image)}}">
                         <div class="holder" style="font-size:2rem;">
-                            <button class="btn btn-link-1">Заказать</button>
+                            <button class="btn btn-link-1">{{translate('order')}}</button>
                         </div>
                     </a>
                     <h3><a href="{{url($v->link)}}">{{trans($v->titleKey)}}</a></h3>

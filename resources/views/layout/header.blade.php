@@ -30,11 +30,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{url('/')}}">MTPerevozki</a>
+                <a class="navbar-brand" href="{{url('/')}}">MT Perevozki</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse" id="top-navbar-1" aria-expanded="false" style="height: 0px;">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-left">
                     <?php
 
                     foreach(App\Menu::where('parent',0)->orderBy('order')->get() as $k=>$v){
@@ -59,16 +59,28 @@
                     }
 
                     ?>
-                    <li class="hidden-md hidden-sm"><a class="btn btn-link-3 scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="border-radius: 15px;
+                    <li class="hidden-md hidden-sm"><a class="btn btn-link-3 scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="border-radius: 5px;
     margin: 5px 0 0 15px;
-    padding: 15px;">{{translate('find_cargo')}}</a></li>
-                    <li class="hidden-md hidden-sm"><a class="btn btn-link-3 scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="border-radius: 15px;
+    padding: 10px;">{{translate('find_cargo')}}</a></li>
+                    <li class="hidden-md hidden-sm"><a class="btn btn-link-3 scroll-link" href="http://azmind.com/premium/faby/v1-2/layout-3/index.html#pricing" style="border-radius: 5px;
     margin: 5px 0 0 15px;
-    padding: 15px;">{{translate('find_cars')}}</a></li>
-                    <li><a class="btn btn-link-2" href="#" style="        line-height: 20px;
-    height: auto;
-    border-radius: 15px;
-    background: white;color: #666666;" data-toggle="modal" data-target="#loginModal">{{translate('autorize')}}</a></li>
+    padding: 10px;">{{translate('find_cars')}}</a></li>
+
+                        @if (!Auth::check())
+                            <li><a class="btn btn-link-2" href="#" data-toggle="modal" data-target="#loginModal">{{translate('autorize')}}</a></li>
+                        @else
+                            <li>
+                                <a class="dropdown-toggle btn btn-link-2" id="profileDrop" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">{{Auth::user()->name.' '.Auth::user()->lastname}}</a>
+                                <div class="dropdown-menu" aria-labelledby="profileDrop" style="overflow: auto;">
+                                    <a class="dropdown-item" href="{{url('/settings')}}">{{translate('settings')}}</a>
+                                    @if(Auth::user()->groupId==1)
+                                        <a class="dropdown-item" href="{{url('/admin')}}">{{translate('admin_panel')}}</a>
+                                    @endif
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{url('/logout')}}">{{translate('logout')}}</a>
+                                </div>
+                            </li>
+                        @endif
                 </ul>
             </div>
         </div>
@@ -626,6 +638,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
     </svg>
 </div>
 
+    @if (!Auth::check())
     <div class="modal fade modal-primary" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
         <div class="modal-dialog modal-login">
             <div class="modal-content">
@@ -654,9 +667,9 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                 <div class="text-center" style="margin-top: 2rem; margin-bottom: 2rem">
                                     <a href="{{url('/forgot')}}">Забыли пароль?</a>
                                 </div>
-                                <button class="btn btn-link-1" style="width: 100%;display: block">Авторизация</button>
-
+                                <button class="btn btn-link-1" style="margin: 0px 5px 5px 0px;width: 100%;display: block">Авторизация</button>
                             </div>
+                            {{csrf_field()}}
                         </form>
                     </div>
                     <div class="modal-footer text-center">
@@ -666,6 +679,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
             </div>
         </div>
     </div>
+    @endif
 
 <script>
     $(document).ready(function () {
@@ -673,6 +687,8 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
         if (window.screen.width>=1024) {
             $('.dropdown-menu').css('height',window.screen.height*0.7+'px');
             $('.dropdown-menu').css('width',window.screen.width*0.3+'px');
+            $('[aria-labelledby="profileDrop"].dropdown-menu').css('height','auto');
+            $('[aria-labelledby="profileDrop"].dropdown-menu').css('width','auto');
         }
     });
 

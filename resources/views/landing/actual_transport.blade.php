@@ -1,4 +1,4 @@
-<div class="how-it-works-container section-container" style="padding-bottom: 30px;    background: #f8f8f8;">
+<div class="how-it-works-container section-container" style="padding-bottom: 30px;    ">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 more-features section-description">
@@ -40,23 +40,8 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-12">
-                        <label class="col-sm-12" for="inlineFormInput">
-                            <div class="row">
-                                {{translate('what_transport')}}
-                            </div>
-                        </label>
-                        <div class="col-sm-12">
-                            <select class="form-control" name="type" style="width: 100%">
-                                <option selected>-------</option>
-                                @foreach($transport_type as $k=>$v)
-                                    <? $title = 'transport_type_'.app()->getLocale(); ?>
-                                    <option value="{{$v->id}}">{{$v->$title}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-1 col-sm-12 col-md-offset-1" style="padding-top: 30px;">
+
+                    <div class="col-md-1 col-sm-12 col-md-offset-4" style="padding-top: 30px;float: right">
                         <button class="btn btn-link-1" type="submit" style="margin: 0px;line-height: 40px;height: auto;">{{translate('search')}}</button>
                     </div>
                 </form>
@@ -104,7 +89,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="{{url('birja/transport/')}}" style="margin-top: 1.2rem;font-size:1.5rem;font-weight: 600;float: right">{{translate('all_transport')}}</a>
+                    <a href="{{url($lang.'/birja/transport/')}}" style="margin-top: 1.2rem;font-size:1.5rem;font-weight: 600;float: right">{{translate('all_transport')}}</a>
                 </div>
             </div>
     </div>

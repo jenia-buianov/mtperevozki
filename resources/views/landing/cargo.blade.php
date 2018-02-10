@@ -14,20 +14,18 @@
                 if ($k%3==2) $effect = 'fade-right';
                 $offset = $k*50;
                 ?>
-                <div class="col-sm-4 features-box"  data-aos="{{$effect}}" data-aos-delay="{{$offset}}">
+                <div class="col-sm-4 features-box">
                     <div class="features-box-icon">
                         <img src="{{url('images/types/'.$v->image)}}">
                     </div>
-                    <h3><a href="{{url($v->link)}}">{{trans($v->titleKey)}}</a></h3>
+                    <h3><a href="{{url($lang.'/'.$v->link)}}">{{trans($v->titleKey)}}</a></h3>
                 </div>
                 @if($k%3==2) </div> @endif
         @endforeach
     </div>
     <div class="container">
         <div class="row">
-            <div data-aos="fade-up">
                 <a class="btn btn-link-1 scroll-link" href="#top-content">Contact Us <i class="fa fa-angle-right"></i></a>
-            </div>
         </div>
     </div>
 </div>
