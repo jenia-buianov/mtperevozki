@@ -30,6 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <a class="navbar-brand" href="{{url('/')}}">MTPerevozki</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="navbar-collapse collapse" id="top-navbar-1" aria-expanded="false" style="height: 0px;">
@@ -67,7 +68,7 @@
                     <li><a class="btn btn-link-2" href="#" style="        line-height: 20px;
     height: auto;
     border-radius: 15px;
-    background: white;color: #666666;">{{translate('autorize')}}</a></li>
+    background: white;color: #666666;" data-toggle="modal" data-target="#loginModal">{{translate('autorize')}}</a></li>
                 </ul>
             </div>
         </div>
@@ -624,6 +625,47 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
         </g>
     </svg>
 </div>
+
+    <div class="modal fade modal-primary" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content">
+                <div class="card card-login card-plain">
+                    <div class="modal-header justify-content-center">
+                        <div style="text-align: right">
+                            <i class="fa fa-times" data-dismiss="modal" aria-hidden="true"></i>
+                        </div>
+                        <div class="text-center" style="margin-top: 1.5rem;margin-bottom: 1.5rem;font-size: 7rem;">
+                            <i class="fa fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form" method="POST" action="{{url('/login')}}" style="margin-top: 2rem;">
+                            <div class="card-body">
+                                <div class="form-group input-group input-group-lg">
+                                    <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                                    <input type="email" class="form-control" name="email" placeholder="E-mail" value="" required="" autofocus>
+                                </div>
+
+                                <div class="form-group input-group input-group-lg">
+                                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                                    <input type="password" class="form-control" name="password" placeholder="Пароль" required="">
+                                </div>
+
+                                <div class="text-center" style="margin-top: 2rem; margin-bottom: 2rem">
+                                    <a href="{{url('/forgot')}}">Забыли пароль?</a>
+                                </div>
+                                <button class="btn btn-link-1" style="width: 100%;display: block">Авторизация</button>
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer text-center">
+                        <a href="{{url('/register')}}" class="btn btn-lg btn-block" style="color: #deaa5c!important;">Регистрация</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <script>
     $(document).ready(function () {

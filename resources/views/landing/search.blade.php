@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 more-features section-description">
-                    <h2>{{translate('search')}}</h2>
+                    <h2>{{translate('search_title')}}</h2>
                     <div class="divider-1"><div class="line"></div></div>
                 </div>
             </div>
@@ -58,6 +58,20 @@
                         <button class="btn btn-link-1" type="submit" style="margin: 0px;line-height: 40px;height: auto;">{{translate('search')}}</button>
                     </div>
                 </form>
+            </div>
+            <div class="row" style="margin-top: 5rem">
+                <div class="col-md-4 col-sm-12">
+                    <button class="btn btn-gray">Добавить транспорт</button>
+                    <div style="margin-bottom: 3rem" class="hidden-md hidden-lg"></div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <button class="btn btn-gray">Добавить груз</button>
+                    <div style="margin-bottom: 3rem" class="hidden-md hidden-lg"></div>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <button class="btn btn-gray">Перейти к бирже</button>
+                </div>
+
             </div>
         </div>
     </div>

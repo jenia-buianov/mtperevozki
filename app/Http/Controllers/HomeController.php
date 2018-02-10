@@ -6,6 +6,7 @@ use App\Category;
 use App\Landing;
 use App\RemoteAutoCargo;
 use App\RemoteAutoTransport;
+use App\RemoteCargoType;
 use App\RemoteCity;
 use App\RemoteCountry;
 use App\RemotePassengersCargo;
@@ -28,6 +29,7 @@ class HomeController extends Controller
             'auto_cargo'=>RemoteAutoCargo::where('hidden',0)->where('date_create','>=',date('Y-m-d',strtotime('-'.$autoTransportShowDays.' days')))->whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->orderBy('id','desc')->limit(10)->get(),
             'auto_transport'=>RemoteAutoTransport::where('hidden',0)->where('date_create','>=',date('Y-m-d',strtotime('-'.$autoTransportShowDays.' days')))->whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->orderBy('id','desc')->limit(10)->get(),
             'transport_type'=>RemoteTransportType::where('transport_type_hidden',0)->get(),
+            'cargo_type'=>RemoteCargoType::where('cargo_type_hidden',0)->get(),
             'statistics'=>[
                 'cargo'=>[
                     'auto'=>['http://img.webme.com/pic/t/truck-driver-worldwide/peterbilt_truck.png',RemoteAutoCargo::whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->where('hidden',0)->count()],

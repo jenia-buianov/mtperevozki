@@ -15,7 +15,7 @@ class CreateLandingTable extends Migration
     {
         Schema::create('landing', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title',30)->default('');
+            $table->string('title',50)->default('');
             $table->string('view',35)->default('');
             $table->integer('order')->default(1);
             $table->integer('active')->default(1);

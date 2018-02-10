@@ -77,21 +77,25 @@
                             <tbody>
                             @foreach($auto_transport as $k=>$v)
                                 <tr>
-                                    <td align="left">
+                                    <td align="left" width="20%">
                                         <img src="{{url('images/flags/flat/24/'.$v->export_flag().'.png')}}" width="24" height="24">
-                                        <?=$v->export()?>
+                                        <font class="hidden-lg hidden-md">{{$v->export_flag()}}</font>
+                                        <font class="hidden-xs hidden-sm"><?=$v->export()?></font>
+                                        <a href="{{url('/birja/transport?from='.$v->export)}}" class="btn btn-gray" style="font-size:1rem;line-height: 3rem">Просмотреть весь транспорт из {{$v->export_country_from()}}</a>
                                     </td>
-                                    <td align="left">
+                                    <td align="left" width="20%">
                                         <img src="{{url('images/flags/flat/24/'.$v->import_flag().'.png')}}" width="24" height="24">
-                                        <?=$v->import()?>
+                                        <font class="hidden-lg hidden-md">{{$v->import_flag()}}</font>
+                                        <font class="hidden-xs hidden-sm"><?=$v->import()?></font>
+                                        <a href="{{url('/birja/transport?to='.$v->import)}}" class="btn btn-gray" style="font-size: 1rem;line-height: 3rem">Просмотреть весь транспорт в {{$v->import_country_to()}}</a>
                                     </td>
-                                    <td>
+                                    <td width="30%">
                                         {{$v->transport_type()}}
                                     </td>
-                                    <td>
+                                    <td width="15%">
                                         {{$v->volume()}}
                                     </td>
-                                    <td>
+                                    <td width="15%">
                                         {{$v->date_from}}<br>
                                         {{$v->date_to}}
                                     </td>

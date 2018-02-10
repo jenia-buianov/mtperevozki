@@ -46,6 +46,17 @@ class RemoteAutoTransport extends Model
         return $this->belongsTo('App\RemoteCountry','export','id_country')->firstOrFail()->$lang;
     }
 
+    public function import_country_to(){
+        $lang = 'country_name_ru_to';
+        return $this->belongsTo('App\RemoteCountry','import','id_country')->firstOrFail()->$lang;
+    }
+
+    public function export_country_from(){
+        $lang = 'country_name_ru_from';
+        return $this->belongsTo('App\RemoteCountry','export','id_country')->firstOrFail()->$lang;
+    }
+
+
     public function export_flag(){
         if (!empty($this->export)&&is_numeric($this->export)){
             return $this->belongsTo('App\RemoteCountry','export','id_country')->firstOrFail()->alpha3;

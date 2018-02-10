@@ -15,10 +15,10 @@
                 $offset = $k*50;
                 ?>
                 <div class="col-sm-4 features-box" data-aos="{{$effect}}" data-aos-delay="{{$offset}}">
-                    <a class="features-box-icon" style="display: block;color:#666;font-weight: 600;cursor: pointer">
+                    <a href="{{url('category/'.$v->titleKey)}}" class="features-box-icon" style="display: block;color:#666;font-weight: 600;cursor: pointer">
                         <img src="{{url('images/categories/'.$v->image)}}">
-                        <div class="holder animated fadeInUpBig" style="font-size:2rem;">
-                            Заказать
+                        <div class="holder" style="font-size:2rem;">
+                            <button class="btn btn-link-1">Заказать</button>
                         </div>
                     </a>
                     <h3><a href="{{url($v->link)}}">{{trans($v->titleKey)}}</a></h3>
