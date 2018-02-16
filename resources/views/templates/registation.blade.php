@@ -17,7 +17,7 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td align="left" style="text-align: left;font-size: 2.5rem;font-weight: bold">MT Perevozki</td>
-                                                                <td align="right" style="text-align: right;font-size: 1rem;font-weight: bold;width: 400px;color: white;">+373 69 107 853</td>
+                                                                <td align="right" style="text-align: right;font-size: 1rem;font-weight: bold;width: 400px;color: white;"><a href="{{url('ru/contacts')}}" style="color: #cccccc;">{{translate('contacts')}}</a></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

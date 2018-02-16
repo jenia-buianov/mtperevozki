@@ -141,11 +141,34 @@ class FormController extends Controller
                     ]);
                 }
 
+                foreach (Emails::where('type','registration')->get() as $k=>$v){
+                    $array = [
+                        'email_from'=>$v->email_from->login,
+                        'template'=>$v->template->path,
+                        'message'=>[
+                            'subject'=>translate('added_with_success'),
+                            'email'=>$input['email']
+                        ]
+                    ];
+                    foreach (json_decode($v->template->params) as $i=>$l){
+                        if (isset($user->$l)&&$l!=='password') $array['message'][$l] = $user->$l;
+                        if ($l=='to')  $array['message'][$l] = strip_tags($cargo->import());
+                        if ($l=='from')  $array['message'][$l] = strip_tags($cargo->export());
+                        if ($l=='volume')  $array['message'][$l] = $cargo->name();
+                        if ($l=='transport')  $array['message'][$l] = $cargo->transport_type();
+                        if ($l=='count')  $array['message'][$l] = RemoteAutoTransport::where('import',$input['import'])->count();
+
+
+                    }
+                    $array['message']['subscribe_link'] = url(app()->getLocale().'/birja/transport/?import='.$input['import'].'&export='.$input['export']);
+                    new SendEmail($array);
+                }
+
             return json_encode([
                 'js'=>[
                     '$(".alert-dismissible").css("opacity",1);
                     $(".alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
-                    $(".alert-danger span:eq(0)").html("'.translate('added_with_success').'");
+                    $(".alert-success span:eq(0)").html("'.translate('added_with_success').'");
                     setTimeout(function(){
                         window.location.replace("'.$subscribe->url.'");
                     },2000);

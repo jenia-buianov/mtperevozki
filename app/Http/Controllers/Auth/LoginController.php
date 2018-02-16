@@ -10,6 +10,7 @@ use App\RemoteCountry;
 use App\RemoteCargoType;
 use App\RemoteCargoVolume;
 use App\RemoteTransportType;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -71,11 +72,15 @@ class LoginController extends Controller
 
     public function confirm(Request $request){
         $user = User::where('confirm_token',htmlspecialchars($request->token,3))->first();
+        if (!$user){
+            abort(404);
+        }
         $user->confirmed = 1;
         $user->confirm_token = null;
         $user->save();
         $redirect = explode('[',$request->r);
         $countries = explode(',',mb_substr($redirect[1],0,mb_strlen($redirect[1])-1));
+        Auth::login($user);
         return redirect($redirect[0].'?import='.$countries[0].'&export='.$countries[1]);
     }
 
@@ -90,7 +95,7 @@ class LoginController extends Controller
         $name = 'country_name_'.app()->getLocale();
 
         if (auth()->attempt(array('email' => $request->input('email'), 'password' => $request->input('password')),true)){
-            if(!auth()->user()->confrimed){
+            if(!auth()->user()->confirmed){
                 auth()->logout();
                 $errors = [$this->username() => trans('auth.failed')];
                 return redirect('/login')->with([
