@@ -9,6 +9,7 @@
 namespace App\Additional;
 
 
+use App\EmailsFrom;
 use Illuminate\Http\Request;
 use Swift_Mailer;
 use Swift_SmtpTransport;
@@ -26,7 +27,7 @@ class SendEmail
         ]
     ];
 
-    private $sample = ['email_from'=>'info@hotel-service.co.il','message'=>
+    private $sample = ['email_from'=>'info@hotel-service.co.il','template'=>'template.registration', 'message'=>
         [
             'email'=>'jeniabuianov@gmail.com',
             'subject'=>'Ежедневная рассылка',
@@ -42,17 +43,20 @@ class SendEmail
 
         $backup = Mail::getSwiftMailer();
 
-        $email = $this->array[$array['email_from']];
-        $transport = new Swift_SmtpTransport($email['smtp'],$email['port'],$email['type']);
-        $transport->setUsername($email['name']);
-        $transport->setPassword($email['password']);
+        $email = EmailsFrom::where('login',$array['email_from'])->first();
+        $transport = new Swift_SmtpTransport($email->host,$email->type,$email->secutity);
+        $transport->setUsername($email->login);
+        $transport->setPassword($email->password);
         $customEmail = new Swift_Mailer($transport);
 
 
         Mail::setSwiftMailer($customEmail);
 
         $send = $array['message'];
-        Mail::send('email', $send, function($message) use ($send) {
+        $send['email_from'] = $email->login;
+        $send['company'] = 'MTPerevizki.RU';
+
+        Mail::send($array['template'], $send, function($message) use ($send) {
             $message->to($send['email']);
             $message->subject($send['subject']);
             $message->from($send['email_from'], $send['company']);

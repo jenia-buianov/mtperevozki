@@ -48,3 +48,87 @@ jQuery(window).load(function() {
 	$(".modal-body img, .testimonial-image img").attr("style", "width: auto !important; height: auto !important;");
 	
 });
+
+
+function  addPhone(e) {
+	event.preventDefault();
+	form = $(e).parents('form');
+	id = $(form).attr('id');
+	if ($('#'+id+' .add_phone input').length<2) {
+	    count_ = $('#'+id+' .add_phone input').length+1;
+        $('#' + id + ' .add_phone').append('<div class="row"><div class="col-xs-12 col-md-6">\n' +
+            '                                                <label>Телефон</label>\n' +
+            '                                            </div><div class="col-xs-12 col-md-6">\n' +
+            '                                                <div class="input-group">\n' +
+            '                                                    <span class="input-group-addon">+</span><input type="text" name="phone'+count_+'" class="form-control" value="" required>\n' +
+            '                                                </div>\n' +
+            '                                            </div></div>');
+        $('#' + id + ' .add_phone').css('display','block');
+    }
+    if ($('#'+id+' .add_phone input').length==2){
+		$('#'+id+' .add_phone_link').css('display','none');
+		$('#'+id+' .dell_phone_link').css('display','inline');
+	}
+}
+
+function  dellPhone(e) {
+    event.preventDefault();
+    form = $(e).parents('form');
+    id = $(form).attr('id');
+    if ($('#'+id+' .add_phone input').length>0) {
+        $('#' + id + ' .add_phone .row:last-child').remove();
+    }
+    if ($('#'+id+' .add_phone input').length==0){
+        $('#'+id+' .add_phone_link').css('display','inline');
+        $('#'+id+' .dell_phone_link').css('display','none');
+        $('#' + id + ' .add_phone').css('display','none');
+    }
+}
+
+function  sendForm(e){
+    event.preventDefault();
+    var $that = $(e),
+        formData = new FormData(e);
+
+    $.ajax({
+        url: $that.attr('action'),
+        type: 'post',
+        contentType: false, // важно - убираем форматирование данных по умолчанию
+        processData: false, // важно - убираем преобразование строк по умолчанию
+        data: formData,
+        async: true,
+        dataType: "json",
+        success: function(json){
+        	console.log(json);
+            if (typeof json.js!=='undefined'){
+            	console.log('here');
+                $('body').append('<script>'+json.js[0]+'</script>');
+            }
+        }
+    });
+}
+
+function  setCity(e){
+    event.preventDefault();
+    form = $(e).parents('form');
+    FormId = $(form).attr('id');
+
+    formData = new FormData();
+    formData.append('country',$(e).val());
+    formData.append('id',$(e).attr('name'));
+    formData.append('_token',$('#'+FormId+' [name="_token"]').val());
+
+    $.ajax({
+        url: lang+'/city',
+        type: 'post',
+        contentType: false, // важно - убираем форматирование данных по умолчанию
+        processData: false, // важно - убираем преобразование строк по умолчанию
+        data: formData,
+        async: true,
+        dataType: "json",
+        success: function(json){
+            $('#'+FormId+' [name="'+$(e).attr('name')+'_city"]').html(json.cities);
+            $('#'+FormId+' [name="'+$(e).attr('name')+'_city"]').prop('disabled',false);
+        }
+    });
+}

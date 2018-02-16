@@ -1,10 +1,11 @@
-<div class="how-it-works-container section-container section-container-image-bg cargo-container" id="cargo" style="padding-bottom: 0px;">
-    <div class="black-holder-3">
+<div class="how-it-works-container section-container section-container-image-bg cargo-container" id="cargo" style="padding-bottom: 30px;background: #e3ddc1;color: #666666 !important;">
+    <div class="black-holder-0">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12 more-features section-description">
-                    <h2>{{translate('search_title')}}</h2>
+                    <h2 style="color: #333">{{translate('search_title')}}</h2>
                     <div class="divider-1"><div class="line"></div></div>
+                    <p class="medium-paragraph">Предложите транспорт или прямо сейчас найдите нужный транспорт. Поиск, моментально покажет вам список перевозчиков в вашем направлении</p>
                 </div>
             </div>
             <div class="row" style="margin-top: 1.5rem; margin-bottom: 0.8rem">
@@ -32,8 +33,7 @@
                             <select class="form-control" name="country_export"  style="width: 100%">
                                 <option selected>{{translate('all_countries')}}</option>
                                 @foreach($countries as $country=>$value)
-                                    <? $title = 'country_name_'.app()->getLocale(); ?>
-                                    <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$title}}</option>
+                                    <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -48,8 +48,7 @@
                             <select class="form-control" name="country_export"  style="width: 100%">
                                 <option selected>{{translate('all_countries')}}</option>
                                 @foreach($countries as $country=>$value)
-                                    <? $title = 'country_name_'.app()->getLocale(); ?>
-                                    <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$title}}</option>
+                                    <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -61,15 +60,15 @@
             </div>
             <div class="row" style="margin-top: 5rem">
                 <div class="col-sm-4 col-xs-12">
-                    <button class="btn btn-gray">{{translate('add_transport')}}</button>
+                    <button class="btn btn-golden">{{translate('add_transport')}}</button>
                     <div style="margin-bottom: 3rem" class="visible-xs"></div>
                 </div>
                 <div class="col-sm-4 col-xs-12">
-                    <button class="btn btn-gray">{{translate('add_cargo')}}</button>
+                    <button class="btn btn-golden">{{translate('add_cargo')}}</button>
                     <div style="margin-bottom: 3rem" class="visible-xs"></div>
                 </div>
                 <div class="col-sm-4 col-xs-12">
-                    <button class="btn btn-gray">{{translate('go_to_birja')}}</button>
+                    <button class="btn btn-golden">{{translate('go_to_birja')}}</button>
                 </div>
 
             </div>

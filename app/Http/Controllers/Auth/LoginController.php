@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\RemoteCountry;
+use App\RemoteCargoType;
+use App\RemoteCargoVolume;
+use App\RemoteTransportType;
 
 class LoginController extends Controller
 {
@@ -36,11 +41,74 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('logs');
     }
 
     public function logout(Request $request)
     {
         auth()->logout();
         return redirect($this->redirectTo);
+    }
+
+    public function showLoginForm()
+    {
+        $name = 'country_name_'.app()->getLocale();
+        $data = [
+            'transport_type'=>RemoteTransportType::where('transport_type_hidden',0)->orderBy('order','asc')->get(),
+            'cargo_type'=>RemoteCargoType::where('cargo_type_hidden',0)->orderBy('order','asc')->get(),
+            'cargo_volume'=>RemoteCargoVolume::where('cargo_volume_hidden',0)->get(),
+            'countries'=>RemoteCountry::select($name,'id_country','alpha3')->where('country_hidden',0)->orderBy($name)->get(),
+            'country_name'=>$name,
+            'cargo_volume_name'=>'cargo_volume_'.app()->getLocale(),
+            'transport_name'=>'transport_type_'.app()->getLocale(),
+            'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
+            'lang'=>app()->getLocale()
+        ];
+
+
+        return view('auth.login')->with($data)->render();
+    }
+
+    public function confirm(Request $request){
+        $user = User::where('confirm_token',htmlspecialchars($request->token,3))->first();
+        $user->confirmed = 1;
+        $user->confirm_token = null;
+        $user->save();
+        $redirect = explode('[',$request->r);
+        $countries = explode(',',mb_substr($redirect[1],0,mb_strlen($redirect[1])-1));
+        return redirect($redirect[0].'?import='.$countries[0].'&export='.$countries[1]);
+    }
+
+    public function login(Request $request)
+    {
+        $validator = $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+
+        $name = 'country_name_'.app()->getLocale();
+
+        if (auth()->attempt(array('email' => $request->input('email'), 'password' => $request->input('password')),true)){
+            if(!auth()->user()->confrimed){
+                auth()->logout();
+                $errors = [$this->username() => trans('auth.failed')];
+                return redirect('/login')->with([
+                    'lang'=>app()->getLocale(),
+                    'warning'=>translate('not_confirmed'),
+                    'countries'=>RemoteCountry::select($name,'id_country','alpha3')->where('country_hidden',0)->orderBy($name)->get(),
+                    'country_name'=>$name,
+                    'cargo_volume_name'=>'cargo_volume_'.app()->getLocale(),
+                    'transport_name'=>'transport_type_'.app()->getLocale(),
+                    'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
+
+                ]);
+            }
+            return redirect('/');
+        }else{
+            $errors = [$this->username() => translate('not_found_user')];
+            return redirect('/login')->withInput($request->only($this->username(), 'remember'))
+                ->withErrors($errors);
+        }
     }
 }

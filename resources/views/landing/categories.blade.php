@@ -4,6 +4,7 @@
             <div class="col-sm-12 features section-description wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
                 <h2>{{translate('categories')}}</h2>
                 <div class="divider-1"><div class="line"></div></div>
+                <p class="medium-paragraph">Укажите тип транспорта, заполните заявку, узнайте стоимость доставки вашего товара</p>
             </div>
         </div>
         @foreach($categories as $k=>$v)

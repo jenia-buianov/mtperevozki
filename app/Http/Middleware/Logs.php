@@ -9,6 +9,7 @@ use Illuminate\Http\Request as R;
 use Jenssegers\Agent\Agent;
 use App;
 use Illuminate\Support\Facades\Cookie;
+use App\Language;
 
 
 class Logs
@@ -21,6 +22,13 @@ class Logs
 
     private function logs(R $request){
 
+        if (isset($request->lang)&&!empty($request->lang)){
+            if (!Language::where('code',$request->lang)->where('active',1)->count()){
+                abort(404);
+            }
+            Cookie::forget('lang');
+            Cookie::queue('lang', $request->lang, 365*60*24);
+        }
 
         $agent = new Agent();
         $reqeust = Request();
@@ -34,7 +42,7 @@ class Logs
 
         if (!empty($_POST)) $array['post'] = json_encode($_POST);
         else $array['post'] = '';
-        if(!count($logsInfo)){
+        if($logsInfo){
 
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, 'http://ip-api.com/json/'.$_SERVER['REMOTE_ADDR']);
