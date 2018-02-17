@@ -978,6 +978,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <div class="g-recaptcha" data-sitekey="6Len7EYUAAAAAPV43CoBro1SxX9PGdgvQ4f_vqaD"></div>
                         <button class="btn btn-link-1" type="submit">{{translate('add')}}</button>
                     </div>
                     </form>
@@ -986,6 +987,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
         </div>
     </div>
     <i class="fas fa-arrow-circle-up fa-2x" id="to-top" aria-hidden="true" style="display: inline;"></i>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
 <script>
     $(document).ready(function () {
