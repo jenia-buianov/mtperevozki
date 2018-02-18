@@ -171,6 +171,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         Alexusmai\Ruslug\RuslugServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         App\Providers\AppServiceProvider::class,
@@ -229,6 +230,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
 
     ],
 

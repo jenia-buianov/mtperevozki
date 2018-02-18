@@ -30,7 +30,12 @@ class FormController extends Controller
         ]);
     }
 
-    public function mainForm(Request $request){
+
+    // Adding cargo only for Auto, Sea, Rails, Air.
+    // Adding post cargo in the method addPostCargo
+    // Adding passengers cargo in the method addPassengersCargo
+
+    public function addCargo(Request $request){
 
         $validator = Validator::make($request->all(), [
             'export' => 'required|integer',
@@ -44,6 +49,7 @@ class FormController extends Controller
             'face' => 'required',
             'phone' => 'required|numeric',
             'email' => 'required|email',
+            'g-recaptcha-response' => 'required|captcha'
         ]);
 
 
@@ -55,9 +61,9 @@ class FormController extends Controller
             }
             return json_encode([
                 'js'=>[
-                    '$(".alert-dismissible").css("opacity",1);
-                    $(".alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
-                    $(".alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
+                    '$("#formModal .alert-dismissible").css("opacity",1);
+                    $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
+                    $("#formModal .alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
                     '
                 ]
             ]);
@@ -97,6 +103,11 @@ class FormController extends Controller
             = $input['warehouse']
             = $input['seats']
             = 0;
+
+        $user = User::where('email',$input['email'])->first();
+
+        if(!Auth::check()&&!$user) $input['hidden'] = 1;
+
         if (empty($input['skype']))
             $input['skype'] = '';
         if (empty($input['description']))
@@ -113,6 +124,7 @@ class FormController extends Controller
         unset($input['date_export']);
         unset($input['transport_type']);
         unset($input['cargo_type']);
+        unset($input['g-recaptcha-response']);
         if (in_array($input['type'],[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45,15,43,44])){
             $cargo = RemoteAutoCargo::create($input);
             if (isset($input['phone1'])&&!empty($input['phone1']))
@@ -121,13 +133,7 @@ class FormController extends Controller
                 $cargo->phone2 = htmlspecialchars($input['phone2']);
             $cargo->save();
 
-            if (Auth::check()){
-                $user = User::where('id',Auth::user()->id)->first();
-            }
-            if (User::where('email',$input['email'])->count()){
-                $user = User::where('email',$input['email'])->first();
-            }
-            if (Auth::check()||User::where('email',$input['email'])->count()){
+            if ($user){
                 $subscribe = Subscribes::create([
                                 'user_id'=>$user->id,
                                 'url'=>url(app()->getLocale().'/birja/transport/?import='.$input['import'].'&export='.$input['export']),
@@ -166,9 +172,9 @@ class FormController extends Controller
 
             return json_encode([
                 'js'=>[
-                    '$(".alert-dismissible").css("opacity",1);
-                    $(".alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
-                    $(".alert-success span:eq(0)").html("'.translate('added_with_success').'");
+                    '$("#formModal .alert-dismissible").css("opacity",1);
+                    $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
+                    $("#formModal .alert-success span:eq(0)").html("'.translate('added_with_success').'");
                     setTimeout(function(){
                         window.location.replace("'.$subscribe->url.'");
                     },2000);
@@ -194,9 +200,9 @@ class FormController extends Controller
                     }
                     return json_encode([
                         'js'=>[
-                            '$(".alert-dismissible").css("opacity",1);
-                    $(".alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
-                    $(".alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
+                            '$("#formModal .alert-dismissible").css("opacity",1);
+                    $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
+                    $("#formModal .alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
                     '
                         ]
                     ]);
@@ -250,9 +256,9 @@ class FormController extends Controller
 
                 return json_encode([
                     'js'=>[
-                        '$(".alert-dismissible").css("opacity",1);
-                    $(".alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
-                    $(".alert-success span:eq(0)").html("'.translate('added_with_success').'.<br>'.translate('send_to_email').'");
+                        '$("#formModal .alert-dismissible").css("opacity",1);
+                    $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
+                    $("#formModal .alert-success span:eq(0)").html("'.translate('added_with_success').'.<br>'.translate('send_to_email').'");
                     '
                     ]
                 ]);
@@ -260,8 +266,266 @@ class FormController extends Controller
         }
     }
 
+    public function addPostCargo(Request $request){
+
+    }
+
+    public function addPassengersCargo(Request $request){
+
+    }
+
+    // Adding transport only for Auto, Sea, Rails, Air.
+    // Adding post transport in the method addPostTransport
+    // Adding passengers transport in the method addPassengersTransport
+
+    public function addTransport(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'export' => 'required|integer',
+            'import' => 'required|integer',
+            'import_city' =>'integer',
+            'export_city' =>'integer',
+            'free_from' => 'required|string',
+            'free_to' => 'required|string',
+            'volume' => 'required|integer',
+            'transport_type' => 'required|integer',
+            'face' => 'required',
+            'phone' => 'required|numeric',
+            'email' => 'required|email',
+//            'g-recaptcha-response' => 'required|captcha'
+        ]);
+
+
+
+        if ($validator->fails()) {
+            $errors = [];
+            foreach ($validator->errors()->all() as $k=>$v){
+                $errors[] = $v;
+            }
+            return json_encode([
+                'js'=>[
+                    '$("#transportFormModal .alert-dismissible").css("opacity",1);
+                    $("#transportFormModal.alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
+                    $("#transportFormModal .alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
+                    '
+                ]
+            ]);
+        }
+
+        $input = $request->input();
+
+        unset($input['_token']);
+        $input['type'] = $input['transport_type'];
+        $input['date_from'] = $input['free_from'];
+        $input['date_to'] = $input['free_to'];
+        $input['order_date'] = date('d-m-Y');
+
+        if (empty($input['skype']))
+            $input['skype'] = '';
+        if (empty($input['description']))
+            $input['description'] = '';
+        if (empty($input['company']))
+            $input['company'] = '';
+        if (empty($input['phone1']))
+            $input['phone1'] = '';
+        if (empty($input['phone2']))
+            $input['phone2'] = '';
+        if (empty($input['phone3']))
+            $input['phone3'] = '';
+
+        $input = array_merge($input,array(
+            'container_type' => '0',
+            'weight' => '',
+            'export_city_port' => '',
+            'import_city_port' => '',
+            'free' => '',
+            'hidden' => '0',
+            'hide_contact' => '0',
+            'status' => '0',
+            'by_admin' => '0',
+            'by_admin_time' => '',
+            'source' => 'mtperevozki.ru',
+            'name' => '',
+            'associate' => '0',
+            'supplementary' => '0',
+            'car_number' => '1',
+            'tir' => '0',
+            'cmr' => '0',
+            'adr' => '0',
+            'cemt' => '0',
+            'date_sort' => NULL,
+            'documents' => '0',
+            'packing' => '0',
+            'door_to_door_delivery' => '0',
+            'airport_to_door_delivery' => '0',
+            'warehouse' => '0',
+            'insurance' => '0',
+            'comstil' => '0',
+            'comstil_id' => '0'
+        ));
+        if (isset($input['phone1'])&&!empty($input['phone1']))
+            $input['phone1'] = htmlspecialchars($input['phone1']);
+        if (isset($input['phone2'])&&!empty($input['phone2']))
+            $input['phone2'] = htmlspecialchars($input['phone2']);
+
+        unset($input['free_from']);
+        unset($input['free_to']);
+        unset($input['transport_type']);
+        unset($input['g-recaptcha-response']);
+
+//        print_r($input);
+//        exit;
+
+        $user = User::where('email',$input['email'])->first();
+
+        if(!Auth::check()&&!$user) $input['hidden'] = 1;
+
+        $cargo = RemoteAutoTransport::create($input);
+
+        if ($user){
+            $subscribe = Subscribes::create([
+                'user_id'=>$user->id,
+                'url'=>url(app()->getLocale().'/birja/cargo/?import='.$input['import'].'&export='.$input['export']),
+                'model'=>'RemoteAutoCargo',
+                'new_count'=>RemoteAutoCargo::where('import',$input['import'])->count()
+            ]);
+            foreach (Emails::where('type','subscribes')->get() as $k=>$v){
+                SubscribesEmails::create([
+                    'subscribe_id'=>$subscribe->id,
+                    'email_id'=>$v->id
+                ]);
+            }
+
+            foreach (Emails::where('type','registration_transport')->get() as $k=>$v){
+                $array = [
+                    'email_from'=>$v->email_from->login,
+                    'template'=>$v->template->path,
+                    'message'=>[
+                        'subject'=>translate('added_with_success'),
+                        'email'=>$input['email']
+                    ]
+                ];
+                foreach (json_decode($v->template->params) as $i=>$l){
+                    if (isset($user->$l)&&$l!=='password') $array['message'][$l] = $user->$l;
+                    if ($l=='to')  $array['message'][$l] = strip_tags($cargo->import());
+                    if ($l=='from')  $array['message'][$l] = strip_tags($cargo->export());
+                    if ($l=='volume')  $array['message'][$l] = $cargo->name();
+                    if ($l=='transport')  $array['message'][$l] = $cargo->transport_type();
+                    if ($l=='count')  $array['message'][$l] = RemoteAutoCargo::where('import',$input['import'])->count();
+
+
+                }
+                $array['message']['subscribe_link'] = url(app()->getLocale().'/birja/cargo/?import='.$input['import'].'&export='.$input['export']);
+                new SendEmail($array);
+            }
+
+            return json_encode([
+                'js'=>[
+                    '$("#transportFormModal .alert-dismissible").css("opacity",1);
+                    $("#transportFormModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
+                    $("#transportFormModal .alert-success span:eq(0)").html("'.translate('added_with_success').'");
+                    setTimeout(function(){
+                        window.location.replace("'.$subscribe->url.'");
+                    },2000);
+                    '
+                ]
+            ]);
+        }
+        else {
+            $password = str_shuffle('A#d^FS025761');
+            $userRegData = $request->only(['face','phone','email']);
+            $userName = explode(' ',$userRegData['face']);
+            unset($userRegData['face']);
+            $userRegData['name'] = $userName[0];
+            $userRegData['lastname'] = $userName[1];
+            $userRegData['confirm_token'] = str_shuffle('ABCDEFJQDLKLSDKFLKSNVPMBOIOT131354640889730213456789_zxcvbnmasdfghjklqwertyuiop');
+            $userRegData['password'] = bcrypt($password);
+            $userRegData['group_id'] = 3;
+            $validateUser = $this->validateUser($userRegData);
+            if ($validateUser->fails()){
+                $errors = [];
+                foreach ($validateUser->errors()->all() as $k=>$v){
+                    $errors[] = $v;
+                }
+                return json_encode([
+                    'js'=>[
+                        '$("#transportFormModal .alert-dismissible").css("opacity",1);
+                    $("#transportFormModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
+                    $("#transportFormModal .alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
+                    '
+                    ]
+                ]);
+            }
+
+            $user = User::create($userRegData);
+            if (!empty($input['phone1']))
+                $user->phone2 = $input['phone1'];
+            if (!empty($input['phone2']))
+                $user->phone3 = $input['phone2'];
+            if (!empty($input['skype']))
+                $user->skype = $input['skype'];
+            $user->save();
+
+            foreach (Emails::where('type','registration_transport')->get() as $k=>$v){
+                $array = [
+                    'email_from'=>$v->email_from->login,
+                    'template'=>$v->template->path,
+                    'message'=>[
+                        'subject'=>translate('registration'),
+                        'email'=>$input['email']
+                    ]
+                ];
+                foreach (json_decode($v->template->params) as $i=>$l){
+                    if (isset($user->$l)) $array['message'][$l] = $user->$l;
+                    if ($l=='password')  $array['message'][$l] = $$l;
+                    if ($l=='to')  $array['message'][$l] = strip_tags($cargo->import());
+                    if ($l=='from')  $array['message'][$l] = strip_tags($cargo->export());
+                    if ($l=='volume')  $array['message'][$l] = $cargo->name();
+                    if ($l=='transport')  $array['message'][$l] = $cargo->transport_type();
+                    if ($l=='count')  $array['message'][$l] = RemoteAutoCargo::where('import',$input['import'])->count();
+
+
+                }
+                $array['message']['subscribe_link'] = url('confirm/'.$user->confirm_token.'?r='.app()->getLocale().'/birja/cargo/['.$input['import'].','.$input['export'].']');
+                new SendEmail($array);
+            }
+
+            $subscribe = Subscribes::create([
+                'user_id'=>$user->id,
+                'url'=>url(app()->getLocale().'/birja/cargo/?import='.$input['import'].'&export='.$input['export']),
+                'model'=>'RemoteAutoCargo',
+                'new_count'=>RemoteAutoCargo::where('import',$input['import'])->count()
+            ]);
+            foreach (Emails::where('type','subscribes')->get() as $k=>$v){
+                SubscribesEmails::create([
+                    'subscribe_id'=>$subscribe->id,
+                    'email_id'=>$v->id
+                ]);
+            }
+
+            return json_encode([
+                'js'=>[
+                    '$("#transportFormModal .alert-dismissible").css("opacity",1);
+                    $("#transportFormModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
+                    $("#transportFormModal .alert-success span:eq(0)").html("'.translate('added_with_success').'.<br>'.translate('send_to_email').'");
+                    '
+                ]
+            ]);
+        }
+
+
+    }
+
+    public function addPostTransport(Request $request){
+
+    }
+
+    public function addPassengersTransport(Request $request){
+
+    }
+
     public function setCity(Request $request){
-        $cities = [];
+        $cities = ['<option selected disabled>'.translate('select_city').'</option>'];
         $name = 'city_name_'.app()->getLocale();
         foreach (RemoteCity::where('id_country',(int)$request->country)->orderBy($name,'asc')->get() as $k=>$v){
             $cities[] = '<option value="'.$v->id_city.'">'.$v->$name.'</option>';

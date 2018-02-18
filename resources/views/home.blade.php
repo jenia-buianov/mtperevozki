@@ -21,6 +21,13 @@
             </div>
         </div>
     </div>
+    <div style="padding-bottom: 30px;">
+        <div class="container">
+            <h3 style="text-align: center">
+                Mtperevozki это портал для тех, кто нуждается в транспортных услугах, для тех кто в поиске транспортных компаний, а также для тех, кому требуется своевременная доставка грузов
+            </h3>
+        </div>
+    </div>
 
     @foreach($landing as $k=>$v)
         @include("landing.$v->view")

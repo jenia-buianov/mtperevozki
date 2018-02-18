@@ -60,15 +60,15 @@
             </div>
             <div class="row" style="margin-top: 5rem">
                 <div class="col-sm-4 col-xs-12">
-                    <button class="btn btn-golden">{{translate('add_transport')}}</button>
+                    <button class="btn btn-golden"  data-toggle="modal" data-target="#transportFormModal">{{translate('add_transport')}}</button>
                     <div style="margin-bottom: 3rem" class="visible-xs"></div>
                 </div>
                 <div class="col-sm-4 col-xs-12">
-                    <button class="btn btn-golden">{{translate('add_cargo')}}</button>
+                    <button class="btn btn-golden"  data-toggle="modal" data-target="#formModal">{{translate('add_cargo')}}</button>
                     <div style="margin-bottom: 3rem" class="visible-xs"></div>
                 </div>
                 <div class="col-sm-4 col-xs-12">
-                    <button class="btn btn-golden">{{translate('go_to_birja')}}</button>
+                    <a class="btn btn-golden" href="{{url(app()->getLocale().'/birja')}}">{{translate('go_to_birja')}}</a>
                 </div>
 
             </div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\RemoteAutoCargo;
+use App\RemoteAutoTransport;
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -80,6 +82,8 @@ class LoginController extends Controller
         $user->save();
         $redirect = explode('[',$request->r);
         $countries = explode(',',mb_substr($redirect[1],0,mb_strlen($redirect[1])-1));
+        RemoteAutoCargo::where('email',$user->email)->where('hidden',0)->update(['hidden'=>1]);
+        RemoteAutoTransport::where('email',$user->email)->where('hidden',0)->update(['hidden'=>1]);
         Auth::login($user);
         return redirect($redirect[0].'?import='.$countries[0].'&export='.$countries[1]);
     }

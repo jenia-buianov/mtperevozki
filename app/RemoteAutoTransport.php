@@ -11,7 +11,13 @@ class RemoteAutoTransport extends Model
     protected $connection = 'remote';
     public $timestamps = false;
 
-    protected $fillable = ['company','face','phone','type','container_type','export','export_city','import','import_city','volume'];
+    protected $fillable = [
+        'face','phone','export','export_city','import','import_city','volume','source','email','export_city_port','import_city_port',
+        'skype','company','phone1','phone2','phone3','date_from','date_to', 'type','description','order_type','count','hidden','weight', 'container_type',
+        'movers_site', 'hide_contact', 'status', 'documents', 'by_admin', 'by_admin_time', 'id_contact', 'permanent', 'supplementary','car_number',
+        'tir','cmr','adr','door_to_door_delivery','airport_to_door_delivery','date_sort','packing','temperature','insurance',
+        'warehouse', 'length','width','height','seats','comstill','comstil_id','order_date','free'
+    ];
 
 
     public function transport_type()

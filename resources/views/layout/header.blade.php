@@ -102,7 +102,7 @@
 @if(isset($page)&&$page=='home')
 <div class="backround_">
     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-         width="1165.000000pt" height="575.000000pt" viewBox="0 0 1165.000000 575.000000"
+         width="auto" height="575.000000pt" viewBox="0 0 1165.000000 575.000000"
          preserveAspectRatio="xMidYMid meet">
 
         <g transform="translate(0.000000,575.000000) scale(0.100000,-0.100000)"
@@ -707,7 +707,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                 </div>
 
                                 <div class="text-center" style="margin-top: 2rem; margin-bottom: 2rem">
-                                    <a href="{{url('/forgot')}}">{{translate('forgot')}}</a>
+                                    <a href="{{route('password.request')}}">{{translate('forgot')}}</a>
                                 </div>
                                 <button class="btn btn-link-1" style="margin: 0px 5px 5px 0px;width: 100%;display: block">{{translate('autorize')}}</button>
                             </div>
@@ -748,7 +748,8 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <select name="export" class="form-control" required onchange="setCity(this)">
-                                                <option selected>{{translate('all_countries')}}</option>
+                                                <option value="" selected disabled>{{translate('select_country')}}</option>
+                                                <option>{{translate('all_countries')}}</option>
                                                 @foreach($countries as $country=>$value)
                                                     <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>
                                                 @endforeach
@@ -763,7 +764,8 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <select name="import" class="form-control" required  onchange="setCity(this)">
-                                                <option selected>{{translate('all_countries')}}</option>
+                                                <option value="" selected disabled>{{translate('select_country')}}</option>
+                                                <option>{{translate('all_countries')}}</option>
                                                 @foreach($countries as $country=>$value)
                                                     <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>
                                                 @endforeach
@@ -781,7 +783,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <select name="export_city" class="form-control" disabled="disabled">
-                                                <option selected>------</option>
+                                                <option value="" selected disabled>{{translate('select_city')}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -793,7 +795,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <select name="import_city" class="form-control"  disabled="disabled">
-                                                <option selected>-----</option>
+                                                <option value="" selected disabled>{{translate('select_city')}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -805,7 +807,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                             <label>{{translate('date')}}</label>
                                         </div>
                                         <div class="col-xs-12 col-md-6">
-                                            <input type="text" class="datepick form-control" id="date" name="date_export" value="" required>
+                                            <input type="text" class="datepick form-control" id="date" name="date_export" value="{{translate('enter_date_export')}}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -816,7 +818,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <select name="cargo_type" class="form-control" required>
-                                                <option selected>-------</option>
+                                                <option selected disabled>{{translate('select_cargo_name')}}</option>
                                                 @foreach($cargo_type as $country=>$value)
                                                     <option value="{{$value->id}}">{{$value->$cargo_type_name}}</option>
                                                 @endforeach
@@ -834,7 +836,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <select name="volume" class="form-control" required>
-                                                <option selected>-------</option>
+                                                <option selected disabled>{{translate('select_cargo_volume')}}</option>
                                                 @foreach($cargo_volume as $country=>$value)
                                                     <option value="{{$value->id}}">{{$value->$cargo_volume_name}}</option>
                                                 @endforeach
@@ -850,7 +852,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <select name="transport_type" class="form-control" required>
-                                                <option selected>-------</option>
+                                                <option selected disabled>{{translate('select_transport_type')}}</option>
                                                 @foreach($transport_type as $country=>$value)
                                                     <option value="{{$value->id}}">{{$value->$transport_name}}</option>
                                                 @endforeach
@@ -862,16 +864,6 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                 <hr class="col-xs-12">
 
                                 <!-- Fith block -->
-                                <div class="col-md-6 col-xs-12">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            {{translate('description')}}
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <textarea class="form-control" name="description" maxlength="255" style="height: 50px;"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-6 col-xs-12">
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
@@ -978,9 +970,264 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="g-recaptcha" data-sitekey="6Len7EYUAAAAAPV43CoBro1SxX9PGdgvQ4f_vqaD"></div>
+                        <div class="col-sm-12" style="text-align: center">
+                            {!! NoCaptcha::display() !!}
+                        </div>
                         <button class="btn btn-link-1" type="submit">{{translate('add')}}</button>
                     </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade modal-primary" id="transportFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="card card-plain">
+                    <form class="form" id="fmodalTransport" method="POST" action="{{url(app()->getLocale().'/sendTransportForm')}}"  onsubmit="sendForm(this)" style="margin-top: 2rem;">
+                        <div class="modal-header justify-content-center">
+                            <div style="text-align: right">
+                                <i class="fa fa-times" data-dismiss="modal" aria-hidden="true"></i>
+                            </div>
+                            <div class="text-center" style="margin-top: 1.5rem;margin-bottom: 1.5rem;font-size: 3rem;">
+                                {{translate('adding_transport')}}
+                            </div>
+                        </div>
+                        <div class="modal-body col-xs-12">
+                            <div class="card-body">
+
+                                <!-- First block -->
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label>{{translate('country_from')}}</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <select name="export" class="form-control" required onchange="setCity(this)">
+                                                <option value="" selected disabled>{{translate('select_country')}}</option>
+                                                <option>{{translate('all_countries')}}</option>
+                                                @foreach($countries as $country=>$value)
+                                                    <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label>{{translate('country_to')}}</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <select name="import" class="form-control" required  onchange="setCity(this)">
+                                                <option value="" selected disabled>{{translate('select_country')}}</option>
+                                                <option>{{translate('all_countries')}}</option>
+                                                @foreach($countries as $country=>$value)
+                                                    <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Second block -->
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            {{translate('city_from')}}
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <select name="export_city" class="form-control" disabled="disabled">
+                                                <option value="" selected disabled>{{translate('select_city')}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            {{translate('city_to')}}
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <select name="import_city" class="form-control"  disabled="disabled">
+                                                <option value="" selected disabled>{{translate('select_city')}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Thierd block -->
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label>{{translate('free_from')}}</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <input type="text" class="datepick form-control" id="free_from" name="free_from" value="{{translate('enter_date_export')}}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label>{{translate('free_to')}}</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <input type="text" class="datepick form-control" id="free_to" name="free_to" value="{{translate('enter_date_export')}}" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Fouth block -->
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label>{{translate('transport_type')}}</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <select name="transport_type" class="form-control" required>
+                                                <option selected disabled>{{translate('select_transport_type')}}</option>
+                                                @foreach($transport_type as $country=>$value)
+                                                    <option value="{{$value->id}}">{{$value->$transport_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label>{{translate('volume_transport')}}</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <select name="volume" class="form-control" required>
+                                                <option selected disabled>{{translate('select_cargo_volume')}}</option>
+                                                @foreach($cargo_volume as $country=>$value)
+                                                    <option value="{{$value->id}}">{{$value->$cargo_volume_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr class="col-xs-12">
+
+                                <!-- Fith block -->
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label>{{translate('face')}}</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <input type="text" name="face" class="form-control" value="@if(Auth::check()){{Auth::user()->name.' '.Auth::user()->lastname}}@endif" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            Skype
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <input type="text" name="skype" class="form-control" value="@if(Auth::check()){{Auth::user()->skype}}@endif">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Sixth block -->
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            {{translate('company')}}
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <input type="text" name="company" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label>{{translate('phone')}}</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">+</span>
+                                                <input type="text" name="phone" class="form-control" value="@if(Auth::check()){{Auth::user()->phone}}@endif" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="add_phone" style="@if(Auth::check()&&!empty(Auth::user()->phone2)) display: block; @else display:none @endif">
+
+                                        @if(Auth::check()&&!empty(Auth::user()->phone2))
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label>{{translate('phone')}}</label>
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">+</span>
+                                                        <input type="text" name="phone1" class="form-control" value="{{Auth::user()->phone2}}" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if(Auth::check()&&!empty(Auth::user()->phone3))
+                                            <div class="row">
+                                                <div class="col-xs-12 col-md-6">
+                                                    <label>{{translate('phone')}}</label>
+                                                </div>
+                                                <div class="col-xs-12 col-md-6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">+</span>
+                                                        <input type="text" name="phone2" class="form-control" value="{{Auth::user()->phone3}}" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <a href="#" class="add_phone_link" onclick="addPhone(this)">{{translate('add_phone')}}</a>
+                                            <a href="#" class="dell_phone_link" onclick="dellPhone(this)" style="display: none">{{translate('dell_phone')}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Seventh block -->
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <input type="email" name="email" value="@if(Auth::check()){{Auth::user()->email}}@endif" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            {{csrf_field()}}
+
+                        </div>
+                        <div class="modal-footer text-center">
+                            <div class="alert col-sm-12 alert-dismissible" role="alert" style="display: none">
+                                <span style="text-align: center"></span>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="col-sm-12" style="text-align: center">
+                                {!! NoCaptcha::display() !!}
+                            </div>
+                            <button class="btn btn-link-1" type="submit">{{translate('add')}}</button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -1019,11 +1266,13 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
         if ($('.datepick').length){
             $('.datepick').datepicker({ format: 'dd-mm-yyyy' });
         }
-        if (window.screen.width>=1024) {
-            $('.dropdown-menu').css('height',window.screen.height*0.7+'px');
-            $('.dropdown-menu').css('width',window.screen.width*0.3+'px');
+        if (window.screen.width>=768) {
+            $('.dropdown-menu').css('height',window.screen.height*0.3+'px');
+            $('.dropdown-menu').css('width',window.screen.width*0.6+'px');
+            $('.dropdown-menu').css('left',(window.screen.width*-0.3)+'px');
             $('[aria-labelledby="profileDrop"].dropdown-menu').css('height','auto');
             $('[aria-labelledby="profileDrop"].dropdown-menu').css('width','auto');
+            $('[aria-labelledby="profileDrop"].dropdown-menu').css('left','auto');
         }
     });
 
