@@ -873,14 +873,6 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                            <input type="text" name="face" class="form-control" value="@if(Auth::check()){{Auth::user()->name.' '.Auth::user()->lastname}}@endif" required>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            Skype
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <input type="text" name="skype" class="form-control" value="@if(Auth::check()){{Auth::user()->skype}}@endif">
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <!-- Sixth block -->
@@ -895,6 +887,18 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                         </div>
                                     </div>
                                 </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <input type="email" name="email" value="@if(Auth::check()){{Auth::user()->email}}@endif" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+
                                 <div class="col-md-6 col-xs-12">
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
@@ -948,16 +952,7 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
 
                                 <!-- Seventh block -->
 
-                                <div class="col-md-6 col-xs-12">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <label>Email</label>
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <input type="email" name="email" value="@if(Auth::check()){{Auth::user()->email}}@endif" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
+
 
                             </div>
                             {{csrf_field()}}
@@ -1116,7 +1111,6 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                 <hr class="col-xs-12">
 
                                 <!-- Fith block -->
-
                                 <div class="col-md-6 col-xs-12">
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
@@ -1124,14 +1118,6 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                         </div>
                                         <div class="col-xs-12 col-md-6">
                                             <input type="text" name="face" class="form-control" value="@if(Auth::check()){{Auth::user()->name.' '.Auth::user()->lastname}}@endif" required>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            Skype
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <input type="text" name="skype" class="form-control" value="@if(Auth::check()){{Auth::user()->skype}}@endif">
                                         </div>
                                     </div>
                                 </div>
@@ -1148,6 +1134,18 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="col-md-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-6">
+                                            <input type="email" name="email" value="@if(Auth::check()){{Auth::user()->email}}@endif" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="col-md-6 col-xs-12">
                                     <div class="row">
                                         <div class="col-xs-12 col-md-6">
@@ -1200,17 +1198,6 @@ l27 24 -27 1 c-15 0 -30 -5 -33 -11 -5 -7 -13 -4 -26 7 -29 26 -14 34 61 34
                                 </div>
 
                                 <!-- Seventh block -->
-
-                                <div class="col-md-6 col-xs-12">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <label>Email</label>
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <input type="email" name="email" value="@if(Auth::check()){{Auth::user()->email}}@endif" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
 
                             </div>
                             {{csrf_field()}}

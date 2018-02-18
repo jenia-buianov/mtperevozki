@@ -82,6 +82,8 @@ class FormController extends Controller
                 =  $input['width']
                 =  $input['height']
                 =  $input['by_admin_time']
+                =  $input['description']
+                =  $input['skype']
                 = '' ;
         $input['order_date'] = date('d-m-Y');
         $input['date_sort'] = null;
@@ -108,10 +110,6 @@ class FormController extends Controller
 
         if(!Auth::check()&&!$user) $input['hidden'] = 1;
 
-        if (empty($input['skype']))
-            $input['skype'] = '';
-        if (empty($input['description']))
-            $input['description'] = '';
         if (empty($input['company']))
             $input['company'] = '';
         if (empty($input['phone1']))
@@ -292,7 +290,7 @@ class FormController extends Controller
             'face' => 'required',
             'phone' => 'required|numeric',
             'email' => 'required|email',
-//            'g-recaptcha-response' => 'required|captcha'
+            'g-recaptcha-response' => 'required|captcha'
         ]);
 
 
@@ -361,7 +359,9 @@ class FormController extends Controller
             'warehouse' => '0',
             'insurance' => '0',
             'comstil' => '0',
-            'comstil_id' => '0'
+            'comstil_id' => '0',
+            'description' => '',
+            'skype' => ''
         ));
         if (isset($input['phone1'])&&!empty($input['phone1']))
             $input['phone1'] = htmlspecialchars($input['phone1']);
