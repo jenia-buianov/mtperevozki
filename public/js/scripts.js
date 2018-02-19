@@ -76,7 +76,7 @@ function  dellPhone(e) {
     }
 }
 
-function  sendForm(e){
+function  sendForm(e,event){
     event.preventDefault();
     var $that = $(e);
         formData = new FormData(e);
@@ -101,7 +101,7 @@ function  sendForm(e){
     });
 }
 
-function  setCity(e){
+function  setCity(e,event){
     event.preventDefault();
     form = $(e).parents('form');
     FormId = $(form).attr('id');

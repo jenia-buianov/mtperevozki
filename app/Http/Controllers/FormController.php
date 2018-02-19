@@ -53,7 +53,7 @@ class FormController extends Controller
             'face' => 'required',
             'phone' => 'required|numeric',
             'email' => 'required|email',
-            'g-recaptcha-response' => 'required|captcha'
+//            'g-recaptcha-response' => 'required|captcha'
         ],[
             'export.required' => translate('export_required'),
             'g-recaptcha-response.required'=>translate('captcha_required'),
@@ -413,7 +413,7 @@ class FormController extends Controller
             $input['phone1'] = htmlspecialchars($input['phone1']);
         if (isset($input['phone2'])&&!empty($input['phone2']))
             $input['phone2'] = htmlspecialchars($input['phone2']);
-        
+
         if (empty($input['export_city']) or $input['export_city']==0)
             $input['export_city'] = '';
         if (empty($input['import_city']) or $input['import_city']==0)

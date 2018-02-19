@@ -85,7 +85,12 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="{{url($lang.'/birja/cargo/')}}" style="margin-top: 1.2rem;font-size:1.5rem;font-weight: 600;float: right">{{translate('all_cargo')}}</a>
+                    <div class="col-md-8 col-xs-12" style="text-align: left;color:#555;padding-top: 1.5rem">
+                        У вас транспорт и вы в поиске грузов? Добавьте транспорт и получайте заявки по грузам
+                    </div>
+                    <div class="col-md-4 col-xs-12" style="text-align: right;">
+                        <a class="btn btn-link-1 scroll-link" data-toggle="modal" data-target="#transportFormModal">{{translate('add_transport')}}</a>
+                    </div>
                 </div>
             </div>
     </div>

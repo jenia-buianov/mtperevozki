@@ -86,7 +86,12 @@
                             </tbody>
                         </table>
                     </div>
-                    <a class="btn btn-link-1 scroll-link" data-toggle="modal" data-target="#formModal" style="margin-top: 1.2rem;float: right">{{translate('order_cargo')}}</a>
+                    <div class="col-md-8 col-xs-8" style="text-align: left;padding-top: 1.5rem">
+                        Вы в поиске транспорта, ищете машину? Разместите ваш груз и получайте предложения
+                    </div>
+                    <div class="col-md-4 col-xs-12" style="text-align: right;">
+                        <a class="btn btn-link-1 scroll-link" data-toggle="modal" data-target="#formModal">{{translate('order_cargo')}}</a>
+                    </div>
                 </div>
             </div>
     </div>

@@ -2,12 +2,12 @@
     <div class="modal-dialog modal-lg" style="border:12px solid #deaa5c">
         <div class="modal-content" style="    box-shadow: none;    border: transparent;">
             <div class="card card-plain">
-                <form class="form" id="fmodal" method="POST" action="{{url(app()->getLocale().'/sendForm')}}"  onsubmit="sendForm(this)" style="margin-top: 1rem;">
+                <form class="form" id="fmodal" method="POST" action="{{url(app()->getLocale().'/sendForm')}}"  onsubmit="sendForm(this,event)" style="margin-top: 1rem;">
                     <div class="modal-header justify-content-center">
                         <div style="text-align: right;float: right;padding-top:1rem">
                             <i class="fa fa-times" data-dismiss="modal" aria-hidden="true"></i>
                         </div>
-                        <div class="text-center" style="margin-top: 1.5rem;margin-bottom: 1.5rem;font-size: 3rem;;float:left">
+                        <div class="text-center" style="margin-top: 0rem;margin-bottom: 1.5rem;font-size: 3rem;;float:left">
                             {{translate('find_price_cargo')}}
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                                         <label>{{translate('country_from')}}</label>
                                     </div>
                                     <div class="col-xs-12 col-md-7">
-                                        <select name="export" class="form-control" required onchange="setCity(this)">
+                                        <select name="export" class="form-control" required onchange="setCity(this,event)">
                                             <option value="" selected disabled>{{translate('select_country_from')}}</option>
                                             <option>{{translate('all_countries')}}</option>
                                             @foreach($countries as $country=>$value)
@@ -38,7 +38,7 @@
                                         <label>{{translate('country_to')}}</label>
                                     </div>
                                     <div class="col-xs-12 col-md-7">
-                                        <select name="import" class="form-control" required  onchange="setCity(this)">
+                                        <select name="import" class="form-control" required  onchange="setCity(this,event)">
                                             <option value="" selected disabled>{{translate('select_country_to')}}</option>
                                             <option>{{translate('all_countries')}}</option>
                                             @foreach($countries as $country=>$value)
@@ -148,10 +148,11 @@
                                 </div>
                             </div>
 
-                            <hr class="col-xs-12">
+                            <hr class="col-xs-12 col-md-11">
 
                             <!-- Fith block -->
                             <div class="col-xs-12 col-md-6">
+                                <div class="row">
                                 <div class="col-xs-12">
                                     <div class="row">
                                         <div class="col-xs-12 col-md-5">
@@ -182,6 +183,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             </div>
 
                             <!-- Sixth block -->
