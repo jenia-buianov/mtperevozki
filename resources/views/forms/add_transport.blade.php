@@ -2,12 +2,12 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="card card-plain">
-                <form class="form" id="fmodalTransport" method="POST" action="{{url(app()->getLocale().'/sendTransportForm')}}"  onsubmit="sendForm(this)" style="margin-top: 2rem;">
+                <form class="form" id="fmodalTransport" method="POST" action="{{url(app()->getLocale().'/sendTransportForm')}}"  onsubmit="sendForm(this)" style="margin-top: 1rem;">
                     <div class="modal-header justify-content-center">
-                        <div style="text-align: right;float: right">
+                        <div style="text-align: right;float: right;padding-top: 1rem">
                             <i class="fa fa-times" data-dismiss="modal" aria-hidden="true"></i>
                         </div>
-                        <div class="text-center" style="margin-top: 1.5rem;margin-bottom: 1.5rem;font-size: 3rem;">
+                        <div class="text-center" style="margin-top: 1.5rem;margin-bottom: 1.5rem;font-size: 3rem;float:left">
                             {{translate('adding_transport')}}
                         </div>
                     </div>
@@ -26,7 +26,7 @@
                                             <option value="" selected disabled>{{translate('select_country_from')}}</option>
                                             <option>{{translate('all_countries')}}</option>
                                             @foreach($countries as $country=>$value)
-                                                <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>
+                                                <option value="{{$value->id_country}}">{{$value->$country_name}} [{{$value->alpha3}}]</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -42,7 +42,7 @@
                                             <option value="" selected disabled>{{translate('select_country_to')}}</option>
                                             <option>{{translate('all_countries')}}</option>
                                             @foreach($countries as $country=>$value)
-                                                <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>
+                                                <option value="{{$value->id_country}}">{{$value->$country_name}} [{{$value->alpha3}}]</option>
                                             @endforeach
                                         </select>
                                     </div>

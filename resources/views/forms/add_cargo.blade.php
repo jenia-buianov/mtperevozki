@@ -2,17 +2,17 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="card card-plain">
-                <form class="form" id="fmodal" method="POST" action="{{url(app()->getLocale().'/sendForm')}}"  onsubmit="sendForm(this)" style="margin-top: 2rem;">
+                <form class="form" id="fmodal" method="POST" action="{{url(app()->getLocale().'/sendForm')}}"  onsubmit="sendForm(this)" style="margin-top: 1rem;">
                     <div class="modal-header justify-content-center">
-                        <div style="text-align: right;float: right">
+                        <div style="text-align: right;float: right;padding-top:1rem">
                             <i class="fa fa-times" data-dismiss="modal" aria-hidden="true"></i>
                         </div>
-                        <div class="text-center" style="margin-top: 1.5rem;margin-bottom: 1.5rem;font-size: 3rem;">
+                        <div class="text-center" style="margin-top: 1.5rem;margin-bottom: 1.5rem;font-size: 3rem;;float:left">
                             {{translate('find_price_cargo')}}
                         </div>
                     </div>
                     <div class="modal-body col-xs-12">
-                        <div class="card-body">
+                        <div class="card-body row">
 
                             <!-- First block -->
 
@@ -26,7 +26,7 @@
                                             <option value="" selected disabled>{{translate('select_country_from')}}</option>
                                             <option>{{translate('all_countries')}}</option>
                                             @foreach($countries as $country=>$value)
-                                                <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>
+                                                <option value="{{$value->id_country}}">{{$value->$country_name}} [{{$value->alpha3}}]</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -42,7 +42,7 @@
                                             <option value="" selected disabled>{{translate('select_country_to')}}</option>
                                             <option>{{translate('all_countries')}}</option>
                                             @foreach($countries as $country=>$value)
-                                                <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>
+                                                <option value="{{$value->id_country}}">{{$value->$country_name}} [{{$value->alpha3}}]</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -151,40 +151,41 @@
                             <hr class="col-xs-12">
 
                             <!-- Fith block -->
-                            <div class="col-md-6 col-xs-12">
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-5">
-                                        <label>{{translate('face')}}</label>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-5">
+                                            <label>{{translate('face')}}</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-7">
+                                            <input type="text" name="face" class="form-control" value="@if(Auth::check()){{Auth::user()->name.' '.Auth::user()->lastname}}@endif" required>
+                                        </div>
                                     </div>
-                                    <div class="col-xs-12 col-md-7">
-                                        <input type="text" name="face" class="form-control" value="@if(Auth::check()){{Auth::user()->name.' '.Auth::user()->lastname}}@endif" required>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-5">
+                                            {{translate('company')}}
+                                        </div>
+                                        <div class="col-xs-12 col-md-7">
+                                            <input type="text" name="company" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-xs-12">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-5">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-xs-12 col-md-7">
+                                            <input data-container="body" data-toggle="popover" data-placement="bottom" data-content="{{translate('will_be_send_on_this_email')}}" type="email" name="email" value="@if(Auth::check()){{Auth::user()->email}}@endif" class="form-control" required>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Sixth block -->
 
-                            <div class="col-md-6 col-xs-12">
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-5">
-                                        {{translate('company')}}
-                                    </div>
-                                    <div class="col-xs-12 col-md-7">
-                                        <input type="text" name="company" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 col-xs-12">
-                                <div class="row">
-                                    <div class="col-xs-12 col-md-5">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-xs-12 col-md-7">
-                                        <input data-container="body" data-toggle="popover" data-placement="bottom" data-content="{{translate('will_be_send_on_this_email')}}" type="email" name="email" value="@if(Auth::check()){{Auth::user()->email}}@endif" class="form-control" required>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="col-md-6 col-xs-12">
                                 <div class="row">
