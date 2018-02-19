@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Companies;
 use App\Landing;
 use App\Language;
+use App\Pages;
+use App\PagesSitemap;
 use App\RemoteAutoCargo;
 use App\RemoteAutoTransport;
 use App\RemoteCargoType;
@@ -15,12 +18,23 @@ use App\RemotePassengersTransport;
 use App\RemotePostCargo;
 use App\RemotePostTransport;
 use App\RemoteTransportType;
+use App\Sitemap;
 use App\TypesCargo;
 use Illuminate\Http\Request;
 
 
 class HomeController extends Controller
 {
+
+    private function sendCurl($url){
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+        $resp = curl_exec($curl);
+        curl_close($curl);
+        return $resp;
+    }
+
     public function index(Request $request){
 
         $autoTransportShowDays = 30;
@@ -45,12 +59,12 @@ class HomeController extends Controller
 
                 ],
                 'transport'=>[
-                    'auto'=>['http://img.webme.com/pic/t/truck-driver-worldwide/peterbilt_truck.png',RemoteAutoTransport::whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->where('hidden',0)->count()],
-                    'sea'=>['http://ntrans-container.ru/assets/template/images/slide2.png',RemoteAutoTransport::where('type',15)->where('hidden',0)->count()],
-                    'rails'=>['https://bestpngimg.com/wp-content/uploads/2017/09/Diesel-Train.png',RemoteAutoTransport::where('type',44)->where('hidden',0)->count()],
-                    'plain'=>['https://img-fotki.yandex.ru/get/176508/493212545.3/0_1bbd11_4a9d975a_L',RemoteAutoTransport::where('type',43)->where('hidden',0)->count()],
-                    'post'=>['http://www.hazalambalaj.com/Images/Sayfa/Kurumsal/Basit/5311caeb8cb76.png',RemotePostTransport::where('hidden',0)->count()],
-                    'passengers'=>['http://st30.stblizko.ru/images/product/188/451/132_original.png',RemotePassengersTransport::where('hidden',0)->count()],
+                    'auto'=>[url('images/types/avto.jpg'),RemoteAutoTransport::whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->where('hidden',0)->count()],
+                    'sea'=>[url('images/types/sea.jpg'),RemoteAutoTransport::where('type',15)->where('hidden',0)->count()],
+                    'rails'=>[url('images/types/rail.jpg'),RemoteAutoTransport::where('type',44)->where('hidden',0)->count()],
+                    'plain'=>[url('images/types/avia.jpg'),RemoteAutoTransport::where('type',43)->where('hidden',0)->count()],
+                    'post'=>[url('images/types/posil.jpg'),RemotePostTransport::where('hidden',0)->count()],
+                    'passengers'=>[url('images/types/auto.jpg'),RemotePassengersTransport::where('hidden',0)->count()],
 
                 ]
             ],

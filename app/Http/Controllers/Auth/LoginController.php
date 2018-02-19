@@ -80,12 +80,15 @@ class LoginController extends Controller
         $user->confirmed = 1;
         $user->confirm_token = null;
         $user->save();
-        $redirect = explode('[',$request->r);
-        $countries = explode(',',mb_substr($redirect[1],0,mb_strlen($redirect[1])-1));
-        RemoteAutoCargo::where('email',$user->email)->where('hidden',0)->update(['hidden'=>1]);
-        RemoteAutoTransport::where('email',$user->email)->where('hidden',0)->update(['hidden'=>1]);
         Auth::login($user);
-        return redirect($redirect[0].'?import='.$countries[0].'&export='.$countries[1]);
+        if (isset($request->r)&&!empty($request->r)) {
+            $redirect = explode('[', $request->r);
+            $countries = explode(',', mb_substr($redirect[1], 0, mb_strlen($redirect[1]) - 1));
+            RemoteAutoCargo::where('email', $user->email)->where('hidden', 0)->update(['hidden' => 1]);
+            RemoteAutoTransport::where('email', $user->email)->where('hidden', 0)->update(['hidden' => 1]);
+            return redirect($redirect[0] . '?import=' . $countries[0] . '&export=' . $countries[1]);
+        }
+        return redirect('/');
     }
 
     public function login(Request $request)

@@ -42,7 +42,7 @@ class Logs
 
         if (!empty($_POST)) $array['post'] = json_encode($_POST);
         else $array['post'] = '';
-        if($logsInfo){
+        if(!$logsInfo){
 
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, 'http://ip-api.com/json/'.$_SERVER['REMOTE_ADDR']);

@@ -1882,3 +1882,25 @@ footer a:hover, footer a:focus { border-bottom: 1px dotted #b3853f; outline: 0; 
 .g-recaptcha div:first-child{
 	display: inline;
 }
+
+@media(max-width: 767px) {
+	.g-recaptcha div{
+		width: 250px;
+		max-width: 100%!important;
+	}
+	.g-recaptcha div iframe{
+		width: 250px;
+		max-width: 100%!important;
+	}
+}
+
+@media(max-width: 991px) {
+	.align-items-center{
+		margin-top: 100px;
+	}
+}
+
+.modal.in .modal-dialog{
+	border: 1px solid #deaa5c;
+	border-radius: 7px;
+}

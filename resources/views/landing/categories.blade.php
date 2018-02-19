@@ -4,7 +4,7 @@
             <div class="col-sm-12 features section-description wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
                 <h2>{{translate('categories')}}</h2>
                 <div class="divider-1"><div class="line"></div></div>
-                <p class="medium-paragraph">Укажите тип транспорта, заполните заявку, узнайте стоимость доставки вашего товара</p>
+                <p class="medium-paragraph">{!! translate('categories_p') !!}</p>
             </div>
         </div>
         @foreach($categories as $k=>$v)
@@ -26,5 +26,10 @@
                 </div>
                 @if($k%3==2) </div> @endif
         @endforeach
+    </div>
+    <div class="container">
+        <div class="row">
+            <a class="btn btn-link-1 scroll-link" data-toggle="modal" data-target="#formModal">{{translate('order_cargo')}}</a>
+        </div>
     </div>
 </div>

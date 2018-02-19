@@ -4,7 +4,7 @@
             <div class="col-sm-12 features section-description wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
                 <h2>{{translate('order_cars')}}</h2>
                 <div class="divider-1"><div class="line"></div></div>
-                <p class="medium-paragraph">Выберите нужную категорию доставки, в зависимости от ваших потребностей</p>
+                <p class="medium-paragraph">{!! translate('cargo_p') !!}</p>
             </div>
         </div>
         @foreach($cargo as $k=>$v)
@@ -26,7 +26,7 @@
     </div>
     <div class="container">
         <div class="row">
-                <a class="btn btn-link-1 scroll-link" href="#top-content">Contact Us <i class="fa fa-angle-right"></i></a>
+                <a class="btn btn-link-1 scroll-link" data-toggle="modal" data-target="#formModal">{{translate('order_cargo')}}</a>
         </div>
     </div>
 </div>

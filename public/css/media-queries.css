@@ -61,6 +61,9 @@
 	.footer-social a { margin-right: 15px; }
 	.footer-social i { font-size: 22px; }
 	.footer-menu li { margin-left: 15px; }
+	.nav.navbar-nav.navbar-left li:first-child{
+		display: none;
+	}
 
 }
 

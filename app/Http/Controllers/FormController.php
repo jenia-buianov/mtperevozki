@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Additional\SendEmail;
+use App\Companies;
 use App\Emails;
 use App\RemoteAutoCargo;
 use App\RemoteAutoTransport;
@@ -11,6 +12,7 @@ use App\RemoteCity;
 use App\Subscribes;
 use App\SubscribesEmails;
 use App\User;
+use App\UsersCompanies;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use PharIo\Manifest\Email;
@@ -27,6 +29,8 @@ class FormController extends Controller
             'phone' => 'required|numeric',
             'confirm_token' => 'required|string|max:100|unique:mysql.users',
             'password' => 'required'
+        ],[
+            'required' => 'Вы не указали поле :attribute',
         ]);
     }
 
@@ -43,13 +47,30 @@ class FormController extends Controller
             'import_city' =>'integer',
             'export_city' =>'integer',
             'date_export' => 'required|string',
-            'cargo_type' => 'required|integer',
+            'cargo_type' => 'required',
             'volume' => 'required|integer',
             'transport_type' => 'required|integer',
             'face' => 'required',
             'phone' => 'required|numeric',
             'email' => 'required|email',
             'g-recaptcha-response' => 'required|captcha'
+        ],[
+            'export.required' => translate('export_required'),
+            'g-recaptcha-response.required'=>translate('captcha_required'),
+            'phone.numeric' => translate('phone_should_be_numeric'),
+            'email' => translate('email_wrong'),
+            'import.required'=>translate('import_required'),
+            'import_city.integer'=>translate('wrong_import_city'),
+            'export_city.integer'=>translate('wrong_export_ciy'),
+            'date_export.required'=>translate('should_be_date_export'),
+            'date_export.string'=>translate('date_export_string'),
+            'cargo_type.required'=>translate('should_be_cargo_type'),
+            'volume.required'=>translate('should_be_volume'),
+            'volume.integer'=>translate('should_be_volume_integer'),
+            'transport_type.required'=>translate('should_be_transport_type'),
+            'transport_type.integer'=>translate('should_be_transport_type_integer'),
+            'face.required'=>translate('should_be_face'),
+            'phone.required'=>translate('should_be_phone'),
         ]);
 
 
@@ -72,6 +93,10 @@ class FormController extends Controller
         $input = $request->input();
 
         unset($input['_token']);
+        if (!empty($input['own'])&&$input['cargo_type']=='own')
+            $input['cargo_type'] = htmlspecialchars(trim($input['own']),3);
+        unset($input['own']);
+        $input['company'] = trim($input['company']);
         $input['type'] = $input['transport_type'];
         $input['name'] = $input['cargo_type'];
         $input['date'] = $input['date_export'];
@@ -118,6 +143,11 @@ class FormController extends Controller
             $input['phone2'] = '';
         if (empty($input['phone3']))
             $input['phone3'] = '';
+
+        if (empty($input['export_city']))
+            $input['export_city'] = '';
+        if (empty($input['import_city']))
+            $input['export_city'] = '';
 
         unset($input['date_export']);
         unset($input['transport_type']);
@@ -291,6 +321,24 @@ class FormController extends Controller
             'phone' => 'required|numeric',
             'email' => 'required|email',
             'g-recaptcha-response' => 'required|captcha'
+        ],[
+            'export.required' => translate('export_required'),
+            'g-recaptcha-response.required'=>translate('captcha_required'),
+            'phone.numeric' => translate('phone_should_be_numeric'),
+            'email' => translate('email_wrong'),
+            'import.required'=>translate('import_required'),
+            'import_city.integer'=>translate('wrong_import_city'),
+            'export_city.integer'=>translate('wrong_export_ciy'),
+            'free_from.required'=>translate('should_be_free_from'),
+            'free_from.string'=>translate('free_from_string'),
+            'free_to.required'=>translate('should_be_free_to'),
+            'free_to.string'=>translate('free_to_string'),
+            'volume.required'=>translate('should_be_volume'),
+            'volume.integer'=>translate('should_be_volume_integer'),
+            'transport_type.required'=>translate('should_be_transport_type'),
+            'transport_type.integer'=>translate('should_be_transport_type_integer'),
+            'face.required'=>translate('should_be_face'),
+            'phone.required'=>translate('should_be_phone'),
         ]);
 
 
@@ -318,10 +366,8 @@ class FormController extends Controller
         $input['date_to'] = $input['free_to'];
         $input['order_date'] = date('d-m-Y');
 
-        if (empty($input['skype']))
-            $input['skype'] = '';
-        if (empty($input['description']))
-            $input['description'] = '';
+        $input['company'] = trim($input['company']);
+
         if (empty($input['company']))
             $input['company'] = '';
         if (empty($input['phone1']))
@@ -367,6 +413,10 @@ class FormController extends Controller
             $input['phone1'] = htmlspecialchars($input['phone1']);
         if (isset($input['phone2'])&&!empty($input['phone2']))
             $input['phone2'] = htmlspecialchars($input['phone2']);
+        if (empty($input['export_city']))
+            $input['export_city'] = '';
+        if (empty($input['import_city']))
+            $input['export_city'] = '';
 
         unset($input['free_from']);
         unset($input['free_to']);
@@ -417,6 +467,15 @@ class FormController extends Controller
                 }
                 $array['message']['subscribe_link'] = url(app()->getLocale().'/birja/cargo/?import='.$input['import'].'&export='.$input['export']);
                 new SendEmail($array);
+            }
+
+            if (!empty(trim($input['company']))){
+                $company = Companies::where('title',$input['company'])->first();
+                if (!$company){
+                    $company = Companies::create(['title'=>htmlspecialchars($input['company'])]);
+                    UsersCompanies::create(['user_id'=>$user->id,'company_id'=>$company->id]);
+                }elseif(!UsersCompanies::where([['user_id','=',$user->id],['company_id','=',$company->id]])->count())
+                    UsersCompanies::create(['user_id'=>$user->id,'company_id'=>$company->id]);
             }
 
             return json_encode([
@@ -503,6 +562,13 @@ class FormController extends Controller
                 ]);
             }
 
+            if (!empty($input['company'])){
+                $company = Companies::where('title',$input['company'])->first();
+                if (!$company){
+                    $company = Companies::create(['title'=>htmlspecialchars($input['company'])]);
+                }
+                UsersCompanies::create(['user_id'=>$user->id,'company_id'=>$company->id]);
+            }
             return json_encode([
                 'js'=>[
                     '$("#transportFormModal .alert-dismissible").css("opacity",1);

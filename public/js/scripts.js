@@ -56,9 +56,9 @@ function  addPhone(e) {
 	id = $(form).attr('id');
 	if ($('#'+id+' .add_phone input').length<2) {
 	    count_ = $('#'+id+' .add_phone input').length+1;
-        $('#' + id + ' .add_phone').append('<div class="row"><div class="col-xs-12 col-md-6">\n' +
+        $('#' + id + ' .add_phone').append('<div class="row"><div class="col-xs-12 col-md-5">\n' +
             '                                                <label>Телефон</label>\n' +
-            '                                            </div><div class="col-xs-12 col-md-6">\n' +
+            '                                            </div><div class="col-xs-12 col-md-7">\n' +
             '                                                <div class="input-group">\n' +
             '                                                    <span class="input-group-addon">+</span><input type="text" name="phone'+count_+'" class="form-control" value="" required>\n' +
             '                                                </div>\n' +
@@ -131,4 +131,15 @@ function  setCity(e){
             $('#'+FormId+' [name="'+$(e).attr('name')+'_city"]').prop('disabled',false);
         }
     });
+}
+
+function cargoType(e) {
+    val = $(e).val();
+    form = $(e).parents('form');
+    formId = $(form).attr('id');
+    // console.log(formId);
+    if (val=='own'){
+        $('#'+formId+' #cargo_name').css('display','block');
+    }
+    else $('#'+formId+' #cargo_name').css('display','none');
 }

@@ -4,8 +4,7 @@
                 <div class="col-sm-12 more-features section-description">
                     <h2 style="color:#555;">{{translate('actual_cargo')}}</h2>
                     <div class="divider-1"><div class="line"></div></div>
-                    <p class="medium-paragraph" style="color:#555;"> На сайте большое количество грузов, и грузовладельцев со всех стран.<br>
-                        Поиск грузов в два шага, и вы найдёте груз для вашего транспорта.</p>
+                    <p class="medium-paragraph" style="color:#555;"> {!! translate('actual_p') !!}</p>
                 </div>
             </div>
             <div class="row" style="color:#888;margin-top: 1.5rem; margin-bottom: 0.8rem">

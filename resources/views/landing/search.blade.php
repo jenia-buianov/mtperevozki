@@ -5,7 +5,9 @@
                 <div class="col-sm-12 more-features section-description">
                     <h2 style="color: #333">{{translate('search_title')}}</h2>
                     <div class="divider-1"><div class="line"></div></div>
-                    <p class="medium-paragraph">Предложите транспорт или прямо сейчас найдите нужный транспорт. Поиск, моментально покажет вам список перевозчиков в вашем направлении</p>
+                    <p class="medium-paragraph">
+                        {!! translate('search_p') !!}
+                    </p>
                 </div>
             </div>
             <div class="row" style="margin-top: 1.5rem; margin-bottom: 0.8rem">

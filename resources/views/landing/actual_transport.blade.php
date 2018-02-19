@@ -4,6 +4,7 @@
                 <div class="col-sm-12 more-features section-description">
                     <h2>{{translate('actual')}}</h2>
                     <div class="divider-1"><div class="line"></div></div>
+                    <div class="medium-paragraph">{!! translate('actual_transport_p') !!}</div>
                 </div>
             </div>
             <div class="row" style="margin-top: 1.5rem; margin-bottom: 0.8rem">
@@ -85,7 +86,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="{{url($lang.'/birja/transport/')}}" style="margin-top: 1.2rem;font-size:1.5rem;font-weight: 600;float: right">{{translate('all_transport')}}</a>
+                    <a class="btn btn-link-1 scroll-link" data-toggle="modal" data-target="#formModal" style="margin-top: 1.2rem;float: right">{{translate('order_cargo')}}</a>
                 </div>
             </div>
     </div>

@@ -5,7 +5,7 @@
                 <div class="col-sm-12 more-features section-description">
                     <h2>{{translate('statistic')}}</h2>
                     <div class="divider-1"><div class="line"></div></div>
-                    <p class="medium-paragraph">В нашей базе вы найдёте исполнителя, по всем видам грузоперевозок</p>
+                    <p class="medium-paragraph">{!! translate('statistic_p') !!}</p>
                 </div>
             </div>
             <div class="row">
