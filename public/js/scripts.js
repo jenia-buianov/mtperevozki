@@ -40,15 +40,6 @@ jQuery(document).ready(function() {
 });
 
 
-jQuery(window).load(function() {
-	
-	/*
-		Hidden images
-	*/
-	$(".modal-body img, .testimonial-image img").attr("style", "width: auto !important; height: auto !important;");
-	
-});
-
 
 function  addPhone(e) {
 	event.preventDefault();
@@ -87,16 +78,18 @@ function  dellPhone(e) {
 
 function  sendForm(e){
     event.preventDefault();
-    var $that = $(e),
+    var $that = $(e);
         formData = new FormData(e);
+    // formData = $(e).serialize();
+    // console.log(formData);
 
     $.ajax({
         url: $that.attr('action'),
         type: 'post',
-        contentType: false, // важно - убираем форматирование данных по умолчанию
-        processData: false, // важно - убираем преобразование строк по умолчанию
+       contentType: false, // важно - убираем форматирование данных по умолчанию
+       processData: false, // важно - убираем преобразование строк по умолчанию
         data: formData,
-        async: true,
+       async: true,
         dataType: "json",
         success: function(json){
         	console.log(json);

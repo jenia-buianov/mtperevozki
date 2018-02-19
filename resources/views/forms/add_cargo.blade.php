@@ -1,6 +1,6 @@
 <div class="modal fade modal-primary" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+    <div class="modal-dialog modal-lg" style="border:12px solid #deaa5c">
+        <div class="modal-content" style="    box-shadow: none;    border: transparent;">
             <div class="card card-plain">
                 <form class="form" id="fmodal" method="POST" action="{{url(app()->getLocale().'/sendForm')}}"  onsubmit="sendForm(this)" style="margin-top: 1rem;">
                     <div class="modal-header justify-content-center">
