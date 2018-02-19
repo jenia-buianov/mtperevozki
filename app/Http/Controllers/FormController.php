@@ -144,10 +144,10 @@ class FormController extends Controller
         if (empty($input['phone3']))
             $input['phone3'] = '';
 
-        if (empty($input['export_city']))
+        if (empty($input['export_city']) or $input['export_city']==0)
             $input['export_city'] = '';
-        if (empty($input['import_city']))
-            $input['export_city'] = '';
+        if (empty($input['import_city']) or $input['import_city']==0)
+            $input['import_city'] = '';
 
         unset($input['date_export']);
         unset($input['transport_type']);
@@ -413,10 +413,11 @@ class FormController extends Controller
             $input['phone1'] = htmlspecialchars($input['phone1']);
         if (isset($input['phone2'])&&!empty($input['phone2']))
             $input['phone2'] = htmlspecialchars($input['phone2']);
-        if (empty($input['export_city']))
+        
+        if (empty($input['export_city']) or $input['export_city']==0)
             $input['export_city'] = '';
-        if (empty($input['import_city']))
-            $input['export_city'] = '';
+        if (empty($input['import_city']) or $input['import_city']==0)
+            $input['import_city'] = '';
 
         unset($input['free_from']);
         unset($input['free_to']);
