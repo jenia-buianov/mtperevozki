@@ -1,3 +1,7 @@
+<?php
+    if (!$content || is_null($content))
+        $content = \App\Pages::select('metatitle','metadesc','metakey')->where('url','/')->first();
+?>
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -7,7 +11,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Faby - Bootstrap Landing Page</title>
+    <meta name="description" content="{{$content->metadesc}}">
+    <meta name="keywords" content="{{$content->metakey}}">
+    <title>{{$content->metatitle}}</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700">
@@ -80,7 +86,8 @@
                             <li>
                                 <a class="dropdown-toggle btn btn-link-2" id="profileDrop" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">{{Auth::user()->name.' '.Auth::user()->lastname}}</a>
                                 <div class="dropdown-menu" aria-labelledby="profileDrop" style="overflow: auto;">
-                                    <a class="dropdown-item" href="{{url('/settings')}}"><i class="fa fa-cog"></i> {{translate('settings')}}</a>
+                                    <a class="dropdown-item" href="{{route('subscribes',['lang'=>app()->getLocale()])}}"><i class="far fa-newspaper"></i> {{translate('subscribes')}}</a>
+                                    <a class="dropdown-item" href="{{route('settings',['lang'=>app()->getLocale()])}}"><i class="fa fa-cog"></i> {{translate('settings')}}</a>
                                     @if(Auth::user()->group->hasAccess('admin_access'))
                                         <a class="dropdown-item" href="{{url('/admin')}}"><i class="fas fa-unlock-alt"></i> {{translate('admin_panel')}}</a>
                                     @endif

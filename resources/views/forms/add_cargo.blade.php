@@ -94,7 +94,7 @@
                                     <div class="col-xs-12 col-md-7">
                                         <select name="cargo_type" class="form-control" onchange="cargoType(this)" required>
                                             <option selected disabled>{{translate('select_cargo_name')}}</option>
-                                            @foreach($cargo_type as $country=>$value)
+                                            @foreach($cargo_type as $k=>$value)
                                                 <option value="{{$value->id}}">{{$value->$cargo_type_name}}</option>
                                             @endforeach
                                             <option disabled>---------------</option>

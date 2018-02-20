@@ -9,6 +9,8 @@ use App\RemoteAutoCargo;
 use App\RemoteAutoTransport;
 use App\RemoteCargoVolume;
 use App\RemoteCity;
+use App\RemoteCountry;
+use App\RemoteTransportType;
 use App\Subscribes;
 use App\SubscribesEmails;
 use App\User;
@@ -30,7 +32,17 @@ class FormController extends Controller
             'confirm_token' => 'required|string|max:100|unique:mysql.users',
             'password' => 'required'
         ],[
-            'required' => 'Вы не указали поле :attribute',
+//            'required' => 'Вы не указали поле :attribute',
+            'name.required'=>translate('should_be_name'),
+            'name.string'=>translate('should_be_name_string'),
+            'name.max'=>translate('should_be_name_max').' :max',
+            'lastname.required'=>translate('should_be_lastname'),
+            'lastname.string'=>translate('should_be_lastname_string'),
+            'lastname.max'=>translate('should_be_lastname_max'),
+            'phone.required'=>translate('should_be_phone'),
+            'phone.numeric' => translate('phone_should_be_numeric'),
+            'email.required'=>translate('should_be_email'),
+            'g-recaptcha-response.required'=>translate('captcha_required'),
         ]);
     }
 
@@ -53,7 +65,7 @@ class FormController extends Controller
             'face' => 'required',
             'phone' => 'required|numeric',
             'email' => 'required|email',
-//            'g-recaptcha-response' => 'required|captcha'
+            'g-recaptcha-response' => 'required|captcha'
         ],[
             'export.required' => translate('export_required'),
             'g-recaptcha-response.required'=>translate('captcha_required'),
@@ -84,6 +96,7 @@ class FormController extends Controller
                 'js'=>[
                     '$("#formModal .alert-dismissible").css("opacity",1);
                     $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
+                    $("#formModal .alert-dismissible").css("display","block");
                     $("#formModal .alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
                     '
                 ]
@@ -164,9 +177,13 @@ class FormController extends Controller
             if ($user){
                 $subscribe = Subscribes::create([
                                 'user_id'=>$user->id,
-                                'url'=>url(app()->getLocale().'/birja/transport/?import='.$input['import'].'&export='.$input['export']),
+                                'url'=>url(app()->getLocale().'/birja/transport/?import='.$input['import'].'&export='.$input['export'].'&transport='.$input['type']),
                                 'model'=>'RemoteAutoTransport',
-                                'new_count'=>RemoteAutoTransport::where('import',$input['import'])->count()
+                                'new_count'=>RemoteAutoTransport::where('import',$input['import'])->count(),
+                                'transport_type'=>$input['type'],
+                                'title'=>translate('transport_subscribes').': '.RemoteTransportType::find($input['type'])->transport_type_ru.' '.RemoteCountry::find($input['import'])->country_name_ru,
+                                'import'=>$input['import'],
+                                'export'=>$input['export'],
                             ]);
                 foreach (Emails::where('type','subscribes')->get() as $k=>$v){
                     SubscribesEmails::create([
@@ -194,13 +211,16 @@ class FormController extends Controller
 
 
                     }
-                    $array['message']['subscribe_link'] = url(app()->getLocale().'/birja/transport/?import='.$input['import'].'&export='.$input['export']);
+                    $array['message']['subscribe_link'] = url(app()->getLocale().'/birja/transport/?import='.$input['import'].'&export='.$input['export'].'&transport='.$input['type']);
+                    $array['message']['subscribe_id'] = $subscribe->id;
                     new SendEmail($array);
                 }
 
+
             return json_encode([
                 'js'=>[
-                    '$("#formModal .alert-dismissible").css("opacity",1);
+                    '$("#formModal .alert-dismissible").css("display","block");
+                    $("#formModal .alert-dismissible").css("opacity",1);
                     $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
                     $("#formModal .alert-success span:eq(0)").html("'.translate('added_with_success').'");
                     setTimeout(function(){
@@ -230,6 +250,7 @@ class FormController extends Controller
                         'js'=>[
                             '$("#formModal .alert-dismissible").css("opacity",1);
                     $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
+                    $("#formModal .alert-dismissible").css("display","block");
                     $("#formModal .alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
                     '
                         ]
@@ -244,6 +265,23 @@ class FormController extends Controller
                 if (!empty($input['skype']))
                     $user->skype = $input['skype'];
                 $user->save();
+
+                $subscribe = Subscribes::create([
+                    'user_id'=>$user->id,
+                    'url'=>url(app()->getLocale().'/birja/transport/?import='.$input['import'].'&export='.$input['export'].'&transport='.$input['type']),
+                    'model'=>'RemoteAutoTransport',
+                    'new_count'=>RemoteAutoTransport::where('import',$input['import'])->count(),
+                    'transport_type'=>$input['type'],
+                    'import'=>$input['import'],
+                    'export'=>$input['export'],
+                    'title'=>translate('transport_subscribes').': '.RemoteTransportType::find($input['type'])->transport_type_ru.' '.RemoteCountry::find($input['import'])->country_name_ru
+                ]);
+                foreach (Emails::where('type','subscribes')->get() as $k=>$v){
+                    SubscribesEmails::create([
+                        'subscribe_id'=>$subscribe->id,
+                        'email_id'=>$v->id
+                    ]);
+                }
 
                 foreach (Emails::where('type','registration')->get() as $k=>$v){
                     $array = [
@@ -266,25 +304,15 @@ class FormController extends Controller
 
                     }
                     $array['message']['subscribe_link'] = url('confirm/'.$user->confirm_token.'?r='.app()->getLocale().'/birja/transport/['.$input['import'].','.$input['export'].']');
+                    $array['message']['subscribe_id'] = $subscribe->id;
                     new SendEmail($array);
                 }
 
-                $subscribe = Subscribes::create([
-                    'user_id'=>$user->id,
-                    'url'=>url(app()->getLocale().'/birja/transport/?import='.$input['import'].'&export='.$input['export']),
-                    'model'=>'RemoteAutoTransport',
-                    'new_count'=>RemoteAutoTransport::where('import',$input['import'])->count()
-                ]);
-                foreach (Emails::where('type','subscribes')->get() as $k=>$v){
-                    SubscribesEmails::create([
-                        'subscribe_id'=>$subscribe->id,
-                        'email_id'=>$v->id
-                    ]);
-                }
 
                 return json_encode([
                     'js'=>[
-                        '$("#formModal .alert-dismissible").css("opacity",1);
+                        '$("#formModal .alert-dismissible").css("display","block");
+                        $("#formModal .alert-dismissible").css("opacity",1);
                     $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
                     $("#formModal .alert-success span:eq(0)").html("'.translate('added_with_success').'.<br>'.translate('send_to_email').'");
                     '
@@ -320,7 +348,7 @@ class FormController extends Controller
             'face' => 'required',
             'phone' => 'required|numeric',
             'email' => 'required|email',
-            'g-recaptcha-response' => 'required|captcha'
+//            'g-recaptcha-response' => 'required|captcha'
         ],[
             'export.required' => translate('export_required'),
             'g-recaptcha-response.required'=>translate('captcha_required'),
@@ -350,8 +378,10 @@ class FormController extends Controller
             }
             return json_encode([
                 'js'=>[
+
                     '$("#transportFormModal .alert-dismissible").css("opacity",1);
-                    $("#transportFormModal.alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
+                    $("#transportFormModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
+                    $("#transportFormModal .alert-dismissible").css("display","block");
                     $("#transportFormModal .alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
                     '
                 ]
@@ -424,6 +454,8 @@ class FormController extends Controller
         unset($input['transport_type']);
         unset($input['g-recaptcha-response']);
 
+
+
 //        print_r($input);
 //        exit;
 
@@ -436,9 +468,13 @@ class FormController extends Controller
         if ($user){
             $subscribe = Subscribes::create([
                 'user_id'=>$user->id,
-                'url'=>url(app()->getLocale().'/birja/cargo/?import='.$input['import'].'&export='.$input['export']),
+                'url'=>url(app()->getLocale().'/birja/cargo/?import='.$input['import'].'&export='.$input['export'].'&transport='.$input['type']),
                 'model'=>'RemoteAutoCargo',
-                'new_count'=>RemoteAutoCargo::where('import',$input['import'])->count()
+                'new_count'=>RemoteAutoCargo::where('import',$input['import'])->count(),
+                'transport_type'=>$input['type'],
+                'import'=>$input['import'],
+                'export'=>$input['export'],
+                'title'=>translate('cargo_subscribes').': '.RemoteTransportType::find($input['type'])->transport_type_ru.' '.RemoteCountry::find($input['import'])->country_name_ru
             ]);
             foreach (Emails::where('type','subscribes')->get() as $k=>$v){
                 SubscribesEmails::create([
@@ -460,15 +496,18 @@ class FormController extends Controller
                     if (isset($user->$l)&&$l!=='password') $array['message'][$l] = $user->$l;
                     if ($l=='to')  $array['message'][$l] = strip_tags($cargo->import());
                     if ($l=='from')  $array['message'][$l] = strip_tags($cargo->export());
-                    if ($l=='volume')  $array['message'][$l] = $cargo->name();
+                    if ($l=='volume')  $array['message'][$l] = $cargo->volume();
                     if ($l=='transport')  $array['message'][$l] = $cargo->transport_type();
                     if ($l=='count')  $array['message'][$l] = RemoteAutoCargo::where('import',$input['import'])->count();
 
 
                 }
-                $array['message']['subscribe_link'] = url(app()->getLocale().'/birja/cargo/?import='.$input['import'].'&export='.$input['export']);
+                $array['message']['subscribe_link'] = url(app()->getLocale().'/birja/cargo/?import='.$input['import'].'&export='.$input['export'].'&transport='.$input['type']);
+                $array['message']['subscribe_id'] = $subscribe->id;
                 new SendEmail($array);
             }
+
+//            return view('templates.registation_transport',$array['message'])->render();
 
             if (!empty(trim($input['company']))){
                 $company = Companies::where('title',$input['company'])->first();
@@ -481,7 +520,9 @@ class FormController extends Controller
 
             return json_encode([
                 'js'=>[
-                    '$("#transportFormModal .alert-dismissible").css("opacity",1);
+                    '
+                     $("#transportFormModal .alert-dismissible").css("display","block");
+                    $("#transportFormModal .alert-dismissible").css("opacity",1);
                     $("#transportFormModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
                     $("#transportFormModal .alert-success span:eq(0)").html("'.translate('added_with_success').'");
                     setTimeout(function(){
@@ -509,7 +550,9 @@ class FormController extends Controller
                 }
                 return json_encode([
                     'js'=>[
-                        '$("#transportFormModal .alert-dismissible").css("opacity",1);
+                        '
+                         $("#transportFormModal .alert-dismissible").css("display","block");
+                        $("#transportFormModal .alert-dismissible").css("opacity",1);
                     $("#transportFormModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
                     $("#transportFormModal .alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
                     '
@@ -526,6 +569,23 @@ class FormController extends Controller
                 $user->skype = $input['skype'];
             $user->save();
 
+            $subscribe = Subscribes::create([
+                'user_id'=>$user->id,
+                'url'=>url(app()->getLocale().'/birja/cargo/?import='.$input['import'].'&export='.$input['export'].'&transport='.$input['type']),
+                'model'=>'RemoteAutoCargo',
+                'new_count'=>RemoteAutoCargo::where('import',$input['import'])->count(),
+                'transport_type'=>$input['type'],
+                'import'=>$input['import'],
+                'export'=>$input['export'],
+                'title'=>translate('cargo_subscribes').': '.RemoteTransportType::find($input['type'])->transport_type_ru.' '.RemoteCountry::find($input['import'])->country_name_ru
+            ]);
+            foreach (Emails::where('type','subscribes')->get() as $k=>$v){
+                SubscribesEmails::create([
+                    'subscribe_id'=>$subscribe->id,
+                    'email_id'=>$v->id
+                ]);
+            }
+
             foreach (Emails::where('type','registration_transport')->get() as $k=>$v){
                 $array = [
                     'email_from'=>$v->email_from->login,
@@ -540,28 +600,17 @@ class FormController extends Controller
                     if ($l=='password')  $array['message'][$l] = $$l;
                     if ($l=='to')  $array['message'][$l] = strip_tags($cargo->import());
                     if ($l=='from')  $array['message'][$l] = strip_tags($cargo->export());
-                    if ($l=='volume')  $array['message'][$l] = $cargo->name();
+                    if ($l=='volume')  $array['message'][$l] = $cargo->volume();
                     if ($l=='transport')  $array['message'][$l] = $cargo->transport_type();
                     if ($l=='count')  $array['message'][$l] = RemoteAutoCargo::where('import',$input['import'])->count();
 
 
                 }
                 $array['message']['subscribe_link'] = url('confirm/'.$user->confirm_token.'?r='.app()->getLocale().'/birja/cargo/['.$input['import'].','.$input['export'].']');
+                $array['message']['subscribe_id'] = $subscribe->id;
                 new SendEmail($array);
             }
 
-            $subscribe = Subscribes::create([
-                'user_id'=>$user->id,
-                'url'=>url(app()->getLocale().'/birja/cargo/?import='.$input['import'].'&export='.$input['export']),
-                'model'=>'RemoteAutoCargo',
-                'new_count'=>RemoteAutoCargo::where('import',$input['import'])->count()
-            ]);
-            foreach (Emails::where('type','subscribes')->get() as $k=>$v){
-                SubscribesEmails::create([
-                    'subscribe_id'=>$subscribe->id,
-                    'email_id'=>$v->id
-                ]);
-            }
 
             if (!empty($input['company'])){
                 $company = Companies::where('title',$input['company'])->first();
@@ -572,7 +621,8 @@ class FormController extends Controller
             }
             return json_encode([
                 'js'=>[
-                    '$("#transportFormModal .alert-dismissible").css("opacity",1);
+                    ' $("#transportFormModal .alert-dismissible").css("display","block");
+                    $("#transportFormModal .alert-dismissible").css("opacity",1);
                     $("#transportFormModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
                     $("#transportFormModal .alert-success span:eq(0)").html("'.translate('added_with_success').'.<br>'.translate('send_to_email').'");
                     '

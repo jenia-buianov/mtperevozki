@@ -17,7 +17,10 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td align="left" style="text-align: left;font-size: 2.5rem;font-weight: bold">MT Perevozki</td>
-                                                                <td align="right" style="text-align: right;font-size: 1rem;font-weight: bold;width: 400px;color: white;"><a href="{{url('ru/contacts')}}" style="color: #cccccc;">{{translate('contacts')}}</a></td>
+                                                                <td align="right" style="text-align: right;font-size: 1rem;font-weight: bold;width: 400px;color: white;">
+                                                                    <a href="{{url('ru/contacts')}}" style="color: #cccccc;">{{translate('contacts')}}</a><br>
+                                                                    <a href="{{route('subscribes.dismiss',['lang'=>app()->getLocale(),'id'=>encrypt($subscribe_id)])}}" style="color: #cccccc;">{{translate('dismiss_subscribe')}}</a>
+                                                                </td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -79,12 +82,26 @@
                                                                     <br><br>
                                                                     <div style="text-align: center">
                                                                         <a href="{{$subscribe_link}}" style="background-color:#ff8300;border-collapse:separate;border-top:20px solid #ff8300;border-right:20px solid #ff8300;border-bottom:20px solid #ff8300;border-left:20px solid #ff8300;border-radius:3px;color:#ffffff;display:inline-block;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;text-decoration:none" target="_blank">
-                                                                            {{translate('show_transport')}}
+                                                                            {{translate('show_cargo')}}
                                                                         </a>
                                                                     </div>
                                                                 </div>
                                                             </td>
                                                         </tr>
+                                                        @else
+                                                            <tr>
+                                                                <td valign="top" width="100%" style="padding-top: 30px;padding-right:30px;padding-left:30px;" id="m_-919329868413293045263bodyContainer">
+                                                                    <div style="background: #f8f8f8;padding: 25px;">
+                                                                        {{translate('we_found')}} <b>{{$count}} {{translate('cargo_es')}}</b> {{translate('transport_from')}} {{$from}}
+                                                                        <br><br>
+                                                                        <div style="text-align: center">
+                                                                            <a href="{{$subscribe_link}}" style="background-color:#ff8300;border-collapse:separate;border-top:20px solid #ff8300;border-right:20px solid #ff8300;border-bottom:20px solid #ff8300;border-left:20px solid #ff8300;border-radius:3px;color:#ffffff;display:inline-block;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;font-weight:600;letter-spacing:.3px;text-decoration:none" target="_blank">
+                                                                                {{translate('show_cargo')}}
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                         @endif
                                                         <tr>
                                                             <td valign="top" width="100%" style="padding-right:30px;padding-left:30px;" id="m_-9193298684132930263bodyContainer">

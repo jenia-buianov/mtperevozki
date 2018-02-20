@@ -33,7 +33,6 @@ class Logs
         $agent = new Agent();
         $reqeust = Request();
 
-
         $array = ['city'=>'','country'=>'','latitue'=>'','long'=>'','country_code'=>'','ip'=>$_SERVER['REMOTE_ADDR'],'page'=>$reqeust->fullurl(),'method'=>$reqeust->getMethod(),'post'=>'','os'=>'','browser'=>''];
 
         $logsInfo = DB::table('logs')->select('city','country','latitue','long','country_code')->where('ip',$_SERVER['REMOTE_ADDR'])->orderBy('id','desc')->first();

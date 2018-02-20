@@ -61,7 +61,7 @@ class RegisterController extends Controller
             'password' => 'required|string|min:6|',
             'lastname'=>'required|string|max:64',
             'phone'=>'required|numeric',
-            'g-recaptcha-response' => 'required|captcha'
+//            'g-recaptcha-response' => 'required|captcha'
         ],[
             'name.required'=>translate('should_be_name'),
             'name.string'=>translate('should_be_name_string'),

@@ -10,33 +10,21 @@
 				@if ($warning = Session::get('warning'))
                     <div class="alert alert-warning alert-dismissible fade show" role="alert" style="opacity: 1;">
                         <?=$warning?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						  <span>×</span>
-						</button>
                     </div>
                 @endif
                 @if ($success = Session::get('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert" style="opacity: 1;">
                         <?=$success?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						  <span>×</span>
-						</button>
                     </div>
                 @endif
                 @if ($status = Session::get('status'))
                     <div class="message focus alert-dismissible fade show" role="alert" style="opacity: 1;">
                         <?=$status?>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						  <span>×</span>
-						</button>
                     </div>
                 @endif
 				@if ($errors->has('email'))
 					<div class="alert alert-danger alert-dismissible fade show " role="alert" style="opacity: 1;">
 						<strong>{{ $errors->first('email') }}</strong>
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						  <span>×</span>
-						</button>
 					</div>
 				@endif
 					<form class="" role="form" method="POST" action="{{ route('login') }}">

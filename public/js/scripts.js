@@ -112,7 +112,7 @@ function  setCity(e,event){
     formData.append('_token',$('#'+FormId+' [name="_token"]').val());
 
     $.ajax({
-        url: lang+'/city',
+        url: window.location.origin+'/'+lang+'/city',
         type: 'post',
         contentType: false, // важно - убираем форматирование данных по умолчанию
         processData: false, // важно - убираем преобразование строк по умолчанию
@@ -135,4 +135,30 @@ function cargoType(e) {
         $('#'+formId+' #cargo_name').css('display','block');
     }
     else $('#'+formId+' #cargo_name').css('display','none');
+}
+
+function  addPhoneSettings(e) {
+    event.preventDefault();
+    form = $(e).parents('form');
+    id = $(form).attr('id');
+    phoneId = $('#'+id+' .add_phone .form-group:visible').length;
+    console.log(phoneId);
+    console.log($('#'+id+' .add_phone .form-group:eq('+phoneId+')'));
+    $('#'+id+' .add_phone .form-group:eq('+phoneId+')').css('display','table');
+    if (phoneId==1){
+        $('#'+id+' .add_phone_link').css('display','none');
+        $('#'+id+' .dell_phone_link').css('display','inline');
+    }
+}
+
+function  dellPhoneSettings(e) {
+    event.preventDefault();
+    form = $(e).parents('form');
+    id = $(form).attr('id');
+    phoneId = $('#'+id+' .add_phone .form-group:visible').length - 1;
+    $('#'+id+' .add_phone .form-group:eq('+phoneId+')').css('display','none');
+    // if (phoneId==0){
+        $('#'+id+' .dell_phone_link').css('display','none');
+        $('#'+id+' .add_phone_link').css('display','inline');
+    // }
 }

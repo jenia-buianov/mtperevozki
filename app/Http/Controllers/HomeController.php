@@ -21,6 +21,11 @@ use App\RemoteTransportType;
 use App\Sitemap;
 use App\TypesCargo;
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
+use App\Emails;
+use App\Additional\SendEmail;
+use Validator;
 
 
 class HomeController extends Controller
@@ -75,11 +80,127 @@ class HomeController extends Controller
             'transport_name'=>'transport_type_'.app()->getLocale(),
             'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
             'lang'=>app()->getLocale(),
-            'page'=>'home'
+            'page'=>'home',
+            'content'=>$this->page
         ];
 
 
         return view('home')->with($data)->render();
+    }
+
+    public function settings(){
+        $name = 'country_name_'.app()->getLocale();
+        $data = [
+            'transport_type'=>RemoteTransportType::where('transport_type_hidden',0)->orderBy('order','asc')->get(),
+            'cargo_type'=>RemoteCargoType::where('cargo_type_hidden',0)->orderBy('order','asc')->get(),
+            'cargo_volume'=>RemoteCargoVolume::where('cargo_volume_hidden',0)->get(),
+            'countries'=>RemoteCountry::select($name,'id_country','alpha3')->where('country_hidden',0)->orderBy($name)->get(),
+            'country_name'=>$name,
+            'cargo_volume_name'=>'cargo_volume_'.app()->getLocale(),
+            'transport_name'=>'transport_type_'.app()->getLocale(),
+            'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
+            'lang'=>app()->getLocale(),
+            'user'=>User::find(Auth::user()->id)
+        ];
+
+        return view('auth.settings')->with($data)->render();
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|string|max:64',
+            'email' => 'required|string|email|max:255',
+            'lastname'=>'required|string|max:64',
+            'phone'=>'required|numeric',
+//            'g-recaptcha-response' => 'required|captcha'
+        ],[
+            'name.required'=>translate('should_be_name'),
+            'name.string'=>translate('should_be_name_string'),
+            'name.max'=>translate('should_be_name_max').' :max',
+            'lastname.required'=>translate('should_be_lastname'),
+            'lastname.string'=>translate('should_be_lastname_string'),
+            'lastname.max'=>translate('should_be_lastname_max'),
+            'phone.required'=>translate('should_be_phone'),
+            'phone.numeric' => translate('phone_should_be_numeric'),
+            'email.required'=>translate('should_be_email'),
+            'email.max'=>translate('should_be_max'),
+            'email.unique'=>translate('should_be_unique'),
+            'g-recaptcha-response.required'=>translate('captcha_required'),
+        ]);
+    }
+
+    public function settingsSave(Request $request){
+        $user = User::find(Auth::user()->id);
+        if (!$user) return abort(404);
+        $validator = $this->validator($request->input());
+        if ($validator->fails()) {
+            return back()->withInput($request->except(['password','g-recaptcha-response']))
+                ->withErrors($validator->errors());
+        }
+        $input = $request->except(['_token','g-recaptcha-response']);
+        if ($input['email']!==$user->email){
+            if (User::where('email',$input['email'])->count()){
+                return back()->withInput($request->except(['password','g-recaptcha-response']))
+                    ->with('danger',translate('should_be_unique'));
+            }
+            $input['confirmed'] = 0;
+            $input['confirm_token'] = encrypt($user->email.str_shuffle('ABCDEFJQDLKLSDKFLKSNVPMertyuiop'));
+            foreach (Emails::where('type','change_email')->get() as $k=>$v){
+                $array = [
+                    'email_from'=>$v->email_from->login,
+                    'template'=>$v->template->path,
+                    'message'=>[
+                        'subject'=>translate('change_email'),
+                        'email'=>$input['email']
+                    ]
+                ];
+                foreach (json_decode($v->template->params) as $i=>$l){
+                    if (isset($user->$l)) $array['message'][$l] = $user->$l;
+                    if ($l=='old_email')  $array['message'][$l] = $user->email;
+                    if ($l=='new_email')  $array['message'][$l] = $input['email'];
+
+
+                }
+                $array['message']['confirm'] = url('confirm/'.$input['confirm_token']);
+                new SendEmail($array);
+            }
+            User::where('id',$user->id)->update($input);
+            Auth::logout();
+            return redirect(route('login'))->with('success','На почту отправленно письмо с ссылкой подтверждения Email');
+        }
+
+        return back()->with('success',translate('saved'));
+    }
+
+    public function settingsPassword(Request $request){
+        $user = User::find(Auth::user()->id);
+        if (!$user) return abort(404);
+
+        $input = $request->except(['_token','g-recaptcha-response']);
+
+            $input['confirmed'] = 0;
+            $input['confirm_token'] = encrypt($user->email.str_shuffle('ABCDEFJQDLKLSDKFLKSNVPMertyuiop'));
+            $input['password'] = bcrypt($input['password']);
+
+            foreach (Emails::where('type','change_password')->get() as $k=>$v){
+                $array = [
+                    'email_from'=>$v->email_from->login,
+                    'template'=>$v->template->path,
+                    'message'=>[
+                        'subject'=>translate('change_password'),
+                        'email'=>$input['email']
+                    ]
+                ];
+                foreach (json_decode($v->template->params) as $i=>$l){
+                    if (isset($user->$l)) $array['message'][$l] = $user->$l;
+                }
+                $array['message']['confirm'] = url('confirm/'.$input['confirm_token']);
+                new SendEmail($array);
+            }
+            User::where('id',$user->id)->update($input);
+            Auth::logout();
+            return redirect(route('login'))->with('success','На почту отправленно письмо с ссылкой подтверждения действия');
 
     }
 }

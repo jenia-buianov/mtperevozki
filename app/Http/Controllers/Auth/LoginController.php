@@ -105,15 +105,17 @@ class LoginController extends Controller
             if(!auth()->user()->confirmed){
                 auth()->logout();
                 $errors = [$this->username() => trans('auth.failed')];
-                return redirect('/login')->with([
+                return redirect(route('login'))->with([
                     'lang'=>app()->getLocale(),
                     'warning'=>translate('not_confirmed'),
+                    'transport_type'=>RemoteTransportType::where('transport_type_hidden',0)->orderBy('order','asc')->get(),
+                    'cargo_type'=>RemoteCargoType::where('cargo_type_hidden',0)->orderBy('order','asc')->get(),
+                    'cargo_volume'=>RemoteCargoVolume::where('cargo_volume_hidden',0)->get(),
                     'countries'=>RemoteCountry::select($name,'id_country','alpha3')->where('country_hidden',0)->orderBy($name)->get(),
                     'country_name'=>$name,
                     'cargo_volume_name'=>'cargo_volume_'.app()->getLocale(),
                     'transport_name'=>'transport_type_'.app()->getLocale(),
                     'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
-
                 ]);
             }
             return redirect('/');
