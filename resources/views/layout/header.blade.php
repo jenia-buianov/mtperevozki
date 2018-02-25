@@ -1,6 +1,7 @@
 <?php
     if (!$content || is_null($content))
         $content = \App\Pages::select('metatitle','metadesc','metakey')->where('url','/')->first();
+
 ?>
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
@@ -11,9 +12,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="{{$content->metadesc}}">
-    <meta name="keywords" content="{{$content->metakey}}">
-    <title>{{$content->metatitle}}</title>
+    <meta name="description" content="@if(!is_array($content)){{$content->metadesc}}@else{{$content['metadesc']}}@endif">
+    <meta name="keywords" content="@if(!is_array($content)){{$content->metakey}}@else{{$content['metakey']}}@endif">
+    <title>@if(!is_array($content)){{$content->metatitle}}@else{{$content['metatitle']}}@endif</title>
 
     <!-- CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,700">
@@ -194,8 +195,8 @@
     @endif
 
 
-    @include('forms.add_cargo')
-    @include('forms.add_transport')
+    @include('modals.add_cargo')
+    @include('modals.add_transport')
     <i class="fas fa-arrow-circle-up fa-2x" id="to-top" aria-hidden="true" style="display: inline;"></i>
     <script src='https://www.google.com/recaptcha/api.js'></script>
 

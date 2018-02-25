@@ -59,16 +59,12 @@ class RegisterController extends Controller
             'name' => 'required|string|max:64',
             'email' => 'required|string|email|max:255|unique:mysql.users',
             'password' => 'required|string|min:6|',
-            'lastname'=>'required|string|max:64',
             'phone'=>'required|numeric',
 //            'g-recaptcha-response' => 'required|captcha'
         ],[
             'name.required'=>translate('should_be_name'),
             'name.string'=>translate('should_be_name_string'),
             'name.max'=>translate('should_be_name_max').' :max',
-            'lastname.required'=>translate('should_be_lastname'),
-            'lastname.string'=>translate('should_be_lastname_string'),
-            'lastname.max'=>translate('should_be_lastname_max'),
             'phone.required'=>translate('should_be_phone'),
             'phone.numeric' => translate('phone_should_be_numeric'),
             'email.required'=>translate('should_be_email'),
@@ -90,7 +86,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'lastname'=>$data['lastname'],
             'group_id'=>3,
             'phone'=>$data['phone'],
             'confirm_token'=>$data['confirm_token']

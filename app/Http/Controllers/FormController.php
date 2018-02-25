@@ -26,19 +26,15 @@ class FormController extends Controller
     private function validateUser($data){
         return Validator::make($data,[
             'name' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
             'email' => 'required|email|unique:mysql.users',
             'phone' => 'required|numeric',
             'confirm_token' => 'required|string|max:100|unique:mysql.users',
             'password' => 'required'
         ],[
 //            'required' => 'Вы не указали поле :attribute',
-            'name.required'=>translate('should_be_name'),
+            'name.required'=>'В поле "Контактное лицо":  '.translate('should_be_name'),
             'name.string'=>translate('should_be_name_string'),
             'name.max'=>translate('should_be_name_max').' :max',
-            'lastname.required'=>translate('should_be_lastname'),
-            'lastname.string'=>translate('should_be_lastname_string'),
-            'lastname.max'=>translate('should_be_lastname_max'),
             'phone.required'=>translate('should_be_phone'),
             'phone.numeric' => translate('phone_should_be_numeric'),
             'email.required'=>translate('should_be_email'),
@@ -65,7 +61,7 @@ class FormController extends Controller
             'face' => 'required',
             'phone' => 'required|numeric',
             'email' => 'required|email',
-            'g-recaptcha-response' => 'required|captcha'
+//            'g-recaptcha-response' => 'required|captcha'
         ],[
             'export.required' => translate('export_required'),
             'g-recaptcha-response.required'=>translate('captcha_required'),
@@ -86,6 +82,7 @@ class FormController extends Controller
         ]);
 
 
+        $form = $request->form;
 
         if ($validator->fails()) {
             $errors = [];
@@ -94,10 +91,10 @@ class FormController extends Controller
             }
             return json_encode([
                 'js'=>[
-                    '$("#formModal .alert-dismissible").css("opacity",1);
-                    $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
-                    $("#formModal .alert-dismissible").css("display","block");
-                    $("#formModal .alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
+                    '$("#'.$form.' .alert-dismissible").css("opacity",1);
+                    $("#'.$form.' .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-danger fade show");
+                    $("#'.$form.' .alert-dismissible").css("display","block");
+                    $("#'.$form.' .alert-danger span:eq(0)").html("'.implode(', ',$errors).'");
                     '
                 ]
             ]);
@@ -219,10 +216,10 @@ class FormController extends Controller
 
             return json_encode([
                 'js'=>[
-                    '$("#formModal .alert-dismissible").css("display","block");
-                    $("#formModal .alert-dismissible").css("opacity",1);
-                    $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
-                    $("#formModal .alert-success span:eq(0)").html("'.translate('added_with_success').'");
+                    '$("#'.$form.' .alert-dismissible").css("display","block");
+                    $("#'.$form.' .alert-dismissible").css("opacity",1);
+                    $("#'.$form.' .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
+                    $("#'.$form.' .alert-success span:eq(0)").html("'.translate('added_with_success').'");
                     setTimeout(function(){
                         window.location.replace("'.$subscribe->url.'");
                     },2000);
@@ -233,10 +230,8 @@ class FormController extends Controller
             else {
                 $password = str_shuffle('A#d^FS025761');
                 $userRegData = $request->only(['face','phone','email']);
-                $userName = explode(' ',$userRegData['face']);
-                unset($userRegData['face']);
-                $userRegData['name'] = $userName[0];
-                $userRegData['lastname'] = $userName[1];
+unset($userRegData);
+                $userRegData['name'] = $userRegdata['face'];
                 $userRegData['confirm_token'] = str_shuffle('ABCDEFJQDLKLSDKFLKSNVPMBOIOT131354640889730213456789_zxcvbnmasdfghjklqwertyuiop');
                 $userRegData['password'] = bcrypt($password);
                 $userRegData['group_id'] = 3;
@@ -535,10 +530,8 @@ class FormController extends Controller
         else {
             $password = str_shuffle('A#d^FS025761');
             $userRegData = $request->only(['face','phone','email']);
-            $userName = explode(' ',$userRegData['face']);
-            unset($userRegData['face']);
-            $userRegData['name'] = $userName[0];
-            $userRegData['lastname'] = $userName[1];
+            unset($userRegData);
+                $userRegData['name'] = $userRegdata['face'];
             $userRegData['confirm_token'] = str_shuffle('ABCDEFJQDLKLSDKFLKSNVPMBOIOT131354640889730213456789_zxcvbnmasdfghjklqwertyuiop');
             $userRegData['password'] = bcrypt($password);
             $userRegData['group_id'] = 3;

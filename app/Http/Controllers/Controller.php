@@ -17,7 +17,8 @@ class Controller extends BaseController
     function __construct()
     {
         $request = Request();
-        $this->page = Pages::where('url',$request->path())->first();
+//        dd($request->path());
+        $this->page = Pages::where('url','/'.$request->path())->where('active',1)->first();
         $this->middleware('logs',array());
 
     }

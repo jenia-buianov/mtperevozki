@@ -1,20 +1,4 @@
-<div class="modal fade modal-primary" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
-    <div class="modal-dialog modal-lg" style="border:12px solid #deaa5c">
-        <div class="modal-content" style="    box-shadow: none;    border: transparent;">
-            <div class="card card-plain">
-                <form class="form" id="fmodal" method="POST" action="{{url(app()->getLocale().'/sendForm')}}"  onsubmit="sendForm(this,event)" style="margin-top: 1rem;">
-                    <div class="modal-header justify-content-center">
-                        <div style="text-align: right;float: right;padding-top:1rem">
-                            <i class="fa fa-times" data-dismiss="modal" aria-hidden="true"></i>
-                        </div>
-                        <div class="text-center" style="margin-top: 0rem;margin-bottom: 1.5rem;font-size: 3rem;;float:left">
-                            {{translate('find_price_cargo')}}
-                        </div>
-                    </div>
-                    <div class="modal-body col-xs-12">
-                        <div class="card-body row">
-
-                            <!-- First block -->
+                <form class="form" id="acargo_form" method="POST" action="{{url(app()->getLocale().'/sendForm')}}"  onsubmit="sendForm(this,event)" style="margin-top: 1rem;">
 
                             <div class="col-md-6 col-xs-12">
                                 <div class="row">
@@ -244,27 +228,23 @@
 
 
 
-                        </div>
                         {{csrf_field()}}
 
-                    </div>
-                    <div class="modal-footer text-center">
                         <div class="alert col-sm-12 alert-dismissible" role="alert" style="display: none">
                             <span style="text-align: center"></span>
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="col-md-6 col-xs-12" style="text-align: center">
-                            {!! NoCaptcha::display() !!}
-                            {{translate('set_captcha')}}
-                        </div>
-                        <div class="col-md-6 col-xs-12" style="text-align: right">
-                            <button class="btn btn-link-1" type="submit">{{translate('send_request')}}</button>
+                    <div class="col-xs-12" style="margin-top: 10px;">
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12" style="text-align: center">
+                                {!! NoCaptcha::display() !!}
+                                {{translate('set_captcha')}}
+                            </div>
+                            <div class="col-md-6 col-xs-12" style="text-align: right">
+                                <button class="btn btn-link-1" type="submit">{{translate('send_request')}}</button>
+                            </div>
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
-</div>

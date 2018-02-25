@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Companies;
+use App\Forms;
 use App\Landing;
 use App\Language;
 use App\Pages;
@@ -202,5 +203,54 @@ class HomeController extends Controller
             Auth::logout();
             return redirect(route('login'))->with('success','На почту отправленно письмо с ссылкой подтверждения действия');
 
+    }
+
+    public function page(Request $request){
+
+        if (!$this->page){
+            abort(404);
+        }
+        $name = 'country_name_'.app()->getLocale();
+        $data = [
+            'transport_type'=>RemoteTransportType::where('transport_type_hidden',0)->orderBy('order','asc')->get(),
+            'cargo_type'=>RemoteCargoType::where('cargo_type_hidden',0)->orderBy('order','asc')->get(),
+            'cargo_volume'=>RemoteCargoVolume::where('cargo_volume_hidden',0)->get(),
+            'countries'=>RemoteCountry::select($name,'id_country','alpha3')->where('country_hidden',0)->orderBy($name)->get(),
+            'country_name'=>$name,
+            'cargo_volume_name'=>'cargo_volume_'.app()->getLocale(),
+            'transport_name'=>'transport_type_'.app()->getLocale(),
+            'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
+            'lang'=>app()->getLocale(),
+            'content'=>$this->page
+        ];
+
+//        dd(htmlspecialchars_decode($this->page->content));
+        $yield = explode('$$_FORM'."('",htmlspecialchars_decode($this->page->content));
+        $count = count($yield);
+        if ($count){
+            $html = $yield[0];
+            for ($i=1;$i<$count;$i++) {
+                $yield = explode("'", $yield[$i]);
+                $yield = $yield[0];
+                $html.=view(Forms::where('key',$yield)->first()->path)->with(
+                    [
+                        'transport_type'=>RemoteTransportType::where('transport_type_hidden',0)->orderBy('order','asc')->get(),
+                        'cargo_type'=>RemoteCargoType::where('cargo_type_hidden',0)->orderBy('order','asc')->get(),
+                        'cargo_volume'=>RemoteCargoVolume::where('cargo_volume_hidden',0)->get(),
+                        'countries'=>RemoteCountry::select($name,'id_country','alpha3')->where('country_hidden',0)->orderBy($name)->get(),
+                        'country_name'=>$name,
+                        'cargo_volume_name'=>'cargo_volume_'.app()->getLocale(),
+                        'transport_name'=>'transport_type_'.app()->getLocale(),
+                        'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
+                        'lang'=>app()->getLocale()
+                    ]
+                )->render();
+                $html.=mb_substr($yield[$i],mb_strlen($yield)+2);
+            }
+            $data['content']->content = $html;
+        }
+
+
+        return view('page',$data)->render();
     }
 }

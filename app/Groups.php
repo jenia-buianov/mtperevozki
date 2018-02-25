@@ -26,7 +26,7 @@ class Groups extends Model
     }
 
     public function hasAccessByURL($url){
-        return (boolean)$this->hasManyThrough('App\PermissionsPage','App\PermissionsGroups','group_id','id','id','permission_id')->where('url',$url)->count();
+        return (boolean)$this->hasManyThrough('App\PermissionsPage','App\PermissionsGroups','group_id','permission_id','id','permission_id')->where('url',$url)->count();
     }
 
 

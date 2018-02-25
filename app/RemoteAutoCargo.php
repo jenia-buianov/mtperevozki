@@ -76,24 +76,24 @@ class RemoteAutoCargo extends Model
     public function import(){
 
         if ((int)$this->import_city)
-            return '<h3>'.$this->import_country().'<h3> <h4>'.$this->import_city().'</h4>';
+            return '<h3 style="display:inline">'.$this->import_country().'<h3>, <h4 style="display:inline">'.$this->import_city().'</h4>';
         elseif (!(int)$this->import_city&&!empty($this->import_city))
-            return '<h3'.$this->import_country().'</h3> <h4>'.$this->import_city.'</h4>';
+            return '<h3  style="display:inline">'.$this->import_country().'</h3>, <h4 style="display:inline">'.$this->import_city.'</h4>';
         elseif(!(int)$this->import_city&&empty($this->import_city)&&(int)$this->import)
-            return '<h3>'.$this->import_country().'</h3>';
+            return '<h3 style="display:inline">'.$this->import_country().'</h3>';
         elseif(!(int)$this->import_city&&empty($this->import_city)&&!(int)$this->import)
-            return '<h3>'.$this->import.'</h3>';
+            return '<h3 style="display:inline">'.$this->import.'</h3>';
     }
 
     public function export(){
 
         if ((int)$this->export_city>0)
-            return '<h3>'.$this->export_country().'</h3> <h4>'.$this->export_city().'</h4>';
+            return '<h3 style="display:inline">'.$this->export_country().'</h3>, <h4 style="display:inline">'.$this->export_city().'</h4>';
         elseif ((int)$this->export_city<0&&!empty($this->import_city))
-            return '<h3>'.$this->export_country().'</h3> <h4>'.$this->export_city.'</h4>';
+            return '<h3 style="display:inline">'.$this->export_country().'</h3>, <h4 style="display:inline">'.$this->export_city.'</h4>';
         elseif(!(int)$this->export_city&&empty($this->export_city)&&(int)$this->export)
-            return '<h3>'.$this->export_country().'</h3>';
+            return '<h3 style="display:inline">'.$this->export_country().'</h3>';
         elseif(!(int)$this->export_city&&empty($this->export_city)&&!(int)$this->export)
-            return '<h3>'.$this->export.'</h3>';
+            return '<h3 style="display:inline">'.$this->export.'</h3>';
     }
 }

@@ -23,6 +23,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/{lang}/settings', 'HomeController@settingsSave')->name('settings.save');
     Route::post('/{lang}/settings/password', 'HomeController@settingsPassword')->name('settings.password');
 });
+Route::group(['middleware' => 'admin', 'prefix'=>'admin'], function () {
+    Route::get('/', 'Admin\AdminHomeController@index')->name('admin.home');
+    Route::get('{module}', 'Admin\AdminModuleController@start')->name('admin.module');
+    Route::get('{module}/{action}', 'Admin\AdminModuleController@action')->name('admin.action');
+    Route::get('{module}/{action}/{id}', 'Admin\AdminModuleController@action')->name('admin.action.id');
+    Route::post('{module}/{action}', 'Admin\AdminModuleController@action')->name('admin.action.post');
+//    Route::post('{module}/{action}/{id}', 'Admin\AdminModuleController@action')->name('admin.action.post');
+});
+
 Route::post('/{lang}/sendForm', 'FormController@addCargo')->name('form.add_cargo');
 Route::post('/{lang}/sendPostCargoForm', 'FormController@addPostCargo')->name('form.add_post_cargo');
 Route::post('/{lang}/sendPassengersCargoForm', 'FormController@addPassengersCargo')->name('form.add_passengers_cargo');
@@ -30,5 +39,6 @@ Route::post('/{lang}/sendTransportForm', 'FormController@addTransport')->name('f
 Route::post('/{lang}/sendPostTransportForm', 'FormController@addPostTransport')->name('add_post_transport');
 Route::post('/{lang}/sendPassengersTransportForm', 'FormController@addPassengersTransport')->name('add_passengers_transport');
 Route::post('/{lang}/city', 'FormController@setCity');
+Route::get('/{lang}/birja/transport','BirjaController@openTransport')->name('birja.transport');
 Route::get('/{lang}', 'HomeController@index');
-Route::get('/{lang}/{page}','HomeController@index');
+Route::get('/{lang}/{page}','HomeController@page');
