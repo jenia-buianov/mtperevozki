@@ -60,6 +60,7 @@ class RegisterController extends Controller
             'email' => 'required|string|email|max:255|unique:mysql.users',
             'password' => 'required|string|min:6|',
             'phone'=>'required|numeric',
+            'type' => 'required'
 //            'g-recaptcha-response' => 'required|captcha'
         ],[
             'name.required'=>translate('should_be_name'),
@@ -71,6 +72,7 @@ class RegisterController extends Controller
             'email.max'=>translate('should_be_max'),
             'email.unique'=>translate('should_be_unique'),
             'g-recaptcha-response.required'=>translate('captcha_required'),
+            'type.required'=>'Укажите тип',
         ]);
     }
 
@@ -88,7 +90,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'group_id'=>3,
             'phone'=>$data['phone'],
-            'confirm_token'=>$data['confirm_token']
+            'confirm_token'=>$data['confirm_token'],
+            'type'=>$data['type']
         ]);
     }
 

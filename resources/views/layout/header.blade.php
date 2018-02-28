@@ -56,7 +56,7 @@
                         $link = explode('#',$v->link);
                         $count = App\Menu::where('parent',$v->id)->count();
                         echo '<li><a ';
-                        if (count($link)) echo 'class="scroll-link"';
+                        if (count($link)>1) echo 'class="scroll-link"';
                         if ($count) echo 'class="dropdown-toggle" id="navbarDrop'.$v->id.'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"';
                         echo ' href="'.url($v->link).'" title="'.trans($v->titleKey).'">'.trans($v->titleKey).'</a>';
 
@@ -111,9 +111,9 @@
     <script src="{{asset('aos/aos.js')}}"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
-@if(isset($page)&&$page=='home')
-@include("layout.background")
-@endif
+    @if(isset($page)&&$page=='home')
+        @include("layout.background")
+    @endif
 
     <div class="how-it-works-container section-container section-container-image-bg cargo-container">
         <div class="black-holder-0">
@@ -199,6 +199,7 @@
     @include('modals.add_transport')
     <i class="fas fa-arrow-circle-up fa-2x" id="to-top" aria-hidden="true" style="display: inline;"></i>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src='{{asset('js/datepicker-ru.js')}}'></script>
 
 <script>
     $(document).ready(function () {
@@ -207,6 +208,7 @@
             trigger:'focus'
         });
 
+        @if(isset($page)&&$page=='home')
         if (window.screen.width>=1024) {
             if(typeof page!=='undefined') {
                 top_padding = (window.screen.height - 875) / 2;
@@ -221,6 +223,7 @@
                 $('.backround_').css('padding-top', top_padding + 'px');
             }
         }
+        @endif
 
         $(window).scroll(function () {
             if ($(this).scrollTop() > 100) {
@@ -239,7 +242,7 @@
 
     AOS.init({duration: 1200,easing: 'ease-out-back',disable: "mobile"});
         if ($('.datepick').length){
-            $('.datepick').datepicker({ format: 'dd-mm-yyyy',autoclose:true });
+            $('.datepick').datepicker({ format: 'dd-mm-yyyy',autoclose:true, language: 'ru' });
         }
         if (window.screen.width>=768) {
             $('.dropdown-menu').css('height',window.screen.height*0.3+'px');

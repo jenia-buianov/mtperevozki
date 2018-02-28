@@ -12,7 +12,7 @@
                                     <h1 style="font-size: 2rem; display: inline-block; padding-left: 1rem; padding-right: 1rem">{{$content['h1']}}</h1>
                                 @else
                                     <h3 style="font-size: 1.5rem; display: inline-block; padding-left: 1rem; padding-right: 1rem">
-                                        <a href="{{route('birja.transport',['lang'=>$lang,'tr'=>$k])}}">{{mb_strtoupper(mb_substr($v,0,1)).mb_substr($v,1)}}</a>
+                                        <a href="{{route('birja.cargo',['lang'=>$lang,'tr'=>$k])}}">{{mb_strtoupper(mb_substr($v,0,1)).mb_substr($v,1)}}</a>
                                     </h3>
                                 @endif
                             @endforeach
@@ -21,7 +21,7 @@
     background-position: center;
     background-size: cover;margin-top: 2rem">
                                 <h2>Фильтр</h2>
-                                <form class="form" action="{{route('birja.transport',['tr'=>$prefix,'lang'=>$lang])}}" method="GET">
+                                <form class="form" action="{{route('birja.cargo',['tr'=>$prefix,'lang'=>$lang])}}" method="GET">
                                 <div class="row">
                                     <div class="col-sm-12 col-md-4 col-md-offset-1">
                                         <select name="export" class="form-control">
@@ -85,7 +85,7 @@
                                         <th height="50">Откуда</th>
                                         <th height="50">Куда</th>
                                         <th height="50" style="text-align: center">Тип транспорта</th>
-                                        <th height="50" style="text-align: center">Объем/вес</th>
+                                        <th height="50" style="text-align: center">Наименование груза</th>
                                         <th height="50" style="text-align: center">Дата</th>
                                         <th height="50">Контакты</th>
                                     </tr>
@@ -107,11 +107,10 @@
                                                 {{$v->transport_type()}}
                                             </td>
                                             <td width="15%">
-                                                {{$v->volume()}}
+                                                {{$v->name()}}
                                             </td>
                                             <td width="10%">
-                                                {{$v->date_from}}<br>
-                                                {{$v->date_to}}
+                                                {{$v->date}}<br>
                                             </td>
                                             <td>
                                                 @if(\Illuminate\Support\Facades\Auth::check())

@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone','group_id','confirm_token'
+        'name', 'email', 'password', 'phone','group_id','confirm_token','type'
     ];
 
     /**
@@ -34,6 +34,10 @@ class User extends Authenticatable
 
     public function group(){
         return $this->belongsTo('App\Groups','group_id','id');
+    }
+
+    public function companies(){
+        return $this->hasManyThrough('App\Companies','App\UsersCompanies', 'user_id','id','id','company_id');
     }
 
 }

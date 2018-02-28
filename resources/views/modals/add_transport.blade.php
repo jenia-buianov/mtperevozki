@@ -152,7 +152,7 @@
                                                 {{translate('company')}}
                                             </div>
                                             <div class="col-xs-12 col-md-7">
-                                                <input type="text" name="company" class="form-control">
+                                                <input type="text" name="company" class="form-control" placeholder="Компания повышает уровень доверия" value="@if(Auth::check()&&Auth::user()->companies&&count(Auth::user()->companies)==1){{Auth::user()->companies[0]->title}}@endif">
                                             </div>
                                         </div>
                                     </div>
@@ -238,7 +238,8 @@
                         </div>
                         <div class="col-md-6 col-xs-12" style="text-align: center">
                             {!! NoCaptcha::display() !!}
-                            {{translate('set_captcha')}}
+                            {{translate('set_captcha')}}<br>
+                            <span style="font-size:1.1rem">Отправляя запрос, вы соглашаетесь с обработкой ваших личных данных</span>
                         </div>
                         <div class="col-md-6 col-xs-12" style="text-align: right">
                             <button class="btn btn-link-1" type="submit">{{translate('send_request')}}</button>

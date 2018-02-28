@@ -39,16 +39,26 @@
                                     <input type="text" class="form-control" name="name" placeholder="{{translate('enter_field').' '.mb_strtolower(translate('name'))}}" value="{{ old('name') }}" required>
                                 </div>
                                 <div class="form-group input-group input-group-lg">
-                                    <span class="input-group-addon"><i class="fas fa-user"></i></span>
-                                    <input type="text" class="form-control" name="lastname" placeholder="{{translate('enter_field').' '.mb_strtolower(translate('lastname'))}}" value="{{ old('lastname') }}" required>
-                                </div>
-                                <div class="form-group input-group input-group-lg">
                                     <span class="input-group-addon">+</span>
-                                    <input type="number" class="form-control" name="phone" placeholder="{{translate('enter_field').' '.mb_strtolower(translate('phone'))}}" value="{{ old('phone') }}" required>
+                                    <input type="number" class="form-control" name="phone" placeholder="{{translate('enter_field').' '.mb_strtolower(translate('phone'))}}" value="@if(empty(old('phone'))){{'+'}}@else{{ old('phone') }}@endif" required>
                                 </div>
                                 <div class="form-group input-group input-group-lg">
                                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
                                     <input type="password" class="form-control" name="password" placeholder="{{translate('enter_field').' '.mb_strtolower(translate('password'))}}" required>
+                                </div>
+                                <div class="form-group input-group input-group-lg">
+                                    <span class="input-group-addon"><i class="fab fa-creative-commons"></i></span>
+                                    <select class="form-control" name="type" required>
+                                        <option selected>----Укажите тип-----</option>
+                                        <option value="Грузовладелец">Грузовладелец </option>
+                                        <option value="Автотранспортная компания">Автотранспортная компания</option>
+                                        <option value="Железнодорожные перевозки">Железнодорожные перевозки</option>
+                                        <option value="Авиа перевозки">Авиа перевозки</option>
+                                        <option value="Морские перевозки">Морские перевозки</option>
+                                        <option value="Экспресс доставка">Экспресс доставка </option>
+                                        <option value="Пассажирские перевозки">Пассажирские перевозки</option>
+                                        <option value="Экспедиторская компания">Экспедиторская компания</option>
+                                    </select>
                                 </div>
                                 <div class="col-sm-12" style="text-align: center">
                                     {!! NoCaptcha::display() !!}

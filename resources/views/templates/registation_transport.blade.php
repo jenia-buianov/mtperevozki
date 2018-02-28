@@ -63,7 +63,7 @@
                                                         <tbody><tr>
                                                             <td valign="top" width="100%" style="padding-right:70px;padding-left:40px;padding-top: 30px;" id="m_-9193298684132930263bodyContainer">
                                                                 <div style="padding: 25px;">
-                                                                {{$name}}, {{translate('reg_message_top')}}<br>
+                                                                {{$name}}, {{translate('reg_message_top_transport')}}<br>
                                                                 </div>
                                                             </td>
                                                         </tr>

@@ -518,14 +518,14 @@ ul.navbar-nav { font-size: 15px; color: #fff; }
 	background-size: cover;
 }
 
-.how-it-works-container table h3{
+.how-it-works-container table h3, #grid-data h3{
 	display: inline;
 	font-weight: bold;
 	font-size: 1.5rem;
 	color: #333;
 }
 
-.how-it-works-container table h4{
+.how-it-works-container table h4, #grid-data h4{
 	display: block;
 	font-weight: normal;
 	font-size: 1.5rem;

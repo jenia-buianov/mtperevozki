@@ -50,7 +50,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         auth()->logout();
-        return redirect($this->redirectTo);
+        return redirect()->back();
     }
 
     public function showLoginForm()
@@ -118,7 +118,7 @@ class LoginController extends Controller
                     'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
                 ]);
             }
-            return redirect('/');
+            return redirect()->back();
         }else{
             $errors = [$this->username() => translate('not_found_user')];
             return redirect('/login')->withInput($request->only($this->username(), 'remember'))

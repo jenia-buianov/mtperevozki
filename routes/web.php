@@ -39,6 +39,9 @@ Route::post('/{lang}/sendTransportForm', 'FormController@addTransport')->name('f
 Route::post('/{lang}/sendPostTransportForm', 'FormController@addPostTransport')->name('add_post_transport');
 Route::post('/{lang}/sendPassengersTransportForm', 'FormController@addPassengersTransport')->name('add_passengers_transport');
 Route::post('/{lang}/city', 'FormController@setCity');
-Route::get('/{lang}/birja/transport','BirjaController@openTransport')->name('birja.transport');
+Route::get('/{lang}/birja/{tr}transport/','BirjaController@openTransport')->name('birja.transport');
+Route::get('/{lang}/birja/transport/','BirjaController@openTransport')->name('birja.auto_transport');
+Route::get('/{lang}/birja/{tr}cargo/','BirjaController@openCargo')->name('birja.cargo');
+Route::get('/{lang}/birja/cargo/','BirjaController@openCargo')->name('birja.auto_cargo');
 Route::get('/{lang}', 'HomeController@index');
 Route::get('/{lang}/{page}','HomeController@page');

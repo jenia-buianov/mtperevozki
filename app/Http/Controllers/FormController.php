@@ -230,11 +230,13 @@ class FormController extends Controller
             else {
                 $password = str_shuffle('A#d^FS025761');
                 $userRegData = $request->only(['face','phone','email']);
-unset($userRegData);
+//unset($userRegData);
                 $userRegData['name'] = $userRegdata['face'];
                 $userRegData['confirm_token'] = str_shuffle('ABCDEFJQDLKLSDKFLKSNVPMBOIOT131354640889730213456789_zxcvbnmasdfghjklqwertyuiop');
                 $userRegData['password'] = bcrypt($password);
                 $userRegData['group_id'] = 3;
+                $userRegData['type'] = 'Грузовладелец';
+                unset($userRegData['face']);
                 $validateUser = $this->validateUser($userRegData);
                 if ($validateUser->fails()){
                     $errors = [];
@@ -309,7 +311,7 @@ unset($userRegData);
                         '$("#formModal .alert-dismissible").css("display","block");
                         $("#formModal .alert-dismissible").css("opacity",1);
                     $("#formModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
-                    $("#formModal .alert-success span:eq(0)").html("'.translate('added_with_success').'.<br>'.translate('send_to_email').'");
+                    $("#formModal .alert-success span:eq(0)").html("'.translate('added_with_success').'.<br>'.translate('send_to_email').' '.$input['email'].'");
                     '
                     ]
                 ]);
@@ -530,11 +532,13 @@ unset($userRegData);
         else {
             $password = str_shuffle('A#d^FS025761');
             $userRegData = $request->only(['face','phone','email']);
-            unset($userRegData);
-                $userRegData['name'] = $userRegdata['face'];
+//            unset($userRegData);
+            $userRegData['name'] = $userRegdata['face'];
             $userRegData['confirm_token'] = str_shuffle('ABCDEFJQDLKLSDKFLKSNVPMBOIOT131354640889730213456789_zxcvbnmasdfghjklqwertyuiop');
             $userRegData['password'] = bcrypt($password);
             $userRegData['group_id'] = 3;
+            $userRegData['type'] = 'Автотранспортная компания';
+            unset($userRegData['face']);
             $validateUser = $this->validateUser($userRegData);
             if ($validateUser->fails()){
                 $errors = [];
@@ -617,7 +621,7 @@ unset($userRegData);
                     ' $("#transportFormModal .alert-dismissible").css("display","block");
                     $("#transportFormModal .alert-dismissible").css("opacity",1);
                     $("#transportFormModal .alert-dismissible").removeClass("alert-danger fade show").removeClass("alert-success fade show").addClass("alert-success fade show");
-                    $("#transportFormModal .alert-success span:eq(0)").html("'.translate('added_with_success').'.<br>'.translate('send_to_email').'");
+                    $("#transportFormModal .alert-success span:eq(0)").html("'.translate('added_with_success').'.<br>'.translate('send_to_email_transport').' '.$input['email'].'");
                     '
                 ]
             ]);

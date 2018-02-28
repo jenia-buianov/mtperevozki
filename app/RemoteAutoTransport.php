@@ -4,12 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\DB;
 
 class RemoteAutoTransport extends Model
 {
     protected $table = 'movers_order';
     protected $connection = 'remote';
     public $timestamps = false;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        DB::enableQueryLog();
+    }
 
     protected $fillable = [
         'face','phone','export','export_city','import','import_city','volume','source','email','export_city_port','import_city_port',
@@ -29,12 +36,16 @@ class RemoteAutoTransport extends Model
     public function volume()
     {
         $lang = 'cargo_volume_'.app()->getLocale();
-        return $this->belongsTo('App\RemoteCargoVolume','volume','id')->firstOrFail()->$lang;
+        $relation = $this->belongsTo('App\RemoteCargoVolume','volume','id')->first();
+        if (!$relation) return "";
+        return $relation->$lang;
     }
 
     public function import_city(){
         $lang = 'city_name_'.app()->getLocale();
-        return $this->belongsTo('App\RemoteCity','import_city','id_city')->firstOrFail()->$lang;
+        $relation = $this->belongsTo('App\RemoteCity','import_city','id_city')->first();
+        if (!$relation) return "";
+        return $relation->$lang;
     }
 
     public function import_country(){
@@ -44,7 +55,9 @@ class RemoteAutoTransport extends Model
 
     public function export_city(){
         $lang = 'city_name_'.app()->getLocale();
-        return $this->belongsTo('App\RemoteCity','export_city','id_city')->firstOrFail()->$lang;
+        $relation = $this->belongsTo('App\RemoteCity','export_city','id_city')->first();
+        if (!$relation) return "";
+        return $relation->$lang;
     }
 
     public function export_country(){

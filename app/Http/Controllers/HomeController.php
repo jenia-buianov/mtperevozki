@@ -224,15 +224,14 @@ class HomeController extends Controller
             'content'=>$this->page
         ];
 
-//        dd(htmlspecialchars_decode($this->page->content));
         $yield = explode('$$_FORM'."('",htmlspecialchars_decode($this->page->content));
         $count = count($yield);
         if ($count){
             $html = $yield[0];
             for ($i=1;$i<$count;$i++) {
-                $yield = explode("'", $yield[$i]);
-                $yield = $yield[0];
-                $html.=view(Forms::where('key',$yield)->first()->path)->with(
+                $yield_key_ = explode("')", $yield[$i]);
+                $yield_key_1 = $yield_key_[0];
+                $html.=view(Forms::where('key',$yield_key_1)->first()->path)->with(
                     [
                         'transport_type'=>RemoteTransportType::where('transport_type_hidden',0)->orderBy('order','asc')->get(),
                         'cargo_type'=>RemoteCargoType::where('cargo_type_hidden',0)->orderBy('order','asc')->get(),
@@ -245,11 +244,10 @@ class HomeController extends Controller
                         'lang'=>app()->getLocale()
                     ]
                 )->render();
-                $html.=mb_substr($yield[$i],mb_strlen($yield)+2);
+                $html.=$yield_key_[1];
             }
             $data['content']->content = $html;
         }
-
 
         return view('page',$data)->render();
     }
