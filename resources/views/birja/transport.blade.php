@@ -16,6 +16,20 @@
                                     </h3>
                                 @endif
                             @endforeach
+                            <div class="col-12" style="margin-top: 15px;margin-bottom: 15px;">
+                                <div class="row">
+                                    <div class="col-md-3 col-md-offset-3">
+                                        <button class="btn btn-gray" style="height: 50px;
+    margin: 5px;
+    padding: 0 20px;" data-toggle="modal" data-target="#transportFormModal">Добавить транспорт</button>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button class="btn btn-gray" style="height: 50px;
+    margin: 5px;
+    padding: 0 20px;" data-toggle="modal" data-target="#formModal">Добавить груз</button>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-12" style="padding: 3rem;    background-repeat: no-repeat;
     background-image: url(https://www.desktopbackground.org/download/2560x1440/2010/04/17/3405_cool-simple-white-backgrounds-picture-gallery_5120x2880_h.jpg);
     background-position: center;

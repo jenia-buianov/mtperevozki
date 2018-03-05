@@ -22,7 +22,7 @@
                 <label>{{translate('country_to')}}</label>
             </div>
             <div class="col-xs-12 col-md-7">
-                <select name="import" class="form-control" required  onchange="setCity(this,event)">
+                <select name="import" class="form-control"  onchange="setCity(this,event)">
                     <option value="" selected disabled>{{translate('select_country_to')}}</option>
                     <option>{{translate('all_countries')}}</option>
                     @foreach($countries as $country=>$value)
@@ -66,7 +66,7 @@
                 <label>{{translate('free_from')}}</label>
             </div>
             <div class="col-xs-12 col-md-7">
-                <input type="text" class="datepick form-control" id="free_from" name="free_from" value="{{translate('enter_date_export')}}" required>
+                <input type="text" class="datepick form-control" id="free_from" name="free_from" value="{{translate('enter_date_export')}}" >
             </div>
         </div>
     </div>
@@ -76,7 +76,7 @@
                 <label>{{translate('free_to')}}</label>
             </div>
             <div class="col-xs-12 col-md-7">
-                <input type="text" class="datepick form-control" id="free_to" name="free_to" value="{{translate('enter_date_export')}}" required>
+                <input type="text" class="datepick form-control" id="free_to" name="free_to" value="{{translate('enter_date_export')}}" >
             </div>
         </div>
     </div>
@@ -89,7 +89,7 @@
                 <label>{{translate('transport_type')}}</label>
             </div>
             <div class="col-xs-12 col-md-7">
-                <select name="transport_type" class="form-control" required>
+                <select name="transport_type" class="form-control" >
                     <option selected disabled>{{translate('select_transport_type')}}</option>
                     @foreach($transport_type as $country=>$value)
                         <option value="{{$value->id}}">{{$value->$transport_name}}</option>
@@ -105,7 +105,7 @@
                 <label>{{translate('volume_transport')}}</label>
             </div>
             <div class="col-xs-12 col-md-7">
-                <select name="volume" class="form-control" required>
+                <select name="volume" class="form-control" >
                     <option selected disabled>{{translate('select_cargo_volume')}}</option>
                     @foreach($cargo_volume as $country=>$value)
                         <option value="{{$value->id}}">{{$value->$cargo_volume_name}}</option>
@@ -126,7 +126,7 @@
                         <label>{{translate('face')}}</label>
                     </div>
                     <div class="col-xs-12 col-md-7">
-                        <input type="text" name="face" class="form-control" value="@if(Auth::check()){{Auth::user()->name.' '.Auth::user()->lastname}}@endif" required>
+                        <input type="text" name="face" class="form-control" value="@if(Auth::check()){{Auth::user()->name.' '.Auth::user()->lastname}}@endif" >
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
                         <label>Email</label>
                     </div>
                     <div class="col-xs-12 col-md-7">
-                        <input data-container="body" data-toggle="popover" data-placement="bottom" data-content="{{translate('will_be_send_on_this_email')}}" type="email" name="email" value="@if(Auth::check()){{Auth::user()->email}}@endif" class="form-control" required>
+                        <input data-container="body" data-toggle="popover" data-placement="bottom" data-content="{{translate('will_be_send_on_this_email')}}" type="email" name="email" value="@if(Auth::check()){{Auth::user()->email}}@endif" class="form-control" >
                     </div>
                 </div>
             </div>
@@ -164,7 +164,7 @@
             <div class="col-xs-12 col-md-7">
                 <div class="input-group">
                     <span class="input-group-addon">+</span>
-                    <input type="text" name="phone" class="form-control" value="@if(Auth::check()){{Auth::user()->phone}}@endif" required>
+                    <input type="text" name="phone" class="form-control" value="@if(Auth::check()){{Auth::user()->phone}}@endif" >
                 </div>
             </div>
         </div>
@@ -178,7 +178,7 @@
                     <div class="col-xs-12 col-md-7">
                         <div class="input-group">
                             <span class="input-group-addon">+</span>
-                            <input type="text" name="phone1" class="form-control" value="{{Auth::user()->phone2}}" required>
+                            <input type="text" name="phone1" class="form-control" value="{{Auth::user()->phone2}}" >
                         </div>
                     </div>
                 </div>
@@ -191,7 +191,7 @@
                     <div class="col-xs-12 col-md-7">
                         <div class="input-group">
                             <span class="input-group-addon">+</span>
-                            <input type="text" name="phone2" class="form-control" value="{{Auth::user()->phone3}}" required>
+                            <input type="text" name="phone2" class="form-control" value="{{Auth::user()->phone3}}" >
                         </div>
                     </div>
                 </div>
