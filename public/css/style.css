@@ -1903,3 +1903,19 @@ footer a:hover, footer a:focus { border-bottom: 1px dotted #b3853f; outline: 0; 
 	border: 1px solid #deaa5c;
 	border-radius: 7px;
 }
+
+.fix .form-control{
+	font-size: 14px!important;
+	height: 34px!important;
+	padding: 6px 12px!important;
+	line-height: 1.42857143!important;
+	color: #555!important;
+	background-color: #fff!important;
+	background-image: none!important;
+	border: 1px solid #ccc!important;
+}
+.fix .input-group-addon{
+	height: 34px!important;
+	font-size: 14px!important;
+	padding: 6px 12px!important;
+}

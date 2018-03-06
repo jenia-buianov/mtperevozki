@@ -37,7 +37,7 @@ class AdminHomeController extends Controller
         }
         if (!empty(htmlspecialchars($request->mod,3))){
             DB::table(htmlspecialchars($request->mod,3))->where('id',(int)$request->id)->delete();
-            echo json_encode(['js'=>'$("#row'.(int)$request->id.'").remove();toastr["success"]("'.__('admin.deleted').'")']);
+            echo json_encode(['js'=>'$("#row'.(int)$request->id.'").remove();toastr["success"]("Удалено")']);
         }
     }
 

@@ -224,7 +224,7 @@ class HomeController extends Controller
             'content'=>$this->page
         ];
 
-        $yield = explode('$$_FORM'."('",htmlspecialchars_decode($this->page->content));
+        $yield = explode('$$_FORM'."('",htmlspecialchars_decode($this->page->content,3));
         $count = count($yield);
         if ($count){
             $html = $yield[0];
@@ -251,4 +251,5 @@ class HomeController extends Controller
 
         return view('page',$data)->render();
     }
+
 }

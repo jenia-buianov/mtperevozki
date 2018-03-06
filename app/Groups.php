@@ -10,7 +10,7 @@ class Groups extends Model
     protected $fillable = ['titleKey'];
 
     public function user(){
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\User','group_id','id');
     }
 
     public function permission(){

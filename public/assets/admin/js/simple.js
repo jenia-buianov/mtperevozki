@@ -26,6 +26,10 @@ function  submitForm(e){
     event.preventDefault();
     var $that = $(e),
         formData = new FormData($that.get(0));
+    if ($('[name="text_ru"]').length){
+        formData.delete("text_ru");
+        formData.append("text_ru",CKEDITOR.instances.text_ru.getData())
+    }
     $.ajax({
         url: $that.attr('action'),
         type: 'post',
@@ -49,6 +53,28 @@ function checkUser(id) {
     formData.append('_token',$('meta[name="csrf-token"]').attr('content'));
     $.ajax({
         url: 'http://'+window.location.hostname+'/admin/users/check',
+        type: 'post',
+        contentType: false, // важно - убираем форматирование данных по умолчанию
+        processData: false, // важно - убираем преобразование строк по умолчанию
+        data: formData,
+        async: true,
+        dataType: "json",
+        success: function(json){
+            if (typeof json.js!=='undefined'){
+                $('body').append('<script>'+json.js+'</script>');
+            }
+        }
+    });
+}
+
+
+function checkLang(id) {
+    event.preventDefault();
+    formData = new FormData();
+    formData.append('id',id);
+    formData.append('_token',$('meta[name="csrf-token"]').attr('content'));
+    $.ajax({
+        url: 'http://'+window.location.hostname+'/admin/languages/check',
         type: 'post',
         contentType: false, // важно - убираем форматирование данных по умолчанию
         processData: false, // важно - убираем преобразование строк по умолчанию

@@ -13,6 +13,8 @@ use App\RemoteCargoVolume;
 use App\RemoteTransportType;
 use App\Emails;
 use App\Additional\SendEmail;
+use App\Companies;
+use App\UsersCompanies;
 
 class RegisterController extends Controller
 {
@@ -105,6 +107,13 @@ class RegisterController extends Controller
         $input = $request->input();
         $input['confirm_token'] = str_shuffle('ABCDEFJQDLKLSDKFLKSNVPMBOIOT131354640889730213456789_zxcvbnmasdfghjklqwertyuiop');
         $user = $this->create($input);
+        if (!empty($input['company'])){
+            $company = Companies::where('title',$input['company'])->first();
+            if (!$company){
+                $company = Companies::create(['title'=>htmlspecialchars($input['company'])]);
+            }
+            UsersCompanies::create(['user_id'=>$user->id,'company_id'=>$company->id]);
+        }
         foreach (Emails::where('type','registration_user')->get() as $k=>$v){
             $array = [
                 'email_from'=>$v->email_from->login,
@@ -134,7 +143,8 @@ class RegisterController extends Controller
             'cargo_volume_name'=>'cargo_volume_'.app()->getLocale(),
             'transport_name'=>'transport_type_'.app()->getLocale(),
             'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
-            'lang'=>app()->getLocale()
+            'lang'=>app()->getLocale(),
+            'back'=>url()->previous()
         ];
         return view('auth.register')->with($data)->render();
     }

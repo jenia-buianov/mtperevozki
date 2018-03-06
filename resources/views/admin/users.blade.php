@@ -50,6 +50,7 @@
                     <th data-column-id="id" data-type="numeric">#</th>
                     <th data-column-id="name">Имя Фамилия</th>
                     <th data-column-id="url">Email</th>
+                    <th data-column-id="type">Тип</th>
                     <th data-column-id="confirmed" data-sortable="false">Поддтвержден</th>
                     <th data-column-id="commands" data-formatter="commands" data-sortable="false">{{__('admin.acp_actions')}}</th>
                 </tr>
@@ -60,6 +61,13 @@
                             <td>{{$k+1}}</td>
                             <td>{{$v->name.' '.$v->lastname}}</td>
                             <td>{{$v->email}}</td>
+                            <td>{{$v->type}}
+                                @if(count($v->companies))
+                                    @foreach($v->companies as $c=>$company)
+                                        <br><b>{{$company->title}}</b>
+                                    @endforeach
+                                @endif
+                            </td>
                             <td>
                                 <label class="switch switch-warn switch-primary">
                                     <input type="checkbox" @if($v->confirmed) checked="checked" @endif onchange="checkUser('{{encrypt($v->id)}}')"><span></span>

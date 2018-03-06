@@ -6,19 +6,28 @@
  * Time: 15:34
  */
 ?>
-@extends('layouts.admin')
+@extends('layout.admin')
 
 @section('content')
+    <div class="col-xs-1 col-sm-1 col-md-4">
+        &nbsp;
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-4">
+        <p style="margin-bottom: 2.5em;margin-top: 2.5em">
+            <a style="width: 100%" class="btn btn-lg btn-gradient wd-sm btn-primary" href="{{url('admin/languages/add')}}">{{translate('add')}}</a>
+        </p>
+    </div>
+
 <div class="cardbox col-12">
     <div class="col-sm-12 table-responsive">
-        <table id="grid-data1" class="table table-condensed table-hover table-striped">
+        <table id="grid-data" class="table table-condensed table-hover table-striped">
             <thead>
             <tr>
                 <th data-column-id="id" data-type="numeric">#</th>
-                <th data-column-id="name">{{__('admin.title')}}</th>
-                <th data-column-id="code">{{__('admin.code')}}</th>
-                <th data-column-id="date">{{__('admin.date')}}</th>
-                <th data-column-id="active">{{__('admin.active')}}</th>
+                <th data-column-id="name">Название языка</th>
+                <th data-column-id="code">Код</th>
+                <th data-column-id="active">Используется</th>
+                <th data-column-id="commands" data-formatter="commands" data-sortable="false">{{__('admin.acp_actions')}}</th>
             </tr>
             </thead>
             <tbody>
@@ -27,73 +36,22 @@
                     <td>{{$k+1}}</td>
                     <td>{{$v->title}}</td>
                     <td>{{$v->code}}</td>
-                    <td>{{date('m.d.Y',strtotime($v->created_at))}}</td>
                     <td width="80">
-                        @if($v->active==1)
-                            <form action="{{url('admin/language/disable')}}" method="post" onsubmit="submitForm(this)" style="display: inline">
-                                <input type="hidden" name="id" value="{{$v->id}}">
-                                {{csrf_field()}}
-                                <button data-toggle="tooltip" data-placement="top" title="{{__('admin.disable')}}" class="btn btn-flat btn-danger" type="submit"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
-                            </form>
-                        @else
-                            <form action="{{url('admin/language/enable')}}" method="post" onsubmit="submitForm(this)" style="display: inline">
-                                <input type="hidden" name="id" value="{{$v->id}}">
-                                {{csrf_field()}}
-                                <button data-toggle="tooltip" data-placement="top" title="{{__('admin.enable')}}" class="btn btn-flat btn-success" type="submit"><i class="fa fa-eye" aria-hidden="true"></i></button>
-                            </form>
-                        @endif
+                        <label class="switch switch-warn switch-primary">
+                            <input type="checkbox" @if($v->active==1) checked="checked" @endif onchange="checkLang('{{encrypt($v->id)}}')"><span></span>
+                        </label>
                     </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
-</div>
-<div class="col-12" style="margin-top: 25px;margin-bottom: 35px">
-    <div class="row">
-        <a href="{{url('admin/language/add')}}" class="btn btn-gradient btn-primary col-xs-12 col-sm-6 text-center" style="width: 100%">{{__('admin.add_language')}}</a>
-        <a href="{{url('admin/language/addtranslation')}}" class="btn btn-gradient btn-info col-xs-12 col-sm-6 text-center" style="width: 100%">{{__('admin.add_translation')}}</a>
-    </div>
-</div>
-<div class="cardbox col-12">
-    <div class="cardbox-heading">
-        <div class="cardbox-title">{{__('admin.translations')}}</div>
-    </div>
-    <div class="col-sm-12 table-responsive">
-
-        <table id="grid-data" class="table table-condensed table-hover table-striped">
-            <thead>
-            <tr>
-                <th data-column-id="id" data-type="numeric">#</th>
-                @foreach($languages as $k=>$v)
-                    @if($v->active==1)
-                        <th data-column-id="lang_{{$v->code}}">{{__('admin.title').' '.$v->title}}</th>
-                    @endif
-                @endforeach
-                <th data-column-id="commands" data-formatter="commands" data-sortable="false">{{__('admin.acp_actions')}}</th>
-            </tr>
-            </thead>
-            <tbody>
-            @for($i=0;$i<count($translations);$i++)
-                <tr id="row{{$v->id}}">
-                    <td>{{$i+1}}</td>
-                        @foreach($languages as $k=>$v)
-                            @if($v->active==1)
-                                <?php  $file = explode('.',$translations[$i]); ?>
-                                <td>@if(is_file(__DIR__.'/../../../resources/lang/'.$v->code.'/'.$file[0].'.php')) {{__($translations[$i],[],$v->code)}} @endif</td>
-                            @endif
-                        @endforeach
                     <td>
-                        <a href="{{url('admin/language/editTranslation/'.$translations[$i])}}" data-toggle="tooltip" data-placement="top" title="{{__('admin.edit')}}" class="btn btn-circle btn-outline-success" style="margin-right: 5px"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-
-                        <form action="{{url('admin/language/delete')}}" method="post" onsubmit="submitForm(this)" style="display: inline">
+                        <a href="{{url('admin/languages/edit/'.$v->id)}}" data-toggle="tooltip" data-placement="top" title="{{translate('edit')}}" class="btn btn-circle btn-outline-success" style="margin-right: 5px"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <form action="{{url('admin/delete')}}" id="del_form_{{$k}}" method="post" onsubmit="submitDelete(this)" style="display: inline">
                             <input type="hidden" name="id" value="{{$v->id}}">
+                            <input type="hidden" name="mod" value="languages">
                             {{csrf_field()}}
-                            <button data-toggle="tooltip" data-placement="top" title="{{__('admin.delete')}}" class="btn btn-circle btn-outline-danger" type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button data-toggle="tooltip" data-info="{{$v->title}}" data-placement="top" title="{{translate('delete')}}" class="btn btn-circle btn-outline-danger" type="submit"><i class="fa fa-trash" aria-hidden="true"></i></button>
                         </form>
                     </td>
                 </tr>
-            @endfor
+            @endforeach
             </tbody>
         </table>
     </div>
@@ -103,10 +61,6 @@
         var dataTable = $('#grid-data').DataTable({
             "pageLength":10,
             "order":[]
-        });
-        var dataTable1 = $('#grid-data1').DataTable({
-            "pageLength":10,
-            "order":[0,"asc"]
         });
         $('[data-toggle="tooltip"]').tooltip();
     },500);

@@ -32,6 +32,21 @@
             </div>
 
             <div class="form-group">
+                <label>Деяьельность</label>
+                <select class="form-control" name="type" required>
+                    <option selected>-Укажите деятельность пользователя-</option>
+                    <option value="Грузовладелец" @if($user_->type=='Грузовладелец') selected="selected" @endif>Грузовладелец </option>
+                    <option value="Автотранспортная компания" @if($user_->type=='Автотранспортная компания') selected="selected" @endif>Автотранспортная компания</option>
+                    <option value="Железнодорожные перевозки" @if($user_->type=='Железнодорожные перевозки') selected="selected" @endif>Железнодорожные перевозки</option>
+                    <option value="Авиа перевозки" @if($user_->type=='Авиа перевозки') selected="selected" @endif>Авиа перевозки</option>
+                    <option value="Морские перевозки" @if($user_->type=='Морские перевозки') selected="selected" @endif>Морские перевозки</option>
+                    <option value="Экспресс доставка" @if($user_->type=='Экспресс доставка') selected="selected" @endif>Экспресс доставка </option>
+                    <option value="Пассажирские перевозки" @if($user_->type=='Пассажирские перевозки') selected="selected" @endif>Пассажирские перевозки</option>
+                    <option value="Экспедиторская компания" @if($user_->type=='Экспедиторская компания') selected="selected" @endif>Экспедиторская компания</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label>Телефон</label>
                 <input required name="phone" value="{{$user_->phone}}" class="form-control">
             </div>

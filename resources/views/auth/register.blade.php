@@ -30,26 +30,26 @@
                             <form class="" role="form" method="POST" action="{{ route('register') }}">
                                 {{ csrf_field() }}
 
-                                <div class="form-group input-group input-group-lg">
+                                <div class="form-group input-group input-group-lg fix">
                                     <span class="input-group-addon"><i class="fas fa-envelope"></i></span>
-                                    <input  data-container="body" data-toggle="popover" data-placement="bottom" data-content="{{translate('will_be_send_reg_message')}}" type="email" class="form-control" name="email" placeholder="{{translate('enter_field').' Email'}}" value="{{ old('email') }}" required autofocus>
+                                    <input  data-container="body" data-toggle="popover" data-placement="bottom" data-content="{{translate('will_be_send_reg_message')}}" type="email" class="form-control" name="email" placeholder="Укажите ваш Email" value="{{ old('email') }}" required autofocus>
                                 </div>
-                                <div class="form-group input-group input-group-lg">
+                                <div class="form-group input-group input-group-lg fix">
                                     <span class="input-group-addon"><i class="fas fa-user"></i></span>
-                                    <input type="text" class="form-control" name="name" placeholder="{{translate('enter_field').' '.mb_strtolower(translate('name'))}}" value="{{ old('name') }}" required>
+                                    <input type="text" class="form-control" name="name" placeholder="Укажите ваше имя" value="{{ old('name') }}" required>
                                 </div>
-                                <div class="form-group input-group input-group-lg">
+                                <div class="form-group input-group input-group-lg fix">
                                     <span class="input-group-addon">+</span>
                                     <input type="number" class="form-control" name="phone" placeholder="{{translate('enter_field').' '.mb_strtolower(translate('phone'))}}" value="@if(empty(old('phone'))){{'+'}}@else{{ old('phone') }}@endif" required>
                                 </div>
-                                <div class="form-group input-group input-group-lg">
+                                <div class="form-group input-group input-group-lg fix">
                                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                    <input type="password" class="form-control" name="password" placeholder="{{translate('enter_field').' '.mb_strtolower(translate('password'))}}" required>
+                                    <input type="password" class="form-control" name="password" placeholder="Придумайте пароль" required>
                                 </div>
-                                <div class="form-group input-group input-group-lg">
+                                <div class="form-group input-group input-group-lg fix">
                                     <span class="input-group-addon"><i class="fab fa-creative-commons"></i></span>
                                     <select class="form-control" name="type" required>
-                                        <option selected>----Укажите тип-----</option>
+                                        <option selected>-Укажите вашу деятельность-</option>
                                         <option value="Грузовладелец">Грузовладелец </option>
                                         <option value="Автотранспортная компания">Автотранспортная компания</option>
                                         <option value="Железнодорожные перевозки">Железнодорожные перевозки</option>
@@ -60,11 +60,16 @@
                                         <option value="Экспедиторская компания">Экспедиторская компания</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-12" style="text-align: center">
+                                <div class="form-group input-group input-group-lg fix" style="margin-top: 1rem;">
+                                    <span class="input-group-addon"><i class="fa fa-copyright"></i></span>
+                                    <input type="text" class="form-control" name="company" placeholder="Укажите название компании" value="{{ old('company') }}">
+                                </div>
+                                <div class="col-sm-12" style="text-align: center;margin-bottom: 2rem;">
                                     {!! NoCaptcha::display() !!}
                                     {{translate('set_captcha')}}
                                 </div>
                                 <button class="btn btn-link-2" style="width: 100%;display: block">{{ translate('registration') }}</button>
+                                <a href="{{$back}}" style="margin-top: 2rem;display: inline-block">Отменить регистрацию</a>
                             </form>
                         </div>
                     </div>

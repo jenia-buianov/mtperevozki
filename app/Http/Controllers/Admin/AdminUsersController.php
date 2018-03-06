@@ -71,6 +71,7 @@ class AdminUsersController extends Controller
             'email' => 'required|string|email|max:255',
             'phone'=>'required|numeric',
             'group_id'=>'required|numeric',
+            'type'=>'required'
         ],[
             'name.required'=>translate('should_be_name'),
             'name.string'=>translate('should_be_name_string'),
@@ -80,6 +81,7 @@ class AdminUsersController extends Controller
             'email.required'=>translate('should_be_email'),
             'email.max'=>translate('should_be_max'),
             'email.unique'=>translate('should_be_unique'),
+            'type.required'=>'Укажите деятельность'
         ]);
         if ($validator->fails()) {
             $errors = [];

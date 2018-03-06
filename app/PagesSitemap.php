@@ -12,4 +12,7 @@ class PagesSitemap extends Model
     public function pages(){
         return $this->belongsTo('App\Pages');
     }
+    public function sitemap(){
+        return $this->belongsTo('App\Sitemap');
+    }
 }

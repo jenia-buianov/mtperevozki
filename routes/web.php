@@ -29,6 +29,7 @@ Route::group(['middleware' => 'admin', 'prefix'=>'admin'], function () {
     Route::get('{module}/{action}', 'Admin\AdminModuleController@action')->name('admin.action');
     Route::get('{module}/{action}/{id}', 'Admin\AdminModuleController@action')->name('admin.action.id');
     Route::post('{module}/{action}', 'Admin\AdminModuleController@action')->name('admin.action.post');
+    Route::post('delete', 'Admin\AdminHomeController@deleteMethod')->name('admin.delete');
 //    Route::post('{module}/{action}/{id}', 'Admin\AdminModuleController@action')->name('admin.action.post');
 });
 

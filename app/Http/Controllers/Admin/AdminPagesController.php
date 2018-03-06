@@ -172,6 +172,7 @@ class AdminPagesController extends Controller
         $id = (int)$url[count($url)-1];
         $input = $request->input();
 
+
         $validator = Validator::make($request->except(['_token']),[
             'url_' => 'required|string',
             'sitemap' => 'required|numeric',
@@ -204,13 +205,13 @@ class AdminPagesController extends Controller
         unset($input['metakey_ru']);
         unset($input['title_ru']);
         unset($input['text_ru']);
-        $oldPage = Pages::find($id);
-        $oldPage->active = 0;
-        $oldPage->save();
-        $input['parent'] = $oldPage->id;
-        $page = Pages::create($input);
-        $sitemap = Sitemap::create(['url'=>$input['url'],'title'=>$input['title'],'parent'=>$request->sitemap]);
-        $sitemap_pages = PagesSitemap::create(['page_id'=>$page->id,'sitemap_id'=>$sitemap->id]);
+        Pages::where('id',$id)->update($input);
+        $sitemap = PagesSitemap::where('page_id',$id)->first();
+        $sitemap->sitemap->title = $input['title'];
+        $sitemap->sitemap->url = $input['url'];
+        $sitemap->sitemap->parent = $request->sitemap;
+        $sitemap->save();
+
         return json_encode(['js'=>'toastr["success"]("'.translate('saved').'");$("form")[0].reset()']);
 
 
