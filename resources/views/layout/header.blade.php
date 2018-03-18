@@ -56,20 +56,27 @@
                         $link = explode('#',$v->link);
                         $count = App\Menu::where('parent',$v->id)->count();
                         echo '<li><a ';
-                        if (count($link)>1) echo 'class="scroll-link"';
                         if ($count) echo 'class="dropdown-toggle" id="navbarDrop'.$v->id.'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"';
                         echo ' href="'.url($v->link).'" title="'.trans($v->titleKey).'">'.trans($v->titleKey).'</a>';
 
-                        if ($count) echo '<div class="dropdown-menu" aria-labelledby="navbarDrop'.$v->id.'" style="overflow: auto;padding: 10px;">';
+                        if ($count) echo '<div class="dropdown-menu" aria-labelledby="navbarDrop'.$v->id.'" style="padding: 10px;"><div class="container-fluid">';
 
-                        foreach (App\Menu::where('parent',$v->id)->orderBy('order')->get() as $item=>$value){
-                            echo '<a class="dropdown-item" title="'.trans($value->titleKey).'" href="'.url($value->link).'" style="font-weight:bold">'.trans($value->titleKey).'</a>';
-                            foreach (App\Menu::where('parent',$value->id)->orderBy('order')->get() as $it=>$val){
-                                echo '<a class="dropdown-item" title="'.trans($val->titleKey).'" href="'.url($val->link).'">'.trans($val->titleKey).'</a>';
+                        foreach (App\Menu::where('parent',$v->id)->orderBy('order')->limit(4)->get() as $item=>$value){
+                            if (!empty($value->link))
+                                echo '<a class="dropdown-item btn btn-link-menu" data-item="'.$item.'" title="'.trans($value->titleKey).'" href="'.url($value->link).'" style="font-weight:bold">'.trans($value->titleKey).'</a>';
+                            else
+                                echo '<a class="dropdown-item btn btn-link-menu" data-item="'.$item.'" title="'.trans($value->titleKey).'" href="#" style="font-weight:bold">'.trans($value->titleKey).'</a>';
+//
+                            if (App\Menu::where('parent',$value->id)->count()){
+                                echo '<div class="d-item ditem-'.$item.'">';
+                                foreach (App\Menu::where('parent',$value->id)->orderBy('order')->get() as $it=>$val){
+                                    echo '<a title="'.trans($val->titleKey).'" href="'.url($val->link).'">'.trans($val->titleKey).'</a>';
+                                }
+                                echo '</div>';
                             }
                         }
 
-                        if ($count) echo '</div>';
+                        if ($count) echo '</div></div>';
                         echo'</li>';
                     }
 
@@ -138,13 +145,13 @@
                         }
                     }
                 }
-                echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="row">';
-                foreach ($menu as $k=>$v){
-                   echo '<a href="'.$v['link'].'" style="display: block">'.$v['title'].'</a>';
-                    if ($k>0&&$k%10==0){
-                        echo '</div></div><div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="row">';
-                    }
-                }
+//                echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="row">';
+//                foreach ($menu as $k=>$v){
+//                   echo '<a href="'.$v['link'].'" style="display: block">'.$v['title'].'</a>';
+//                    if ($k>0&&$k%10==0){
+//                        echo '</div></div><div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="row">';
+//                    }
+//                }
                 echo'</div></div>';
                 ?>
             </div>
@@ -245,12 +252,32 @@
             $('.datepick').datepicker({ format: 'dd-mm-yyyy',autoclose:true, language: 'ru' });
         }
         if (window.screen.width>=768) {
-            $('.dropdown-menu').css('height',window.screen.height*0.3+'px');
-            $('.dropdown-menu').css('width',window.screen.width*0.6+'px');
-            $('.dropdown-menu').css('left',(window.screen.width*-0.3)+'px');
-            $('[aria-labelledby="profileDrop"].dropdown-menu').css('height','auto');
+
+            $('.dropdown-menu').css('position',"fixed");
+            $('.dropdown-menu').css('left',"0px");
+            $('.dropdown-menu').css('top',"70px");
+            $('.dropdown-menu').css('width',"100%");
+            $('.dropdown-menu').css('background',"transparent");
+            $('.dropdown-menu').css('border',"none");
+            $('.dropdown-menu').css('box-shadow',"none");
+            $('.dropdown-item').on( "mouseenter", function (e) {
+                attr = $(this).attr('data-item');
+                $('.ditem-0, .ditem-1, .ditem-2, .ditem-3').css('display','none');
+                $('.ditem-'+attr).css('display','block');
+                margin = attr*23.6;
+                $('.ditem-'+attr).css('margin-left',margin+'%');
+            } );
+
+//            $('.dropdown-menu').css('box-shadow',"none");
+            $('[aria-labelledby="profileDrop"].dropdown-menu').css('position','absolute');
             $('[aria-labelledby="profileDrop"].dropdown-menu').css('width','auto');
             $('[aria-labelledby="profileDrop"].dropdown-menu').css('left','auto');
+            $('[aria-labelledby="profileDrop"].dropdown-menu').css('top','auto');
+            $('[aria-labelledby="profileDrop"].dropdown-menu').css('background','white');
+//            $('[aria-labelledby="profileDrop"].dropdown-menu').css('left','auto');
+        }else{
+            $('.dropdown-menu .container-fluid').css('background','transparent').removeClass('container-fluid');
+
         }
     });
 

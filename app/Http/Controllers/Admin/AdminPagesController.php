@@ -207,11 +207,12 @@ class AdminPagesController extends Controller
         unset($input['text_ru']);
         Pages::where('id',$id)->update($input);
         $sitemap = PagesSitemap::where('page_id',$id)->first();
-        $sitemap->sitemap->title = $input['title'];
-        $sitemap->sitemap->url = $input['url'];
-        $sitemap->sitemap->parent = $request->sitemap;
-        $sitemap->save();
-
+        if ($sitemap) {
+            $sitemap->sitemap->title = $input['title'];
+            $sitemap->sitemap->url = $input['url'];
+            $sitemap->sitemap->parent = $request->sitemap;
+            $sitemap->save();
+        }
         return json_encode(['js'=>'toastr["success"]("'.translate('saved').'");$("form")[0].reset()']);
 
 

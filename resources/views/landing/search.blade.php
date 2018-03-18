@@ -5,12 +5,12 @@
                 <div class="col-sm-12 more-features section-description">
                     <h2 style="color: #333">{{translate('search_title')}}</h2>
                     <div class="divider-1"><div class="line"></div></div>
-                    <p class="medium-paragraph">
+                    <p class="medium-paragraph" style="color:black">
                         {!! translate('search_p') !!}
                     </p>
                 </div>
             </div>
-            <div class="row" style="margin-top: 1.5rem; margin-bottom: 0.8rem">
+            <div class="row" style="color:black;margin-top: 1.5rem; margin-bottom: 0.8rem">
                 <form class="form-inline col-xs-12" method="GET" action="{{url($lang.'/birja/search')}}">
                     <div class="col-md-3 col-sm-12">
                         <label class="col-sm-12" for="inlineFormInput">
@@ -47,7 +47,7 @@
                             </div>
                         </label>
                         <div class="col-sm-12">
-                            <select class="form-control" name="country_export"  style="width: 100%">
+                            <select class="form-control" name="country_import"  style="width: 100%">
                                 <option selected>{{translate('all_countries')}}</option>
                                 @foreach($countries as $country=>$value)
                                     <option value="{{$value->id_country}}">{{$value->alpha3}} - {{$value->$country_name}}</option>

@@ -12,7 +12,7 @@
                 <div class="col-sm-12 more-features-box" data-aos="fade-up">
                     <div class="row">
                     @foreach($statistics['cargo'] as $v=>$i)
-                            <div class="col-sm-2 col-xs-12">
+                            <a href="{{route('birja.cargo',['lang'=>$lang,'tr'=>$v])}}" class="col-sm-2 col-xs-12" style="color:#333">
                                 <div class="img_class">
                                 @if(count($i)>1)
                                     <img src="{{$i[0]}}">
@@ -22,13 +22,13 @@
                                 @endif
                                 </div>
                                 <h3>{{translate($v.'_cargo')}}</h3>
-                            </div>
+                            </a>
                     @endforeach
                     </div>
 
                     <div class="row" style="padding-bottom: 30px;">
                         @foreach($statistics['transport'] as $v=>$i)
-                            <div class="col-sm-2 col-xs-12">
+                            <a href="{{route('birja.transport',['lang'=>$lang,'tr'=>$v])}}" class="col-sm-2 col-xs-12" style="color:#333">
                                 <div class="img_class">
                                 @if(count($i)>1)
                                     <img src="{{$i[0]}}">
@@ -38,7 +38,7 @@
                                 @endif
                                 </div>
                                 <h3>{{translate($v.'_transport')}}</h3>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>

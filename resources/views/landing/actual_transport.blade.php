@@ -4,10 +4,10 @@
                 <div class="col-sm-12 more-features section-description">
                     <h2>{{translate('actual')}}</h2>
                     <div class="divider-1"><div class="line"></div></div>
-                    <div class="medium-paragraph">{!! translate('actual_transport_p') !!}</div>
+                    <div class="medium-paragraph" style="color:black">{!! translate('actual_transport_p') !!}</div>
                 </div>
             </div>
-            <div class="row" style="margin-top: 1.5rem; margin-bottom: 0.8rem">
+            <div class="row" style="margin-top: 1.5rem; margin-bottom: 0.8rem;color:black">
                 <form class="form-inline col-xs-12" method="GET" action="{{url('/birja/transport/')}}">
                     <div class="col-md-4 col-sm-12  col-md-offset-1">
                         <label class="col-sm-12" for="inlineFormInput">

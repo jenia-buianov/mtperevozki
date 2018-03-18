@@ -99,12 +99,13 @@ class BirjaController extends Controller
             $i++;
         }
         $class = "App\Remote".$prefix_model_class[$prefix]."TransportType";
-        $transport = $class::where('transport_type_hidden',0)->orderBy('order','asc')->get();
+        $transport = $class::where('transport_type_hidden',0)->where('split',1)->orderBy('transport_type_group','asc')->orderBy('order','asc')->get();
         $class = "App\Remote".$prefix_model_class[$prefix]."CargoType";
         $cargo_type = $class::where('cargo_type_hidden',0)->orderBy('order','asc')->get();
         $class = "App\Remote".$prefix_model_class[$prefix]."CargoVolume";
         $cargo_volume = $class::where('cargo_volume_hidden',0)->get();
         $name = 'country_name_'.app()->getLocale();
+//        dd($query->count());
         $data = [
             'content'=>['metatitle'=>'Поиск '.$prefix_h1[$prefix],'metakey'=>'','metadesc'=>'','h1'=>'Поиск '.$prefix_h1[$prefix]],
             'transport_type'=>$transport,
@@ -117,8 +118,8 @@ class BirjaController extends Controller
             'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
             'lang'=>app()->getLocale(),
             'prefix'=>$prefix,
-            'search'=>$query->orderBy('id','desc')->paginate($this->showOnPage),
             'search_count'=>$query->count(),
+            'search'=>$query->orderBy('id','desc')->paginate($this->showOnPage),
             'menus'=>$menus_order
         ];
 
@@ -240,8 +241,8 @@ class BirjaController extends Controller
             'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
             'lang'=>app()->getLocale(),
             'prefix'=>$prefix,
-            'search'=>$query->orderBy('id','desc')->paginate($this->showOnPage),
             'search_count'=>$query->count(),
+            'search'=>$query->orderBy('id','desc')->paginate($this->showOnPage),
             'menus'=>$menus_order
         ];
 
@@ -260,5 +261,13 @@ class BirjaController extends Controller
         $data['content']['metatitle'].='. Биржа транспорта и грузов.';
         $data['content']['metakey'] = implode(',',explode(' ',implode(explode('.',$data['content']['metatitle']))));
         return view('birja.cargo',$data)->render();
+    }
+
+    public function search(Request $request){
+        $type = htmlspecialchars($request->type,3);
+        $import = htmlspecialchars($request->country_import,3);
+        $export = htmlspecialchars($request->country_export,3);
+//        dd($_GET);
+        return redirect(url(app()->getLocale().'/birja/auto'.$type.'?import='.$import.'&export='.$export));
     }
 }

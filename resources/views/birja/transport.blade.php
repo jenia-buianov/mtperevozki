@@ -2,10 +2,8 @@
 @section('content')
 
     <div class="top-content" style="position: relative; z-index: 0;background: none">
-        <div class="container">
-            <div class="row">
+        <div class="container-fluid">
                 <div class="row align-items-center  text-center">
-                    <div class="col-12">
                         <div class="card"  style="background: white">
                             @foreach($menus as $k=>$v)
                                 @if($k==$prefix)
@@ -16,30 +14,17 @@
                                     </h3>
                                 @endif
                             @endforeach
-                            <div class="col-12" style="margin-top: 15px;margin-bottom: 15px;">
-                                <div class="row">
-                                    <div class="col-md-3 col-md-offset-3">
-                                        <button class="btn btn-gray" style="height: 50px;
-    margin: 5px;
-    padding: 0 20px;" data-toggle="modal" data-target="#transportFormModal">Добавить транспорт</button>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <button class="btn btn-gray" style="height: 50px;
-    margin: 5px;
-    padding: 0 20px;" data-toggle="modal" data-target="#formModal">Добавить груз</button>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="col-12" style="padding: 3rem;    background-repeat: no-repeat;
     background-image: url(https://www.desktopbackground.org/download/2560x1440/2010/04/17/3405_cool-simple-white-backgrounds-picture-gallery_5120x2880_h.jpg);
     background-position: center;
     background-size: cover;margin-top: 2rem">
-                                <h2>Фильтр</h2>
+                                <div class="container">
+                                <h2 class="col-12 text-center">Фильтр</h2>
                                 <form class="form" action="{{route('birja.transport',['tr'=>$prefix,'lang'=>$lang])}}" method="GET">
-                                <div class="row">
                                     <div class="col-sm-12 col-md-4 col-md-offset-1">
                                         <select name="export" class="form-control">
-                                            <option selected value="" disabled="disabled">Откуда</option>
+                                            <option selected value="" disabled="disabled">{{translate('country_from')}}</option>
                                             <option>{{translate('all_countries')}}</option>
                                             @foreach($countries as $country=>$value)
                                                 <option value="{{$value->id_country}}" @if(isset($_GET['export'])&&$value->id_country==(int)$_GET['export']) selected @endif>{{$value->$country_name}} [{{$value->alpha3}}]</option>
@@ -48,19 +33,22 @@
                                     </div>
                                     <div class="col-sm-12 col-md-4 col-md-offset-2">
                                         <select name="import" class="form-control">
-                                            <option selected value="" disabled="disabled">Куда</option>
+                                            <option selected value="" disabled="disabled">{{translate('country_to')}}</option>
                                             <option>{{translate('all_countries')}}</option>
                                             @foreach($countries as $country=>$value)
                                                 <option value="{{$value->id_country}}" @if(isset($_GET['import'])&&$value->id_country==(int)$_GET['import']) selected @endif>{{$value->$country_name}} [{{$value->alpha3}}]</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-sm-12 col-md-4 col-md-offset-1">
                                         <select name="transport" class="form-control">
                                             <option selected value="" disabled>Транспорт</option>
+                                            <?php $group = $transport_type[0]->transport_type_group; ?>
                                             @foreach($transport_type as $country=>$value)
+                                                <?php if ($group!==$value->transport_type_group) {
+                                                    $group = $value->transport_type_group;
+                                                    echo '<option value="" disabled>-------------------</option>';
+                                                } ?>
                                                 <option value="{{$value->id}}" @if(isset($_GET['transport'])&&$value->id==(int)$_GET['transport']) selected @endif>{{$value->$transport_name}}</option>
                                             @endforeach
                                         </select>
@@ -73,24 +61,20 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-sm-12 col-md-4 col-md-offset-1">
                                         <input placeholder="Свободен с" name="date_from" class="datepick form-control"  @if(isset($_GET['date_from'])) value="{{$_GET['date_from']}}" @endif>
                                     </div>
                                     <div class="col-sm-12 col-md-4 col-md-offset-2">
                                         <input placeholder="Свободен по" name="date_to" class="datepick form-control" @if(isset($_GET['date_to'])) value="{{$_GET['date_to']}}" @endif>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-12 text-center">
                                         <button class="btn btn-link-2">Применить</button>
                                     </div>
-                                </div>
                                 </form>
                             </div>
-                            <p style="text-align: left;font-weight: bold;padding: 3rem">
-                                По запросу {{mb_strtolower($content['h1'])}} найдено {{$search_count}} заявок.
+                            </div>
+                            <p class="top_titles" style="text-align: left;font-weight: bold;padding: 3rem">
+                                По запросу {{mb_lcfirst(explode('.',$content['metatitle'])[0])}} найдено {{$search_count}} заявок.
                             </p>
                             <div class="col-sm-12 table-responsive" style="padding: 3rem;padding-top: 0px;">
                                 <table id="grid-data" class="table table-condensed table-hover table-striped">
@@ -143,8 +127,6 @@
                             <?php $assets = $_GET; unset($assets['page']); ?>
                             {{$search->appends($assets)->links()}}
                         </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -162,7 +144,6 @@
 
 
             for(k=0;k<getTd.length;k++)
-
                 $('#grid-data thead th:eq('+k+')').css('width',($('#grid-data tbody tr:eq(0) td:eq('+k+')').width()+11)+'px');
 
             for(k=0;k<getTd.length;k++)
@@ -170,15 +151,25 @@
 
             $(window).scroll(function () {
                 if ($(this).scrollTop() > pos&&$(this).scrollTop()<$('#grid-data tbody tr:eq('+countTR+')').offset().top) {
+
+                    $('.top_titles').css('position','fixed');
+                    $('.top_titles').css('z-index','1000');
+                    $('.top_titles').css('background','white');
+                    $('.top_titles').css('width','100%');
+                    $('.top_titles').css('padding','10px');
+                    $('.top_titles').css('padding-left','3rem');
+                    $('.top_titles').css('top','60px');
                     $('#grid-data thead').css('background-color','white');
 //                    $('#grid-data thead').css('color','white');
                     $('#grid-data thead').css('position','fixed');
                     $('#grid-data thead ').css('left',left+'px');
-                    $('#grid-data thead ').css('top','60px');
+                    $('#grid-data thead ').css('top','90px');
                     $('#grid-data thead th').css('border-right','2px solid #ddd');
 
                 } else {
 
+                    $('.top_titles').css('position','relative');
+                    $('.top_titles').css('top','0');
                     $('#grid-data thead th').css('border-right','none');
                     $('#grid-data thead').css('background-color','transparent');
 //                    $('#grid-data thead').css('color','inherit');

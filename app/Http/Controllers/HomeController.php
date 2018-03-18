@@ -7,6 +7,7 @@ use App\Companies;
 use App\Forms;
 use App\Landing;
 use App\Language;
+use App\Menu;
 use App\Pages;
 use App\PagesSitemap;
 use App\RemoteAutoCargo;
@@ -46,12 +47,22 @@ class HomeController extends Controller
         $autoTransportShowDays = 30;
         $name = 'country_name_'.app()->getLocale();
 
+        $directions = [];
+        $count = ceil(Menu::whereIn('parent',Menu::select('id')->where('parent',18)->get())->count()/4);
+        foreach (Menu::whereIn('parent',Menu::select('id')->where('parent',18)->get())->get() as $item=>$value){
+            $number = $item % $count;
+            $directions[$number][] = [
+                'title'=>$value->titleKey,
+                'link'=>url($value->link)
+            ];
+        }
+
         $data = [
             'cargo'=>TypesCargo::orderBY('order')->get(),
             'categories'=>Category::orderBy('order')->get(),
             'auto_cargo'=>RemoteAutoCargo::where('hidden',0)->where('date_create','>=',date('Y-m-d',strtotime('-'.$autoTransportShowDays.' days')))->whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->orderBy('id','desc')->limit(10)->get(),
             'auto_transport'=>RemoteAutoTransport::where('hidden',0)->where('date_create','>=',date('Y-m-d',strtotime('-'.$autoTransportShowDays.' days')))->whereIn('type',[2,3,4,5,7,8,9,10,11,12,13,14,16,17,18,19,20,21,22,23,26,27,28,29,32,35,37,45])->orderBy('id','desc')->limit(10)->get(),
-            'transport_type'=>RemoteTransportType::where('transport_type_hidden',0)->orderBy('order','asc')->get(),
+            'transport_type'=>RemoteTransportType::where('split',1)->orderBy('transport_type_group','asc')->where('transport_type_hidden',0)->orderBy('order','asc')->get(),
             'cargo_type'=>RemoteCargoType::where('cargo_type_hidden',0)->orderBy('order','asc')->get(),
             'cargo_volume'=>RemoteCargoVolume::where('cargo_volume_hidden',0)->get(),
             'statistics'=>[
@@ -82,7 +93,8 @@ class HomeController extends Controller
             'cargo_type_name'=>'cargo_type_'.app()->getLocale(),
             'lang'=>app()->getLocale(),
             'page'=>'home',
-            'content'=>$this->page
+            'content'=>$this->page,
+            'directions'=>$directions
         ];
 
 
@@ -233,7 +245,7 @@ class HomeController extends Controller
                 $yield_key_1 = $yield_key_[0];
                 $html.=view(Forms::where('key',$yield_key_1)->first()->path)->with(
                     [
-                        'transport_type'=>RemoteTransportType::where('transport_type_hidden',0)->orderBy('order','asc')->get(),
+                        'transport_type'=>RemoteTransportType::where('transport_type_hidden',0)->where('split',1)->orderBy('transport_type_group','asc')->orderBy('order','asc')->get(),
                         'cargo_type'=>RemoteCargoType::where('cargo_type_hidden',0)->orderBy('order','asc')->get(),
                         'cargo_volume'=>RemoteCargoVolume::where('cargo_volume_hidden',0)->get(),
                         'countries'=>RemoteCountry::select($name,'id_country','alpha3')->where('country_hidden',0)->orderBy($name)->get(),
@@ -248,6 +260,16 @@ class HomeController extends Controller
             }
             $data['content']->content = $html;
         }
+
+        $sitemap = [
+            ['title'=>'Главная страница','url'=>url('/')],
+            ['title'=>$this->page->title,'url'=>url($this->page->url)]
+        ];
+        if ($this->page->sitemap[0]->parent) {
+            $parentPage = Sitemap::find($this->page->sitemap[0]->parent);
+            $sitemap[] = ['title'=>$parentPage->title,'url'=>url($parentPage->url)];
+        }
+        $data['sitemap'] = $sitemap;
 
         return view('page',$data)->render();
     }

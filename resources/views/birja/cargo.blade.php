@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="top-content" style="position: relative; z-index: 0;background: none">
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="row align-items-center  text-center">
                     <div class="col-12">
@@ -75,7 +75,7 @@
                                 </div>
                                 </form>
                             </div>
-                            <p style="text-align: left;font-weight: bold;padding: 3rem">
+                            <p class="top_titles" style="text-align: left;font-weight: bold;padding: 3rem">
                                 По запросу {{mb_strtolower($content['h1'])}} найдено {{$search_count}} заявок.
                             </p>
                             <div class="col-sm-12 table-responsive" style="padding: 3rem;padding-top: 0px;">
@@ -155,15 +155,25 @@
 
             $(window).scroll(function () {
                 if ($(this).scrollTop() > pos&&$(this).scrollTop()<$('#grid-data tbody tr:eq('+countTR+')').offset().top) {
+
+                    $('.top_titles').css('position','fixed');
+                    $('.top_titles').css('z-index','1000');
+                    $('.top_titles').css('background','white');
+                    $('.top_titles').css('width','100%');
+                    $('.top_titles').css('padding','10px');
+                    $('.top_titles').css('padding-left','3rem');
+                    $('.top_titles').css('top','60px');
                     $('#grid-data thead').css('background-color','white');
 //                    $('#grid-data thead').css('color','white');
                     $('#grid-data thead').css('position','fixed');
                     $('#grid-data thead ').css('left',left+'px');
-                    $('#grid-data thead ').css('top','60px');
+                    $('#grid-data thead ').css('top','90px');
                     $('#grid-data thead th').css('border-right','2px solid #ddd');
 
                 } else {
 
+                    $('.top_titles').css('position','relative');
+                    $('.top_titles').css('top','0');
                     $('#grid-data thead th').css('border-right','none');
                     $('#grid-data thead').css('background-color','transparent');
 //                    $('#grid-data thead').css('color','inherit');

@@ -141,7 +141,11 @@
                                         <select name="transport_type" class="form-control" >
                                             <option selected disabled>{{translate('select_transport_type')}}</option>
                                             @foreach($transport_type as $country=>$value)
-                                                <option value="{{$value->id}}">{{$value->$transport_name}}</option>
+                                                <?php if ($group!==$value->transport_type_group) {
+                                                    $group = $value->transport_type_group;
+                                                    echo '<option value="" disabled>-------------------</option>';
+                                                } ?>
+                                                <option value="{{$value->id}}" @if(isset($_GET['transport'])&&$value->id==(int)$_GET['transport']) selected @endif>{{$value->$transport_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>

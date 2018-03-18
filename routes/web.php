@@ -44,5 +44,6 @@ Route::get('/{lang}/birja/{tr}transport/','BirjaController@openTransport')->name
 Route::get('/{lang}/birja/transport/','BirjaController@openTransport')->name('birja.auto_transport');
 Route::get('/{lang}/birja/{tr}cargo/','BirjaController@openCargo')->name('birja.cargo');
 Route::get('/{lang}/birja/cargo/','BirjaController@openCargo')->name('birja.auto_cargo');
+Route::get('/{lang}/birja/search/','BirjaController@search')->name('birja.search');
 Route::get('/{lang}', 'HomeController@index');
 Route::get('/{lang}/{page}','HomeController@page');

@@ -11,8 +11,8 @@
                 <div class="col-sm-12 text" data-aos="fade-up" data-aos-delay="300">
                     <h1 style="    color: #333;">{{translate('main_logo')}}</h1>
                     <div class="description">
-                        <p class="medium-paragraph" style="    color: #333;">{{translate('main_logo_small')}}</p>
-                        <h3>{{translate('main_logo_h3')}}</h3>
+                        <p class="medium-paragraph" style="color:black">{{translate('main_logo_small')}}</p>
+                        <h3 style="color:black">{{translate('main_logo_h3')}}</h3>
                     </div>
                     <div style="margin-bottom: 250px;">
                         <button class="btn btn-link-2"  data-toggle="modal" data-target="#formModal">{{translate('find_price_cargo')}}</button>

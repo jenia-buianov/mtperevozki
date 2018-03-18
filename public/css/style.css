@@ -1,9 +1,9 @@
 
 body {
-    font-family: 'Raleway', sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 15px;
     font-weight: 400;
-    color: #888;
+    color: black;
     line-height: 30px;
     text-align: center;
 	background: #f8f8f8;  /* fallback for old browsers */
@@ -38,7 +38,7 @@ a, a:hover, a:focus {
 }
 
 h1, h2 { margin-top: 10px; font-size: 36px; font-weight: 700; color: #555; line-height: 44px; }
-h3 { font-size: 22px; font-weight: 400; color: #555; line-height: 30px; }
+h3 { font-size: 22px; font-weight: 400;  line-height: 30px; }
 
 img { max-width: 100%; }
 
@@ -91,6 +91,41 @@ img { max-width: 100%; }
 .btn-golden:hover, .btn-golden:focus{
 	background: #987136; /* Old browsers */
 	color: white;
+}
+
+@media(min-width: 768px) {
+	.btn-link-menu{
+		background: white;
+		-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+		box-shadow: 0 6px 12px rgba(0,0,0,.175);
+		text-transform: uppercase;
+		padding: 0px;
+		margin-right: 0.3%;
+	}
+
+	.btn-link-menu:hover{
+		background: #f0f1f2;
+	}
+
+	.d-item{
+		width: calc(24% - 10px);
+		position: absolute;
+		display: none;
+		background: white;
+		padding: 10px;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+	}
+
+	.d-item a{
+		color: black!important;
+		display: inline-block!important;
+		width: 50%!important;
+	}
+
+	.d-item a:hover{
+		color: #ff8300!important;
+	}
 }
 
 .btn-link-1 {
@@ -393,7 +428,7 @@ ul.navbar-nav { font-size: 15px; color: #fff; }
 }
 .features-box:hover .features-box-icon img { border-color: #deaa5c; }
 .features-box a{
-	color: #555;
+	color: #333;
 	text-decoration: none;
 }
 
