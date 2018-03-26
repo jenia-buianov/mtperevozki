@@ -17,6 +17,9 @@ Route::get('/', 'HomeController@index');
 Route::get('/confirm/{token}', 'Auth\LoginController@confirm')->name('confirm');
 Route::get('/{lang}/subscribes/dismiss/{id}', 'SubscribesController@dismiss')->name('subscribes.dismiss');
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/{lang}/subscribes/cargo', 'SubscribesController@cargo')->name('subscribes.cargo');
+    Route::get('/{lang}/subscribes/transport', 'SubscribesController@transport')->name('subscribes.transport');
     Route::get('/{lang}/subscribes', 'SubscribesController@index')->name('subscribes');
     Route::get('/{lang}/subscribes/enable/{id}', 'SubscribesController@enable')->name('subscribes.enable');
     Route::get('/{lang}/settings', 'HomeController@settings')->name('settings');

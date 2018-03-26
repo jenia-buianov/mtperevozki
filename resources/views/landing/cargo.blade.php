@@ -24,18 +24,6 @@
                 @if($k%3==2) </div> @endif
         @endforeach
     </div>
-    <div class="container mb-15">
-        <div class="row">
-            <a class="btn btn-link-1 scroll-link" data-toggle="modal" data-target="#formModal">{{translate('order_cargo')}}</a>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="text-left" style="margin-top: 50px;">
-                {!! $content->content !!}
-            </div>
-        </div>
-    </div>
     <div class="container">
         <div class="row">
                 <a class="btn btn-link-1 scroll-link" data-toggle="modal" data-target="#formModal">{{translate('order_cargo')}}</a>

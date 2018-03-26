@@ -12,9 +12,9 @@
             </div>
             <div class="row" style="color:black;margin-top: 1.5rem; margin-bottom: 0.8rem">
                 <form class="form-inline col-xs-12" method="GET" action="{{url($lang.'/birja/search')}}">
-                    <div class="col-md-3 col-sm-12">
+                    <div class="col-md-2 col-sm-12">
                         <label class="col-sm-12" for="inlineFormInput">
-                            <div class="row">
+                            <div class="row text-center">
                                 {{translate('what_find')}}
                             </div>
                         </label>
@@ -25,6 +25,24 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-md-3 col-sm-12">
+                        <label class="col-sm-12" for="inlineFormInput">
+                            <div class="row text-center">
+                                Укажите тип перевозки
+                            </div>
+                        </label>
+                        <div class="col-sm-12">
+                            <select class="form-control" name="kind" style="width: 100%">
+                                <option value="auto" selected>Авто перевозки</option>
+                                <option value="sea">Морские перевозки </option>
+                                <option value="rails">Ж.Д. перевозки</option>
+                                <option value="plain">Авиа перевозки</option>
+                                <option value="passengers">Пассажирские перевозки</option>
+                                <option value="post">Доставка посылок</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="col-md-3 col-sm-12">
                         <label class="col-sm-12" for="inlineFormInput">
                             <div class="row">
@@ -55,7 +73,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-1 col-sm-12 col-md-offset-1" style="padding-top: 30px;">
+                    <div class="col-md-1 col-sm-12" style="padding-top: 30px;">
                         <button class="btn btn-link-1" type="submit" style="margin: 0px;line-height: 40px;height: auto;">{{translate('search')}}</button>
                     </div>
                 </form>

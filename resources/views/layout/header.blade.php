@@ -59,24 +59,43 @@
                         if ($count) echo 'class="dropdown-toggle" id="navbarDrop'.$v->id.'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"';
                         echo ' href="'.url($v->link).'" title="'.trans($v->titleKey).'">'.trans($v->titleKey).'</a>';
 
-                        if ($count) echo '<div class="dropdown-menu" aria-labelledby="navbarDrop'.$v->id.'" style="padding: 10px;"><div class="container-fluid">';
 
-                        foreach (App\Menu::where('parent',$v->id)->orderBy('order')->limit(4)->get() as $item=>$value){
-                            if (!empty($value->link))
-                                echo '<a class="dropdown-item btn btn-link-menu" data-item="'.$item.'" title="'.trans($value->titleKey).'" href="'.url($value->link).'" style="font-weight:bold">'.trans($value->titleKey).'</a>';
-                            else
-                                echo '<a class="dropdown-item btn btn-link-menu" data-item="'.$item.'" title="'.trans($value->titleKey).'" href="#" style="font-weight:bold">'.trans($value->titleKey).'</a>';
-//
-                            if (App\Menu::where('parent',$value->id)->count()){
-                                echo '<div class="d-item ditem-'.$item.'">';
-                                foreach (App\Menu::where('parent',$value->id)->orderBy('order')->get() as $it=>$val){
-                                    echo '<a title="'.trans($val->titleKey).'" href="'.url($val->link).'">'.trans($val->titleKey).'</a>';
+
+                        if ($count){
+                            $countChilds = App\Menu::where('parent',App\Menu::where('parent',$v->id)->orderBy('order')->first()->id)->orderBy('order')->count();
+                        }
+
+                        if ($count&&$countChilds){
+                            echo '<div class="dropdown-menu" aria-labelledby="navbarDrop'.$v->id.'" style="padding: 10px;">';
+                            echo '<div class="container-fluid">';
+                            foreach (App\Menu::where('parent',$v->id)->orderBy('order')->get() as $item=>$value){
+                                if (!empty($value->link))
+                                    echo '<a class="dropdown-item btn btn-link-menu" data-item="'.$v->id.'-'.$item.'" title="'.trans($value->titleKey).'" href="'.url($value->link).'" style="font-weight:bold">'.trans($value->titleKey).'</a>';
+                                else
+                                    echo '<a class="dropdown-item btn btn-link-menu" data-item="'.$v->id.'-'.$item.'" title="'.trans($value->titleKey).'" href="#" style="font-weight:bold">'.trans($value->titleKey).'</a>';
+
+    //
+                                if (App\Menu::where('parent',$value->id)->count()&&$value->id){
+                                    echo '<div class="d-item ditem-'.$v->id.'-'.$item.'">';
+                                    foreach (App\Menu::where('parent',$value->id)->where('active',1)->orderBy('order')->get() as $it=>$val){
+                                        echo '<a title="'.$val->titleKey.'" href="'.url($val->link).'">'.$val->titleKey.'</a>';
+                                    }
+                                    echo '</div>';
                                 }
-                                echo '</div>';
+                            }
+                            echo '</div>';
+                        }
+
+                        if ($count&&!$countChilds){
+                            echo '<div class="renew dropdown-menu" aria-labelledby="navbarDrop'.$v->id.'" style="overflow: auto;width:220px!important">';
+                            if (App\Menu::where('parent',$v->id)->count()){
+                                foreach (App\Menu::where('parent',$v->id)->orderBy('order')->get() as $item=>$value){
+                                    echo '<a class="dropdown-item" href="'.url($value->link).'">'.trans($value->titleKey).'</a>';
+                                }
                             }
                         }
 
-                        if ($count) echo '</div></div>';
+                        if ($count) echo '</div>';
                         echo'</li>';
                     }
 
@@ -93,7 +112,7 @@
                         @else
                             <li>
                                 <a class="dropdown-toggle btn btn-link-2" id="profileDrop" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">{{Auth::user()->name.' '.Auth::user()->lastname}}</a>
-                                <div class="dropdown-menu" aria-labelledby="profileDrop" style="overflow: auto;">
+                                <div class="renew dropdown-menu" aria-labelledby="profileDrop" style="overflow: auto;">
                                     <a class="dropdown-item" href="{{route('subscribes',['lang'=>app()->getLocale()])}}"><i class="far fa-newspaper"></i> {{translate('subscribes')}}</a>
                                     <a class="dropdown-item" href="{{route('settings',['lang'=>app()->getLocale()])}}"><i class="fa fa-cog"></i> {{translate('settings')}}</a>
                                     @if(Auth::user()->group->hasAccess('admin_access'))
@@ -128,23 +147,23 @@
                 <?php
                     $menu = [];
 
-                foreach(App\Menu::where('parent',0)->orderBy('order')->get() as $k=>$v){
-                    if (!empty($v->link)){
-                        if (count(explode('#',$v->link)))
-                            $menu[] = ['link'=>url($v->link),'title'=>trans($v->titleKey)];
-                        else $menu[] = ['link'=>url(app()->getLocale().'/'.$v->link),'title'=>trans($v->titleKey)];
-
-                    }
-                }
-
-                foreach(App\Menu::where('parent',0)->orderBy('order')->get() as $k=>$v){
-                    foreach (App\Menu::where('parent',$v->id)->orderBy('order')->get() as $item=>$value){
-                        $menu[] = ['link'=>url($val->link),'title'=>trans($value->titleKey)];
-                        foreach (App\Menu::where('parent',$value->id)->orderBy('order')->get() as $it=>$val){
-                            $menu[] = ['link'=>url($val->link),'title'=>trans($val->titleKey)];
-                        }
-                    }
-                }
+//                foreach(App\Menu::where('parent',0)->orderBy('order')->get() as $k=>$v){
+//                    if (!empty($v->link)){
+//                        if (count(explode('#',$v->link)))
+//                            $menu[] = ['link'=>url($v->link),'title'=>trans($v->titleKey)];
+//                        else $menu[] = ['link'=>url(app()->getLocale().'/'.$v->link),'title'=>trans($v->titleKey)];
+//
+//                    }
+//                }
+//
+//                foreach(App\Menu::where('parent',0)->orderBy('order')->get() as $k=>$v){
+//                    foreach (App\Menu::where('parent',$v->id)->orderBy('order')->get() as $item=>$value){
+//                        $menu[] = ['link'=>url($val->link),'title'=>trans($value->titleKey)];
+//                        foreach (App\Menu::where('parent',$value->id)->orderBy('order')->get() as $it=>$val){
+//                            $menu[] = ['link'=>url($val->link),'title'=>trans($val->titleKey)];
+//                        }
+//                    }
+//                }
 //                echo '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3"><div class="row">';
 //                foreach ($menu as $k=>$v){
 //                   echo '<a href="'.$v['link'].'" style="display: block">'.$v['title'].'</a>';
@@ -247,6 +266,22 @@
             return false;
         });
 
+        var openedMenu = {};
+
+        $('.dropdown-toggle').on('click',function (e) {
+            $('.dropdown-menu').css('display','block');
+            if ($(this).attr("id")=="navbarDrop18"||$(this).attr("id")=="navbarDrop163"){
+                if (typeof openedMenu[$(this).attr("id")]!=="undefined") {
+                    delete openedMenu[$(this).attr("id")];
+                    $('[aria-labelledby="' + $(this).attr("id") + '"]').css('display', 'none');
+                }
+                else{
+                    openedMenu[$(this).attr("id")] = 1;
+                    $('[aria-labelledby="'+$(this).attr("id")+'"]').css('display','block');
+                }
+            }
+        });
+
     AOS.init({duration: 1200,easing: 'ease-out-back',disable: "mobile"});
         if ($('.datepick').length){
             $('.datepick').datepicker({ format: 'dd-mm-yyyy',autoclose:true, language: 'ru' });
@@ -255,25 +290,34 @@
 
             $('.dropdown-menu').css('position',"fixed");
             $('.dropdown-menu').css('left',"0px");
-            $('.dropdown-menu').css('top',"70px");
+            $('.dropdown-menu').css('top',"60px");
             $('.dropdown-menu').css('width',"100%");
-            $('.dropdown-menu').css('background',"transparent");
+            $('.dropdown-menu').css('background',"black");
+            $('.dropdown-menu').css('padding-top',"20px");
             $('.dropdown-menu').css('border',"none");
             $('.dropdown-menu').css('box-shadow',"none");
             $('.dropdown-item').on( "mouseenter", function (e) {
                 attr = $(this).attr('data-item');
-                $('.ditem-0, .ditem-1, .ditem-2, .ditem-3').css('display','none');
+                $('.d-item').css('display','none');
                 $('.ditem-'+attr).css('display','block');
-                margin = attr*23.6;
+                att = parseInt(attr.split('-')[1]);
+                margin = att*18.8;
                 $('.ditem-'+attr).css('margin-left',margin+'%');
+            } ).on( "mouseleave", function (e) {
+                attr = $(this).attr('data-item');
+                $('.ditem-'+attr).on('mouseleave',function(){
+                    $('.ditem-'+attr).css('display','none');
+                });
+                if (!$('.ditem-'+attr+':hover').length) $('.ditem-'+attr).css('display','none');
             } );
 
 //            $('.dropdown-menu').css('box-shadow',"none");
-            $('[aria-labelledby="profileDrop"].dropdown-menu').css('position','absolute');
-            $('[aria-labelledby="profileDrop"].dropdown-menu').css('width','auto');
-            $('[aria-labelledby="profileDrop"].dropdown-menu').css('left','auto');
-            $('[aria-labelledby="profileDrop"].dropdown-menu').css('top','auto');
-            $('[aria-labelledby="profileDrop"].dropdown-menu').css('background','white');
+            $('.renew.dropdown-menu').css('padding-top','10px');
+            $('.renew.dropdown-menu').css('position','absolute');
+            $('.renew.dropdown-menu').css('width','auto');
+            $('.renew.dropdown-menu').css('left','auto');
+            $('.renew.dropdown-menu').css('top','auto');
+            $('.renew.dropdown-menu').css('background','white');
 //            $('[aria-labelledby="profileDrop"].dropdown-menu').css('left','auto');
         }else{
             $('.dropdown-menu .container-fluid').css('background','transparent').removeClass('container-fluid');

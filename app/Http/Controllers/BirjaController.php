@@ -103,7 +103,7 @@ class BirjaController extends Controller
         $class = "App\Remote".$prefix_model_class[$prefix]."CargoType";
         $cargo_type = $class::where('cargo_type_hidden',0)->orderBy('order','asc')->get();
         $class = "App\Remote".$prefix_model_class[$prefix]."CargoVolume";
-        $cargo_volume = $class::where('cargo_volume_hidden',0)->get();
+        $cargo_volume = $class::where('cargo_volume_hidden',0)->where('split',1)->get();
         $name = 'country_name_'.app()->getLocale();
 //        dd($query->count());
         $data = [
@@ -227,7 +227,7 @@ class BirjaController extends Controller
         $class = "App\Remote".$prefix_model_class[$prefix]."CargoType";
         $cargo_type = $class::where('cargo_type_hidden',0)->orderBy('order','asc')->get();
         $class = "App\Remote".$prefix_model_class[$prefix]."CargoVolume";
-        $cargo_volume = $class::where('cargo_volume_hidden',0)->get();
+        $cargo_volume = $class::where('cargo_volume_hidden',0)->where('split',1)->get();
         $name = 'country_name_'.app()->getLocale();
         $data = [
             'content'=>['metatitle'=>'Поиск '.$prefix_h1[$prefix],'metakey'=>'','metadesc'=>'','h1'=>'Поиск '.$prefix_h1[$prefix]],
@@ -267,7 +267,8 @@ class BirjaController extends Controller
         $type = htmlspecialchars($request->type,3);
         $import = htmlspecialchars($request->country_import,3);
         $export = htmlspecialchars($request->country_export,3);
+        $kind = htmlspecialchars($request->kind,3);
 //        dd($_GET);
-        return redirect(url(app()->getLocale().'/birja/auto'.$type.'?import='.$import.'&export='.$export));
+        return redirect(url(app()->getLocale().'/birja/'.$kind.$type.'?import='.$import.'&export='.$export));
     }
 }

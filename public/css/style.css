@@ -108,13 +108,18 @@ img { max-width: 100%; }
 	}
 
 	.d-item{
-		width: calc(24% - 10px);
+		width: calc(19% - 10px);
 		position: absolute;
 		display: none;
 		background: white;
 		padding: 10px;
 		border-bottom-left-radius: 10px;
 		border-bottom-right-radius: 10px;
+		-webkit-box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+		box-shadow: 0 6px 12px rgba(0,0,0,0.175);
+		-webkit-background-clip: padding-box;
+		max-height: calc(100vh - 120px);
+		overflow: auto;
 	}
 
 	.d-item a{
@@ -233,7 +238,7 @@ ul.navbar-nav { font-size: 15px; color: #fff; }
 /*.navbar-no-bg ul.navbar-nav li a{color: #666666;}*/
 
 
-.navbar-inverse ul.navbar-nav .dropdown-menu a { border: 0;display: inline-block;  width: 24%;}
+.navbar-inverse ul.navbar-nav .dropdown-menu a { border: 0;display: inline-block;  width: 19%;}
 
 @media(min-width: 768px)and(max-width: 1023px){
 	.navbar-inverse ul.navbar-nav .dropdown-menu a { width: 30%!important;}
@@ -307,13 +312,14 @@ ul.navbar-nav { font-size: 15px; color: #fff; }
 	}
 }
 
-[aria-labelledby="profileDrop"].dropdown-menu .dropdown-item {
+.renew.dropdown-menu .dropdown-item {
 	width: 100%!important;
+	min-width: 220px!important;
 	padding: 10px;
 	display: block!important;
 }
 
-[aria-labelledby="profileDrop"].dropdown-menu .dropdown-item:hover{
+.renew.dropdown-menu .dropdown-item:hover{
 	background: #f0f1f2;
 }
 
@@ -1953,4 +1959,9 @@ footer a:hover, footer a:focus { border-bottom: 1px dotted #b3853f; outline: 0; 
 	height: 34px!important;
 	font-size: 14px!important;
 	padding: 6px 12px!important;
+}
+
+.datepicker-days table tbody
+{
+	font-size: 13px;
 }
