@@ -175,7 +175,7 @@
                 </div>
         </div>
     </div>
-@endsection
+
 
 @if (!Auth::check())
     <div class="modal fade modal-primary" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
@@ -309,3 +309,4 @@
 
     },1500);
 </script>
+@endsection
