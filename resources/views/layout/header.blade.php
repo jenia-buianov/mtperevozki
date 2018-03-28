@@ -269,7 +269,7 @@
         var openedMenu = {};
 
         $('.dropdown-toggle').on('click',function (e) {
-            $('.dropdown-menu').css('display','block');
+//            $('.dropdown-menu').css('display','block');
             if ($(this).attr("id")=="navbarDrop18"||$(this).attr("id")=="navbarDrop163"){
                 if (typeof openedMenu[$(this).attr("id")]!=="undefined") {
                     delete openedMenu[$(this).attr("id")];
