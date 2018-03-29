@@ -1971,24 +1971,25 @@ footer a:hover, footer a:focus { border-bottom: 1px dotted #b3853f; outline: 0; 
 	width: 235px;
 	display: inline-block;
 	vertical-align: top;
+	left: 0px;
 }
 
 .birja-right{
 	display: inline-block;
-	width: calc(100% - 280px);
-	padding: 0 15px 0 15px;
+	width: calc(100% - 240px);
+	padding: 0 15px 0 0;
 }
 
 .banner img{
-	max-width: 250px;
-	height: 150px;
+	width: 300px;
+	height: 100px;
 }
 
 .birja-menu{
 	text-align: center;
 	width: 100%;
 	display: block;
-	background: #ff8300;
+	background: #eeeeef;
 }
 
 .birja-menu li{
@@ -2022,11 +2023,12 @@ footer a:hover, footer a:focus { border-bottom: 1px dotted #b3853f; outline: 0; 
 
 .birja-menu li.current{
 	display: inline-block;
-	color:white;
+	color:#1c1b1b;
 	padding: 15px;
 	cursor: pointer;
 	width: 220px;
 	line-height: 16px;
+	font-weight: bold;
 }
 
 @media(max-width: 1600px){
@@ -2055,12 +2057,12 @@ footer a:hover, footer a:focus { border-bottom: 1px dotted #b3853f; outline: 0; 
 }
 
 .birja-menu li.current:hover{
-	background: #ff8300;
-	background: -moz-linear-gradient(top, #ff8300 0%, #f74e00 100%);
-	background: -webkit-linear-gradient(top, #ff8300 0%,#f74e00 100%);
-	background: linear-gradient(to bottom, #ff8300 0%,#f74e00 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8300', endColorstr='#f74e00',GradientType=0 );
-	color: white;
+	background: #eeeeef;
+	background: -moz-linear-gradient(top, #eeeeef 0%, #fff 100%);
+	background: -webkit-linear-gradient(top, #eeeeef 0%,#fff 100%);
+	background: linear-gradient(to bottom, #eeeeef 0%,#fff 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeef', endColorstr='#fff',GradientType=0 );
+	color: #1c1b1b;
 }
 
 .birja-menu li.current span{
@@ -2076,10 +2078,19 @@ footer a:hover, footer a:focus { border-bottom: 1px dotted #b3853f; outline: 0; 
 	border: none;
 }
 
-.birja-menu .fnp div a:hover{
-	color:#ff8300!important;
-}
 
 .modal .modal-register {
 	max-width: 350px;
+}
+
+.bnr{
+	text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+	width: 300px;
+	height: 100px;
+	border: 3px solid #999999;
+	color:#666;
+	text-transform: uppercase;
+	font-weight: bold;
 }
